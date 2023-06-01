@@ -1,9 +1,31 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, ScrollView, TextInput, Button } from 'react-native';
 
 export default function App() {
+  const [text, setText] = useState('');
+
+  const handleInputChange = (inputText) => {
+    setText(inputText);
+  };
+
+  const handleButtonClick = () => {
+    // Perform an action with the entered text
+    console.log('Entered text:', text);
+  };
+
   return (
     <ScrollView style={styles.scrollView}>
+    <View style={styles.container}>
+      <TextInput
+        style={styles.textInput}
+        onChangeText={handleInputChange}
+        value={text}
+        placeholder=" Search by location..." // Placeholder text
+        placeholderTextColor="gray" // Placeholder text color
+      />
+      <Button title="Search" onPress={handleButtonClick} />
+    </View>
       <View>
         <View style={[styles.card, styles.shadowProp]}>
           <View>
@@ -183,5 +205,17 @@ const styles = StyleSheet.create({
   scrollView: {
     backgroundColor: 'white',
     marginHorizontal: 7,
+  },
+  container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 30
+  },
+  textInput: {
+    flex: 1,
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+    marginRight: 10,
   },
 });
