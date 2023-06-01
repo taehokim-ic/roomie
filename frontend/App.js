@@ -5,6 +5,16 @@ import { StyleSheet, Text, View, ScrollView, TextInput, Button } from 'react-nat
 export default function App() {
   const [text, setText] = useState('');
 
+  const people = [
+    { name: "Edward W", minBudget: 1500, maxBudget: 2300, location: "London", age: 23},
+    { name: "John S", minBudget: 1200, maxBudget: 2000, location: "London", age: 24},
+    { name: "Samuel K", minBudget: 1700, maxBudget: 2050, location: "London", age: 25},
+    { name: "Ryan G", minBudget: 1800, maxBudget: 2200, location: "Manchester", age: 26},
+    { name: "Pete M", minBudget: 1700, maxBudget: 2100, location: "Hull", age: 27},
+    { name: "George D", minBudget: 1200, maxBudget: 1700, location: "Southampton", age: 27},
+    { name: "Simon A", minBudget: 1400, maxBudget: 1800, location: "London", age: 27}
+  ]
+
   const handleInputChange = (inputText) => {
     setText(inputText);
   };
@@ -27,150 +37,15 @@ export default function App() {
       <Button title="Search" onPress={handleButtonClick} />
     </View>
       <View>
-        <View style={[styles.card, styles.shadowProp]}>
-          <View>
-            <Text style={styles.heading}>
-              Edward W.                                                 23
-            </Text>
-          </View>
-          <Text>
-            £1,500 - £2,300 pm
-          </Text>
+      {people.map((item, index) => (
+        <View style={[styles.card, styles.shadowProp]} key={index}>
+          <Text style={styles.heading}>{item.name}, {item.age}</Text>
+          <Text>£{item.minBudget} - £{item.maxBudget}</Text>
           <View style={styles.tag}>
-            <Text>
-              Student
-            </Text>  
-          </View>  
-        </View>
-  
-        <View style={[styles.card, styles.shadowProp]}>
-          <View>
-            <Text style={styles.heading}>
-              George C.                                                  21
-            </Text>
-          </View>
-          <Text>
-            £1,500 - £2,000 pm
-          </Text>
-          <View style={styles.tag}>
-            <Text>
-              Student
-            </Text>  
+            <Text>{item.location}</Text>
           </View>
         </View>
-  
-        <View style={[styles.card, styles.shadowProp]}>
-          <View>
-            <Text style={styles.heading}>
-              Maddie P.                                                  28
-            </Text>
-          </View>
-          <Text>
-            £1,600 - £2,200 pm
-          </Text>
-          <View style={styles.tag}>
-            <Text>
-              Student
-            </Text>  
-          </View>
-        </View>
-  
-        <View style={[styles.card, styles.shadowProp]}>
-          <View>
-            <Text style={styles.heading}>
-              Stuart G.                                                     23
-            </Text>
-          </View>
-          <Text>
-            £1,500 - £2,100 pm
-          </Text>
-          <View style={styles.tag}>
-            <Text>
-              Student
-            </Text>  
-          </View>
-        </View>
-  
-        <View style={[styles.card, styles.shadowProp]}>
-          <View>
-            <Text style={styles.heading}>
-              Stuart G.                                                     23
-            </Text>
-          </View>
-          <Text>
-            £1,500 - £2,100 pm
-          </Text>
-          <View style={styles.tag}>
-            <Text>
-              Student
-            </Text>  
-          </View>
-        </View>
-  
-        <View style={[styles.card, styles.shadowProp]}>
-          <View>
-            <Text style={styles.heading}>
-              Stuart G.                                                     23
-            </Text>
-          </View>
-          <Text>
-            £1,500 - £2,100 pm
-          </Text>
-          <View style={styles.tag}>
-            <Text>
-              Student
-            </Text>  
-          </View>
-        </View>
-  
-        <View style={[styles.card, styles.shadowProp]}>
-          <View>
-            <Text style={styles.heading}>
-              Stuart G.                                                     23
-            </Text>
-          </View>
-          <Text>
-            £1,500 - £2,100 pm
-          </Text>
-          <View style={styles.tag}>
-            <Text>
-              Student
-            </Text>  
-          </View>
-        </View>
-  
-        <View style={[styles.card, styles.shadowProp]}>
-          <View>
-            <Text style={styles.heading}>
-              Stuart G.                                                     23
-            </Text>
-          </View>
-          <Text>
-            £1,500 - £2,100 pm
-          </Text>
-          <View style={styles.tag}>
-            <Text>
-              Student
-            </Text>  
-          </View>
-        </View>
-  
-        <View style={[styles.card, styles.shadowProp]}>
-          <View>
-            <Text style={styles.heading}>
-              Stuart G.                                                     23
-            </Text>
-          </View>
-          <Text>
-            £1,500 - £2,100 pm
-          </Text>
-          <View style={styles.tag}>
-            <Text>
-              Student
-            </Text>  
-          </View>
-        </View>
-  
+      ))}
       </View>
     </ScrollView>
   );
