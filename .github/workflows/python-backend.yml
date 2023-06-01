@@ -5,9 +5,9 @@ name: Python FastAPI Back-End
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "backend" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "backend" ]
 
 permissions:
   contents: read
