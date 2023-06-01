@@ -1,0 +1,33 @@
+# .gitlab-ci.yml
+
+stages:
+  - build
+
+build_android:
+  stage: build
+  image: node:lts
+  script:
+    - cd frontend
+    - npm install -g react-native-cli
+    - npm install
+    - cd ../android
+    - ./gradlew assembleRelease
+    - cd ..
+  artifacts:
+    paths:
+      - android/app/build/outputs/apk/release/*.apk
+
+build_ios:
+  stage: build
+  image: node:lts
+  script:
+    - cd frontend
+    - npm install -g react-native-cli
+    - npm install
+    - cd ../ios
+    - pod install
+    - xcodebuild -workspace frontend.xcworkspace -scheme frontend -configuration Release -archivePath build/frontend.xcarchive archive
+    - xcodebuild -exportArchive -archivePath build/frontend.xcarchive -exportPath build -exportOptionsPlist ExportOptions.plist
+  artifacts:
+    paths:
+      - ios/build/*.ipa
