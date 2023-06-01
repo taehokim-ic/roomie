@@ -1,33 +1,62 @@
-# .gitlab-ci.yml
+name: Build
 
-stages:
-  - build
+on:
+  push:
+    branches:
+      - main
 
-build_android:
-  stage: build
-  image: node:lts
-  script:
-    - cd frontend
-    - npm install -g react-native-cli
-    - npm install
-    - cd ../android
-    - ./gradlew assembleRelease
-    - cd ..
-  artifacts:
-    paths:
-      - android/app/build/outputs/apk/release/*.apk
+jobs:
+  build_android:
+    runs-on: ubuntu-latest
 
-build_ios:
-  stage: build
-  image: node:lts
-  script:
-    - cd frontend
-    - npm install -g react-native-cli
-    - npm install
-    - cd ../ios
-    - pod install
-    - xcodebuild -workspace frontend.xcworkspace -scheme frontend -configuration Release -archivePath build/frontend.xcarchive archive
-    - xcodebuild -exportArchive -archivePath build/frontend.xcarchive -exportPath build -exportOptionsPlist ExportOptions.plist
-  artifacts:
-    paths:
-      - ios/build/*.ipa
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+
+      - name: Install dependencies
+        working-directory: frontend
+        run: npm install
+
+      - name: Build Android
+        working-directory: frontend/android
+        run: ./gradlew assembleRelease
+
+      - name: Archive Android artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: android-release
+          path: frontend/android/app/build/outputs/apk/release/*.apk
+
+  build_ios:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+
+      - name: Install dependencies
+        working-directory: frontend
+        run: npm install
+
+      - name: Build iOS
+        working-directory: frontend/ios
+        run: |
+          pod install
+          xcodebuild -workspace frontend.xcworkspace -scheme frontend -configuration Release -archivePath build/frontend.xcarchive archive
+          xcodebuild -exportArchive -archivePath build/frontend.xcarchive -exportPath build -exportOptionsPlist ExportOptions.plist
+
+      - name: Archive iOS artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: ios-release
+          path: frontend/ios/build/*.ipa
