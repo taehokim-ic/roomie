@@ -65,12 +65,13 @@ const styles = StyleSheet.create({
     marginBottom: 3,
   },
   card: {
-    backgroundColor: '#F5F5F5',
+    backgroundColor: 'white',
     borderRadius: 5,
     paddingVertical: 10,
     paddingHorizontal: 25,
+    marginHorizontal: 5,
     width: '100%',
-    marginVertical: 10,
+    marginVertical: 5,
   },
   shadowProp: {
     shadowColor: '#171717',
@@ -89,13 +90,14 @@ const styles = StyleSheet.create({
     marginTop:5
   },
   scrollView: {
-    backgroundColor: 'white',
-    marginHorizontal: 7,
+    backgroundColor: '#eeeeee',
+    marginHorizontal: 0
   },
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 30
+    marginTop: 30,
+    backgroundColor: 'white'
   },
   textInput: {
     flex: 1,

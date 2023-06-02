@@ -15,7 +15,8 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.drp24.roomie"
     },
     "android": {
       "package": "com.drp24.roomie",
