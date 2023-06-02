@@ -36,5 +36,5 @@ jobs:
         working-directory: frontend
 
       - name: Publish update
-        run: eas update --auto
+        run: eas build -p android
         working-directory: frontend
