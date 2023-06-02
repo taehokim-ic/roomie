@@ -7,16 +7,19 @@ async def get_supabase(supabase=Depends(get_supabase)):
     return supabase
 
 @router.get("/search/", status_code=200)
-async def get_percentile(area: str, supabase=Depends(get_supabase)):
+async def get_percentile(area: str | None = None, supabase=Depends(get_supabase)):
     
-    try: 
-        response = supabase.table('roomie_profiles').select('*').eq('location', area).execute()
-    
-    #     # if not (0 < area <= 100):
-    #     #     raise HTTPException(status_code=400, detail="Area must be between 0 and 100")
+    if area is None:
+        response = supabase.table('roomie_profiles').select('*').execute()
+    else:
+        try: 
+            response = supabase.table('roomie_profiles').select('*').eq('location', area).execute()
+        
+        #     # if not (0 < area <= 100):
+        #     #     raise HTTPException(status_code=400, detail="Area must be between 0 and 100")
 
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))
 
     data = {
         'people': response.data
