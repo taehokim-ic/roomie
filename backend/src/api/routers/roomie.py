@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException, Body
 from src.db.db import get_supabase
+from typing import Optional
 
 router = APIRouter()
 
@@ -7,7 +8,7 @@ async def get_supabase(supabase=Depends(get_supabase)):
     return supabase
 
 @router.get("/search/", status_code=200)
-async def get_percentile(area: str | None = None, supabase=Depends(get_supabase)):
+async def get_percentile(area: Optional[str] = None, supabase=Depends(get_supabase)):
     
     if area is None:
         response = supabase.table('roomie_profiles').select('*').execute()
