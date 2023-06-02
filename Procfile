@@ -1,1 +1,1 @@
-uvicorn src.main:app --host 0.0.0.0 --port 8080 --workers 4
+gunicorn src.main:app --workers 4 --worker-class uvicorn.workers.UvicornWorker 
