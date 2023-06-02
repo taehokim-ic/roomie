@@ -62,5 +62,5 @@ jobs:
           heroku_email: "taehokimbusiness@gmail.com"
           # healthcheck: "https://roomie.herokuapp.com/healthcheck"
           appdir: "backend"
-          procfile: "gunicorn src.main:app --workers 4 --worker-class uvicorn.workers.UvicornWorker"
+          procfile: "web: gunicorn src.main:app --workers 4 --worker-class uvicorn.workers.UvicornWorker"
           rollbackonhealthcheckfailed: true
