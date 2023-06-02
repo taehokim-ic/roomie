@@ -1,10 +1,8 @@
 from fastapi.testclient import TestClient
-from backend.src.main import app
+from src.main import app
 
 client = TestClient(app)
 
-
-def test_read_main():
-    response = client.get("/")
+def test_search_end_point():
+    response = client.get("/api/v1/search/")
     assert response.status_code == 200
-    assert response.json() == {"message": "Hello World"}
