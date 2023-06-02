@@ -15,13 +15,13 @@ export default function App() {
   };
 
   const fetchUserProfiles = async () => {
-    const people = await axios.get('http://127.0.0.1:8000/api/v1/search/');
+    const people = await axios.get('http://roomie3.herokuapp.com/api/v1/search/');
     const data = people.data;
     setUserProfiles(data.people);
   }
 
   const updateUserProfiles = async () => {
-    const people = await axios.get('http://127.0.0.1:8000/api/v1/search/?area=' + text);
+    const people = await axios.get('http://roomie3.herokuapp.com/api/v1/search/?area=' + text);
     const data = people.data;
     setUserProfiles(data.people);
   }
