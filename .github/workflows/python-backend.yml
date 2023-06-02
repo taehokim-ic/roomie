@@ -46,6 +46,7 @@ jobs:
   deploy:
     # If the test & lint jobs don't pass,
     # the deploy job willn't even execute
+    needs: build
     runs-on: ubuntu-latest
 
     steps:
@@ -59,7 +60,7 @@ jobs:
           heroku_api_key:  ${{ secrets.HEROKU_API_KEY }}
           heroku_app_name: "roomie"
           heroku_email: "taehokimbusiness@gmail.com"
-          healthcheck: "https://roomie.herokuapp.com/healthcheck"
+          # healthcheck: "https://roomie.herokuapp.com/healthcheck"
           appdir: "backend"
           procfile: "uvicorn src.main:app --host 0.0.0.0 --port 8080 --workers 4"
           rollbackonhealthcheckfailed: true
