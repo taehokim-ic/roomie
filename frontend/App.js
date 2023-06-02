@@ -38,7 +38,7 @@ export default function App() {
         style={styles.textInput}
         onChangeText={handleInputChange}
         value={text}
-        placeholder=" Search by location..." // Placeholder text
+        placeholder=" Mithun" // Placeholder text
         placeholderTextColor="gray" // Placeholder text color
       />
       <Button title="Search" onPress={handleButtonClick} />
