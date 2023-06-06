@@ -40,8 +40,10 @@ export default function MainContainer() {
                     },
                     tabBarActiveTintColor: '#03c9a9',
                     tabBarInactiveTintColor: 'gray',
-                    tabBarLabelStyle: {fontSize: 12},
-                    headerShown: false
+                    tabBarStyle: {height: 80, paddingBottom: 25},
+                    tabBarItemStyle: {marginTop: 10},
+                    tabBarLabelStyle: {marginTop: 0, fontSize: 12},
+                    headerShown: false,
                 })}
                 >
                 <Tab.Screen name={homeName} component={HomeScreen} />
