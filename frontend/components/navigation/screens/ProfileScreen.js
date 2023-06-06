@@ -1,14 +1,36 @@
-import * as React from 'react';
-import {View, Text} from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import React from 'react';
+import { View, Text, Image, StyleSheet } from 'react-native';
 
+export default function ProfileScreen() {
+  return (
+    <View style={styles.container}>
+      <Image
+        source={require('../../../assets/profile-picture.png')}
+        style={styles.profileImage}
+      />
+      <Text style={styles.name}>John Doe</Text>
+      <Text style={styles.bio}>24</Text>
+    </View>
+  );
+};
 
-export default function ProfileScreen({navigation}) {
-    return (
-        <SafeAreaView style={{ flex: 1 }}>
-        <View>
-            <Text>Profile Screen</Text>
-        </View>
-        </SafeAreaView>
-    );
-}
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  profileImage: {
+    width: 150,
+    height: 150,
+    borderRadius: 75,
+    marginBottom: 20,
+  },
+  name: {
+    fontSize: 24,
+    fontWeight: 'bold',
+  },
+  bio: {
+    fontSize: 16,
+  },
+});
