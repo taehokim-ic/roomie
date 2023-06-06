@@ -1,7 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, ScrollView, TextInput, Alert, Button } from 'react-native';
-import axios from 'axios';
+import * as React from 'react';
+import MainContainer from './components/navigation/MainContainer';
 
-export default function App() {
-  
+function App() {
+    return (
+        <MainContainer />
+    );
 }
+
+export default App;
