@@ -1,7 +1,14 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, SafeAreaView, TextInput } from 'react-native';
+import { View, Text, Image, TouchableOpacity, StyleSheet, SafeAreaView, StatusBar, Button } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
-export default function ProfileScreen() {
+const ProfileScreen = () => {
+  const navigation = useNavigation();
+
+  const handleClick = () => {
+    navigation.navigate('ProfileEdit', { instantAnimation: true });
+  };
+
   const user = {
     name: 'Jihoon W.',
     age: 22,
@@ -12,7 +19,13 @@ export default function ProfileScreen() {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-    <Text style={styles.title}>Profile</Text>
+      <StatusBar  barStyle="dark-content" translucent={false} />
+      <View style={styles.header}>
+          <Text style={styles.title}>Profile</Text>
+          <TouchableOpacity style={styles.editButtonContainer} onPress={handleClick}>
+            <Text style={styles.editButton}>Edit</Text>
+          </TouchableOpacity>
+      </View>
     <View style={styles.container}>
       <Image
         source={require('../../assets/profile-picture.png')}
@@ -43,6 +56,19 @@ export default function ProfileScreen() {
 };
 
 const styles = StyleSheet.create({
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  editButtonContainer: {
+    paddingTop: 20,
+    marginRight: 20,
+  },
+  editButton: {
+    fontSize: 16,
+    color: '#007AFF',
+  },
   container: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -94,3 +120,5 @@ const styles = StyleSheet.create({
     borderColor: '#ccc',
   }
 });
+
+export default ProfileScreen;
