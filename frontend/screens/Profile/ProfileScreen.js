@@ -1,8 +1,10 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { View, Text, Image, StyleSheet, SafeAreaView } from 'react-native';
 
 export default function ProfileScreen() {
   return (
+    <SafeAreaView style={{ flex: 1 }}>
+    <Text style={styles.title}>Profile</Text>
     <View style={styles.container}>
       <Image
         source={require('../../assets/profile-picture.png')}
@@ -11,6 +13,7 @@ export default function ProfileScreen() {
       <Text style={styles.name}>John Doe</Text>
       <Text style={styles.bio}>24</Text>
     </View>
+    </SafeAreaView>
   );
 };
 
@@ -18,7 +21,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+  },
+  title: {
+    fontSize: 32,
+    paddingLeft: 20,
+    paddingTop: 20,
+    fontWeight: 'bold',
+    textAlign: 'left'
   },
   profileImage: {
     width: 150,
