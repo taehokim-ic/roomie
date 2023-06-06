@@ -2,19 +2,19 @@ import React from 'react';
 import { View, TouchableOpacity, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import SearchFilter  from './SearchFilter';
+import SearchScreen from './SearchScreen';
 
-const SearchScreen = () => {
+const SearchFilter = () => {
   const navigation = useNavigation();
 
   const handleGearIconClick = () => {
-    navigation.navigate('SearchFilter');
+    navigation.navigate('SearchScreen');
   };
 
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={handleGearIconClick}>
-        <Icon name="gear" size={30} color="#000" style={styles.gearIcon} />
+        <Icon name="gear" size={30} color="#f00" style={styles.gearIcon} />
       </TouchableOpacity>
     </View>
   );
@@ -31,4 +31,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SearchScreen;
+export default SearchFilter;
