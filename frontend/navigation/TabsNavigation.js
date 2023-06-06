@@ -7,7 +7,8 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import HomeScreen from '../screens/Home/HomeScreen';
 import MessageScreen from '../screens/Messages/MessageScreen';
 import UserProfileScreen from '../screens/Profile/ProfileScreen';
-import SearchScreen from '../screens/Search/SearchScreen';
+
+import SearchStack from './SearchStack';
 
 const homeName = 'Home';
 const messageName = 'Message';
@@ -16,7 +17,7 @@ const profileName = 'Profile';
 
 const Tab = createBottomTabNavigator();
 
-export default function MainContainer() {
+export default function TabsNavigation() {
     return (
         <NavigationContainer>
             <Tab.Navigator
@@ -47,7 +48,7 @@ export default function MainContainer() {
                 })}
                 >
                 <Tab.Screen name={homeName} component={HomeScreen} />
-                <Tab.Screen name={searchName} component={SearchScreen} />
+                <Tab.Screen name={searchName} component={SearchStack} />
                 <Tab.Screen name={messageName} component={MessageScreen} />
                 <Tab.Screen name={profileName} component={UserProfileScreen} />
             </Tab.Navigator>

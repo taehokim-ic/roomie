@@ -2,13 +2,12 @@ import React from 'react';
 import { View, TouchableOpacity, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import SearchScreen from './SearchScreen';
 
 const SearchFilter = () => {
   const navigation = useNavigation();
 
   const handleGearIconClick = () => {
-    navigation.navigate('SearchScreen');
+    navigation.navigate('DefaultSearch');
   };
 
   return (
