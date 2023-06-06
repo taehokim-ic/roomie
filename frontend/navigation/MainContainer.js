@@ -4,10 +4,10 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
-import HomeScreen from './screens/HomeScreen';
-import MessageScreen from './screens/MessageScreen';
-import UserProfileScreen from './screens/ProfileScreen';
-import SearchScreen from './screens/SearchScreen';
+import HomeScreen from '../components/HomeScreen';
+import MessageScreen from '../components/MessageScreen';
+import UserProfileScreen from '../components/ProfileScreen';
+import SearchScreen from '../components/screens/SearchScreen';
 
 const homeName = 'Home';
 const messageName = 'Message';
