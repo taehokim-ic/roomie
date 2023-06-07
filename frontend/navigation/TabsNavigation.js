@@ -2,14 +2,14 @@ import * as React from 'react';
 
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 import HomeScreen from '../screens/Home/HomeScreen';
-import MessageScreen from '../screens/Messages/MessageScreen';
-import UserProfileScreen from '../screens/Profile/ProfileScreen';
 
 import SearchStack from './SearchStack';
 import ProfileStack from './ProfileStack';
+import MessagesStack from './MessageStack';
 
 const homeName = 'Home';
 const messageName = 'Message';
@@ -17,6 +17,12 @@ const searchName = 'Search';
 const profileName = 'Profile';
 
 const Tab = createBottomTabNavigator();
+
+const getTabBarVisibility = (route) => {
+    let rn = getFocusedRouteNameFromRoute(route);
+    if (rn == 'MainFilter' || rn == 'SearchFilter') return 'none';
+    return 'flex'
+}
 
 export default function TabsNavigation() {
     return (
@@ -46,11 +52,12 @@ export default function TabsNavigation() {
                     tabBarItemStyle: {marginTop: 10},
                     tabBarLabelStyle: {marginTop: 0, fontSize: 12},
                     headerShown: false,
+                    tabBarStyle: {display: getTabBarVisibility(route)},
                 })}
                 >
                 <Tab.Screen name={homeName} component={HomeScreen} />
                 <Tab.Screen name={searchName} component={SearchStack} />
-                <Tab.Screen name={messageName} component={MessageScreen} />
+                <Tab.Screen name={messageName} component={MessagesStack} />
                 <Tab.Screen name={profileName} component={ProfileStack} />
             </Tab.Navigator>
         </NavigationContainer>

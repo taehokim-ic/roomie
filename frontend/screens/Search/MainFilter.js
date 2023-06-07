@@ -3,7 +3,7 @@ import { View, TouchableOpacity, StatusBar, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-const SearchFilter = () => {
+const MainFilter = () => {
   const navigation = useNavigation();
 
   const handleGearIconClick = () => {
@@ -31,4 +31,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SearchFilter;
+export default MainFilter;

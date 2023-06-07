@@ -1,16 +1,27 @@
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
+import { View } from 'react-native';
 
-import DefaultSearchButton from '../../components/DefaultSearchButton';
+import SearchButton from '../../components/SearchButton';
+import GearIconButton from '../../components/GearIconButton';
 
 const SearchScreen = () => {
   const navigation = useNavigation();
 
-  const handleButtonPress = () => {
-    navigation.navigate('SearchFilter');
+  const handleSearchButtonPress = () => {
+    navigation.navigate('MainFilter');
   }
+
+  const handleGearIconButtonPress = () => {
+    navigation.navigate('SearchFilter')
+  }
+
   return (
-    <DefaultSearchButton onPress={handleButtonPress}/>
+    <View>
+      <SearchButton onPress={handleSearchButtonPress}/>
+      <GearIconButton onPress={handleGearIconButtonPress} />
+    </View>
   )
 };
+
 export default SearchScreen;
