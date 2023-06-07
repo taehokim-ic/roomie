@@ -1,21 +1,20 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
-import { FontAwesome } from '@expo/vector-icons';
 
 const data = [
   { label: "Don't mind", value: '1' },
   { label: 'No', value: '2' },
 ];
 
-const SmokerDropdown = ({ position }) => {
+const PetsDropdown = ({ position }) => {
   const [value, setValue] = useState(null);
   const [isFocus, setIsFocus] = useState(false);
 
   const renderLabel = () => {
     return (
       <Text style={[styles.label, isFocus && { color: 'black' }]}>
-        Smoker?
+        Has pets?
       </Text>
     );
   };
@@ -28,7 +27,6 @@ const SmokerDropdown = ({ position }) => {
         placeholderStyle={styles.placeholderStyle}
         selectedTextStyle={styles.selectedTextStyle}
         inputSearchStyle={styles.inputSearchStyle}
-        iconStyle={styles.iconStyle}
         data={data}
         search
         maxHeight={300}
@@ -52,7 +50,7 @@ const styles = StyleSheet.create({
   container: {
     position: 'absolute',
     width: '100%',
-    marginTop: 440,
+    marginTop: 480,
     height: 40,
     backgroundColor: '#89e0c2',
     justifyContent: 'center',
@@ -69,9 +67,6 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     backgroundColor: '#eeeeee',
     paddingHorizontal: 8,
-  },
-  icon: {
-    marginRight: 5,
   },
   label: {
     position: 'absolute',
@@ -92,10 +87,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: 'black',
   },
-  iconStyle: {
-    width: 20,
-    height: 20,
-  },
   inputSearchStyle: {
     height: 40,
     fontSize: 16,
@@ -103,4 +94,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SmokerDropdown;
+export default PetsDropdown;
