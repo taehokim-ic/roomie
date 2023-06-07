@@ -11,7 +11,7 @@ const ProfileEditScreen = () => {
     navigation.navigate('DefaultProfile', { instantAnimation: true });
   };
 
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useState('Jihoon W.');
 
   const handleInputChange = (text) => {
     setInputValue(text);
@@ -20,13 +20,13 @@ const ProfileEditScreen = () => {
   return (
     <ScrollView>
       <View>
-        <StatusBar  barStyle="dark-content" translucent={false} />
+        <StatusBar barStyle="dark-content" translucent={false} />
         <View>
           <Text style={styles.subtitle}>Personal Details</Text>
         </View>
         <View style={styles.row}>
           <Text style={styles.label}>Name</Text>
-          <TextInput style={styles.input} value='Jihoon W.' onChangeText={handleInputChange} />
+          <TextInput style={styles.input} value={inputValue} onChangeText={handleInputChange} />
         </View>
         <View style={styles.row}>
           <Text style={styles.label}>Age</Text>

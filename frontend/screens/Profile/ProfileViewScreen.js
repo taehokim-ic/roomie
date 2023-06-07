@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, StatusBar, TextInput } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, StatusBar, TextInput, ScrollView, SafeAreaView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Card from '../../components/Card';
 
@@ -15,9 +15,11 @@ const ProfileViewScreen = () => {
   }
 
   return (
-    <View>
-      <Card user={user} />
-    </View>
+    <SafeAreaView style={{ flex: 1 }}>
+      <ScrollView>
+        <Card user={user} />
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
