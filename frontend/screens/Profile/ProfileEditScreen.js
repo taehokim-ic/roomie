@@ -11,15 +11,6 @@ const ProfileEditScreen = () => {
   return (
     <View>
       <StatusBar  barStyle="dark-content" translucent={false} />
-      <View style={styles.header}>
-      <TouchableOpacity style={styles.cancelButtonContainer} onPress={handleSave}>
-            <Text style={styles.cancelButton}>Cancel</Text>
-        </TouchableOpacity>
-        <Text style={styles.title}>Edit Profile</Text>
-        <TouchableOpacity style={styles.editButtonContainer} onPress={handleSave}>
-            <Text style={styles.editButton}>Done</Text>
-        </TouchableOpacity>
-      </View>
       <View style={styles.row}>
         <Text style={styles.label}>Name</Text>
         <TextInput style={styles.input} value='Jihoon W.' />

@@ -10,6 +10,7 @@ import UserProfileScreen from '../screens/Profile/ProfileScreen';
 
 import SearchStack from './SearchStack';
 import ProfileStack from './ProfileStack';
+import MessagesStack from './MessageStack';
 
 const homeName = 'Home';
 const messageName = 'Message';
@@ -50,7 +51,7 @@ export default function TabsNavigation() {
                 >
                 <Tab.Screen name={homeName} component={HomeScreen} />
                 <Tab.Screen name={searchName} component={SearchStack} />
-                <Tab.Screen name={messageName} component={MessageScreen} />
+                <Tab.Screen name={messageName} component={MessagesStack} />
                 <Tab.Screen name={profileName} component={ProfileStack} />
             </Tab.Navigator>
         </NavigationContainer>

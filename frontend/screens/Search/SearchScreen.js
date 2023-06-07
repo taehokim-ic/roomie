@@ -2,8 +2,6 @@ import React from 'react';
 import { View, TouchableOpacity, StatusBar, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { TransitionSpecs } from '@react-navigation/stack';
-
 
 const SearchScreen = () => {
   const navigation = useNavigation();
