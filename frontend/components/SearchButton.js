@@ -44,10 +44,12 @@ const styles = StyleSheet.create({
   leftIconContainer: {},
   rightIconContainer: {},
   buttonText: {
-    color: '#ffffff',
+    color: '#777777',
+    marginLeft: 20,
+    marginRight: 'auto',
     fontSize: 16,
     fontWeight: 'bold',
-    textAlign: 'center',
+    textAlign: 'left'
   },
 });
 

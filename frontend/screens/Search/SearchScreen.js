@@ -18,7 +18,7 @@ const SearchScreen = () => {
 
   return (
     <View>
-      <SearchButton onPress={handleSearchButtonPress}/>
+      <SearchButton onPress={handleSearchButtonPress} title="Enter location"/>
       <GearIconButton onPress={handleGearIconButtonPress} />
     </View>
   )
