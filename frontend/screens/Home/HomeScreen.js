@@ -47,15 +47,18 @@ const HomeScreen = () => {
     const panResponder = useState(
         PanResponder.create({
           onMoveShouldSetPanResponder: () => true,
-          onPanResponderMove: Animated.event([
-            null,
-            { dx: pan.x, dy: pan.y }
-          ], { useNativeDriver: false }),
+          onPanResponderMove: Animated.event(
+                [
+                    null,
+                    { dx: pan.x, dy: pan.y }
+                ],
+                { useNativeDriver: false }
+            ),
           onPanResponderRelease: (_, gesture) => {
             if (gesture.dx > 120) {
               handleSkip();
             }
-            Animated.spring(pan, { toValue: { x: 0, y: 0 } }).start();
+            Animated.spring(pan, { toValue: { x: 0, y: 0 }, useNativeDriver: false }).start();
           },
         })
       )[0];
