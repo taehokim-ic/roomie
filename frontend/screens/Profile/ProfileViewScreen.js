@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, StatusBar, TextInput } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import Card from '../../components/Card';
 
 const ProfileViewScreen = () => {
   const navigation = useNavigation();
@@ -14,8 +15,8 @@ const ProfileViewScreen = () => {
   }
 
   return (
-    <View style={styles.container}>
-      <Text>VIEWING THE PROFILE</Text>
+    <View>
+      <Card user={user} />
     </View>
   );
 };

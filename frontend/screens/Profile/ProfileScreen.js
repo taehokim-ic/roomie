@@ -38,9 +38,9 @@ export default ProfileScreen = () => {
         />
         <View style={styles.textContainer}>
           <Text style={styles.name}>{user.name}</Text>
-          <Text style={styles.bio}>{user.age}</Text>
+          <Text style={styles.bio}>Age: {user.age}</Text>
           <TouchableOpacity style={styles.buttonContainer} onPress={handleView}>
-              <Text style={styles.editButton}>View Profile</Text>
+              <Text style={styles.editButton}>View</Text>
           </TouchableOpacity>
         </View>
       </View>
