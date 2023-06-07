@@ -1,19 +1,16 @@
 import React from 'react';
 import { TouchableOpacity, View, Text, StyleSheet } from 'react-native';
-import { AntDesign, FontAwesome } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
 
-const DefaultSearchButton = ({ title, onPress }) => {
+const SearchButton = ({ title, onPress }) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.buttonContainer} onPress={onPress}>
-      <View style={styles.leftIconContainer}>
-        <AntDesign name="search1" size={24} color="black" />
-      </View>
+        <View style={styles.leftIconContainer}>
+          <AntDesign name="search1" size={24} color="black" />
+        </View>
       <Text style={styles.buttonText}>{title}</Text>
-      <View style={styles.rightIconContainer}>
-        <FontAwesome name="gear" size={24} color="black" />
-      </View>
-    </TouchableOpacity>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -47,11 +44,13 @@ const styles = StyleSheet.create({
   leftIconContainer: {},
   rightIconContainer: {},
   buttonText: {
-    color: '#ffffff',
+    color: '#777777',
+    marginLeft: 20,
+    marginRight: 'auto',
     fontSize: 16,
     fontWeight: 'bold',
-    textAlign: 'center',
+    textAlign: 'left'
   },
 });
 
-export default DefaultSearchButton;
+export default SearchButton;

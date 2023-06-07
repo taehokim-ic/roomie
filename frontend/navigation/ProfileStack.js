@@ -3,6 +3,7 @@ import {TouchableOpacity, Text} from 'react-native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import ProfileScreen from "../screens/Profile/ProfileScreen";
 import ProfileEditScreen from "../screens/Profile/ProfileEditScreen";
+import ProfileViewScreen from "../screens/Profile/ProfileViewScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -27,6 +28,7 @@ const ProfileStack = () => {
         />
       ),
       headerShown: true }}/>
+      <Stack.Screen name = 'ProfileView' component = {ProfileViewScreen} options={{ headerShown: false }}/> 
     </Stack.Navigator>
   )
 }

@@ -1,34 +1,38 @@
 import React from 'react';
-import { View, TouchableOpacity, StatusBar, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import { View, StyleSheet } from 'react-native';
+
+import SearchButton from '../../components/SearchButton';
+import GearIconButton from '../../components/GearIconButton';
+import SmokerDropdown from '../../components/SmokerDropdown';
+
 
 const SearchFilter = () => {
   const navigation = useNavigation();
 
-  const handleGearIconClick = () => {
-    navigation.navigate('DefaultSearch');
-  };
+  const handleSearchButtonPress = () => {
+    navigation.navigate('MainFilter');
+  }
+
+  const handleGearIconButtonPress = () => {
+    navigation.navigate('DefaultSearch')
+  }
 
   return (
     <View style={styles.container}>
-      <StatusBar  barStyle="dark-content" translucent={false} />
-      <TouchableOpacity onPress={handleGearIconClick}>
-        <Icon name="gear" size={30} color="#f00" style={styles.gearIcon} />
-      </TouchableOpacity>
+      <SearchButton onPress={handleSearchButtonPress} title="Enter location"/>
+      <GearIconButton onPress={handleGearIconButtonPress} color='#03c9a9'/>
+      <SmokerDropdown />
     </View>
-  );
+  )
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  gearIcon: {
-    paddingHorizontal: 10,
-  },
-});
+    backgroundColor: '#03c9a9',
+  }
+})
+
 
 export default SearchFilter;

@@ -1,12 +1,16 @@
 import React from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet, SafeAreaView, StatusBar, Button } from 'react-native';
+import { View, Text, Image, TouchableOpacity, StyleSheet, SafeAreaView, StatusBar, Button, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-const ProfileScreen = () => {
+export default ProfileScreen = () => {
   const navigation = useNavigation();
 
-  const handleClick = () => {
+  const handleEdit = () => {
     navigation.navigate('ProfileEdit', { instantAnimation: true });
+  };
+
+  const handleView = () => {
+    navigation.navigate('ProfileView', { instantAnimation: true });
   };
 
   const user = {
@@ -19,38 +23,49 @@ const ProfileScreen = () => {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <StatusBar  barStyle="dark-content" translucent={false} />
-      <View style={styles.header}>
-          <Text style={styles.title}>Profile</Text>
-          <TouchableOpacity style={styles.editButtonContainer} onPress={handleClick}>
-            <Text style={styles.editButton}>Edit</Text>
+      <ScrollView>
+        <StatusBar  barStyle="dark-content" translucent={false} />
+        <View style={styles.header}>
+            <Text style={styles.title}>Profile</Text>
+            <TouchableOpacity style={styles.buttonContainer} onPress={handleEdit}>
+              <Text style={styles.editButton}>Edit</Text>
+            </TouchableOpacity>
+        </View>
+      <View style={styles.container}>
+        <Image
+          source={require('../../assets/profile-picture.png')}
+          style={styles.profileImage}
+        />
+        <View style={styles.textContainer}>
+          <Text style={styles.name}>{user.name}</Text>
+          <Text style={styles.bio}>Age: {user.age}</Text>
+          <TouchableOpacity style={styles.buttonContainer} onPress={handleView}>
+              <Text style={styles.editButton}>View</Text>
           </TouchableOpacity>
+        </View>
       </View>
-    <View style={styles.container}>
-      <Image
-        source={require('../../assets/profile-picture.png')}
-        style={styles.profileImage}
-      />
-      <View style={styles.textContainer}>
-        <Text style={styles.name}>{user.name}</Text>
-        <Text style={styles.bio}>{user.age}</Text>
+      <View>
+        <Text style={styles.subtitle}>Personal Details</Text>
+          <View style={styles.fieldContainer}>
+            <Text style={styles.field}>Contact Number    {user.number}</Text>
+          </View>
+          <View style={styles.fieldContainer}>
+            <Text style={styles.field}>Email Address         {user.email}</Text>
+          </View>
+          <View style={styles.fieldContainer}>
+            <Text style={styles.field}>Date of Birth           {user.dob}</Text>
+          </View>
       </View>
-    </View>
-    <View>
-      <Text style={styles.subtitle}>Personal Details</Text>
+      <View>
+        <Text style={styles.subtitle}>Legal</Text>
         <View style={styles.fieldContainer}>
-          <Text style={styles.field}>Contact Number    {user.number}</Text>
+          <Text style={styles.field}>Privacy Policy</Text>
         </View>
         <View style={styles.fieldContainer}>
-          <Text style={styles.field}>Email Address         {user.email}</Text>
+          <Text style={styles.field}>Terms of Service</Text>
         </View>
-        <View style={styles.fieldContainer}>
-          <Text style={styles.field}>Date of Birth           {user.dob}</Text>
-        </View>
-    </View>
-    <View>
-      <Text style={styles.subtitle}>Legal</Text>
-    </View>
+      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -61,7 +76,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  editButtonContainer: {
+  buttonContainer: {
     paddingTop: 20,
     marginRight: 20,
   },
@@ -116,9 +131,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   fieldContainer: {
-    borderWidth: 1,
+    borderWidth: 0.75,
     borderColor: '#ccc',
   }
 });
-
-export default ProfileScreen;
