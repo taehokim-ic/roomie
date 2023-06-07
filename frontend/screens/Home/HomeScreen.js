@@ -2,41 +2,95 @@ import * as React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { View, Image, ScrollView, Alert } from 'react-native';
 import { Text, Card, Button } from '@rneui/themed'
+import { useState } from 'react';
 
-export default function HomeScreen() {
+const UserProfileCard = ({ user, onNext }) => {
+    const { name, age, bio } = user;
+  
+    return (
+        <Card>
+            <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+                <Text h4>{user.name}</Text>
+            </View>
+            <Image 
+                source={user.img} 
+                style={{width: 200, height: 200, borderRadius: 200/ 2, alignSelf: 'center', marginTop: 20, marginBottom: 20}}
+            />
+            <Card>
+                <Card.Title>Bio</Card.Title>
+                <Text>{user.bio}</Text>
+            </Card>
+            <Card>
+                <Card.Title>Who am I looking for?</Card.Title>
+                <Text>{user.lookingFor}</Text>
+            </Card>
+            <Card>
+                <Card.Title>Additional information</Card.Title>
+                <Text>{user.addInfo}</Text>
+            </Card>
+            <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+                <Button size="sm" type="clear" onPress={onNext}>
+                    Save
+                </Button>
+                <Button size="sm" type="clear"onPress={onNext}> 
+                    Skip
+                </Button>
+            </View>
+        </Card>
+    );
+};
+
+const HomeScreen = () => {
+    const [userProfiles, setUserProfiles] = useState([
+        {
+          name: 'John Doe',
+          age: 25,
+          bio: 'I am a software engineer passionate about React Native.',
+          lookingFor: 'I am looking for a flatshare in London.',
+          addInfo: 'I have a peanut allergy, so please bear that in mind. I\'m also a vegetarian, but I don\'t mind if you eat meat. I\'m also a big fan of K-pop, so if you are too, that\'s a bonus!',
+          img: require('../../assets/users/user-1.jpg'),
+        },
+        {
+          name: 'Jane Smith',
+          age: 30,
+          bio: 'I love traveling and exploring new places.',
+          lookingFor: 'Looking to share a flat with someone in their 20s.',
+          addInfo: 'I have a peanut allergy, so please bear that in mind. I\'m also a vegetarian, but I don\'t mind if you eat meat. I\'m also a big fan of K-pop, so if you are too, that\'s a bonus!',
+          img: require('../../assets/users/user-2.jpg'),
+        },
+        {
+            name: 'Rieko Smith',
+            age: 25,
+            bio: 'I am a software engineer passionate about React Native.',
+            lookingFor: 'I am looking for a flatshare in London.',
+            addInfo: 'I have a peanut allergy, so please bear that in mind. I\'m also a vegetarian, but I don\'t mind if you eat meat. I\'m also a big fan of K-pop, so if you are too, that\'s a bonus!',
+            img: require('../../assets/users/user-3.jpg'),
+        },
+        {
+            name: 'Diana Smith',
+            age: 25,
+            bio: 'I am a software engineer passionate about React Native.',
+            lookingFor: 'I am looking for a flatshare in London.',
+            addInfo: 'I have a peanut allergy, so please bear that in mind. I\'m also a vegetarian, but I don\'t mind if you eat meat. I\'m also a big fan of K-pop, so if you are too, that\'s a bonus!',
+            img: require('../../assets/users/user-4.jpg'),
+        },
+    ]);
+      
+    const [currentIndex, setCurrentIndex] = useState(0);
+      
+    const handleSkip = () => {
+        setCurrentIndex((prevIndex) => prevIndex + 1);
+    };
+    
+    const currentUser = userProfiles[currentIndex];
+
     return (
         <SafeAreaView>
             <ScrollView>
-        <Card>
-            <View style={{flexDirection: 'row', justifyContent: 'center'}}>
-            <Text h4>Jihoon W</Text>
-            </View>
-            <Image 
-            source={require('../../assets/users/user-1.jpg')} 
-            style={{width: 200, height: 200, borderRadius: 200/ 2, alignSelf: 'center', marginTop: 20, marginBottom: 20}}
-            />
-    <Card>
-        <Card.Title>Bio</Card.Title>
-        <Text> Hi! I'm Jihoon. I'm 21 and recently arrived in the UK from South Korea. I'm looking for a flatshare in London. I'm a tidy person and I like to keep my room clean. I'm a non-smoker and I don't have any pets. I'm looking for a flatshare with others in the area! </Text>
-    </Card>
-    <Card>
-        <Card.Title>Who am I looking for?</Card.Title>
-        <Text>I'm looking for other Korean speakers in the area, who are also preferably in their 20s. I would like to flatshare with a neat person who doesn't mind me working long hours, but is also down to have fun and explore during the weekends!</Text>
-    </Card>
-    <Card>
-        <Card.Title>Additional information</Card.Title>
-        <Text>I have a peanut allergy, so please bear that in mind. I'm also a vegetarian, but I don't mind if you eat meat. I'm also a big fan of K-pop, so if you are too, that's a bonus! </Text>
-    </Card>
-    <View style={{flexDirection: 'row', justifyContent: 'center'}}>
-    <Button size="sm" type="clear" onPress={() => Alert.alert('Saved user profile')}>
-        Save
-    </Button>
-    <Button size="sm" type="clear"onPress={() => Alert.alert('Skipped user profile')}> 
-        Skip
-    </Button>
-    </View>
-    </Card>
-    </ScrollView>
+                <UserProfileCard user={currentUser} onNext={handleSkip} />
+            </ScrollView>
         </SafeAreaView>
     );
 }
+
+export default HomeScreen;
