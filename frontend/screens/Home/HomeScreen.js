@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { View, Image, ScrollView, Alert } from 'react-native';
+import { View, Image, ScrollView, Alert, PanResponder, Animated } from 'react-native';
 import { Text, Card, Button } from '@rneui/themed'
 import { useState } from 'react';
 
@@ -41,6 +41,29 @@ const UserProfileCard = ({ user, onNext }) => {
 };
 
 const HomeScreen = () => {
+    
+    const pan = useState(new Animated.ValueXY())[0];
+
+    const panResponder = useState(
+        PanResponder.create({
+          onMoveShouldSetPanResponder: () => true,
+          onPanResponderMove: Animated.event([
+            null,
+            { dx: pan.x, dy: pan.y }
+          ], { useNativeDriver: false }),
+          onPanResponderRelease: (_, gesture) => {
+            if (gesture.dx > 120) {
+              handleSkip();
+            }
+            Animated.spring(pan, { toValue: { x: 0, y: 0 } }).start();
+          },
+        })
+      )[0];
+
+    const cardStyle = {
+        transform: [{ translateX: pan.x }, { translateY: pan.y }, { rotate: pan.x.interpolate({ inputRange: [-200, 0, 200], outputRange: ["-10deg", "0deg", "10deg"] }) }],
+    };
+    
     const [userProfiles, setUserProfiles] = useState([
         {
           name: 'John Doe',
@@ -86,9 +109,9 @@ const HomeScreen = () => {
 
     return (
         <SafeAreaView>
-            <ScrollView>
+            <Animated.ScrollView style={cardStyle} {...panResponder.panHandlers}>
                 <UserProfileCard user={currentUser} onNext={handleSkip} />
-            </ScrollView>
+            </Animated.ScrollView>
         </SafeAreaView>
     );
 }
