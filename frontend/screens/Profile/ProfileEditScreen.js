@@ -21,15 +21,6 @@ const ProfileEditScreen = () => {
     <ScrollView>
       <View>
         <StatusBar  barStyle="dark-content" translucent={false} />
-        <View style={styles.header}>
-          <TouchableOpacity style={styles.cancelButtonContainer} onPress={handleSave}>
-              <Text style={styles.cancelButton}>Cancel</Text>
-          </TouchableOpacity>
-          <Text style={styles.title}>Edit Profile</Text>
-          <TouchableOpacity style={styles.editButtonContainer} onPress={handleSave}>
-              <Text style={styles.editButton}>Done</Text>
-          </TouchableOpacity>
-        </View>
         <View>
           <Text style={styles.subtitle}>Personal Details</Text>
         </View>
@@ -118,7 +109,7 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingTop: 20,
+    paddingTop: 10,
   },
   cancelButtonContainer: {
     paddingTop: 40,
@@ -140,7 +131,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: 20,
+    padding: 10,
     borderBottomWidth: 1,
     borderBottomColor: '#E0E0E0',
   },
