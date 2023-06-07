@@ -1,36 +1,16 @@
 import React from 'react';
-import { View, TouchableOpacity, StatusBar, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import { TransitionSpecs } from '@react-navigation/stack';
 
+import DefaultSearchButton from '../../components/DefaultSearchButton';
 
 const SearchScreen = () => {
   const navigation = useNavigation();
 
-  const handleGearIconClick = () => {
-    navigation.navigate('SearchFilter', { instantAnimation: true });
-  };
-
+  const handleButtonPress = () => {
+    navigation.navigate('SearchFilter');
+  }
   return (
-    <View style={styles.container}>
-      <StatusBar  barStyle="dark-content" translucent={false} />
-      <TouchableOpacity onPress={handleGearIconClick}>
-        <Icon name="gear" size={30} color="#000" style={styles.gearIcon} />
-      </TouchableOpacity>
-    </View>
-  );
+    <DefaultSearchButton onPress={handleButtonPress}/>
+  )
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  gearIcon: {
-    paddingHorizontal: 10,
-  },
-});
-
 export default SearchScreen;
