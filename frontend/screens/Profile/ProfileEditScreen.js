@@ -1,21 +1,39 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, Profiler } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, StatusBar, TextInput, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import UserContext from '../../context/UserContext';
 
 const ProfileEditScreen = () => {
   const navigation = useNavigation();
 
   const handleSave = () => {
     // Save to database
+
     console.log('Saved value:', inputValue);
     navigation.navigate('DefaultProfile', { instantAnimation: true });
   };
 
-  const [inputValue, setInputValue] = useState('Jihoon W.');
+  // const handleInputChange = (text) => {
+  //   console.log('Input value:', text);
+  // //   setInputValue(text);
+  // };
 
-  const handleInputChange = (text) => {
-    setInputValue(text);
-  };
+  const user = useContext(UserContext);
+
+  const ProfileTextbox = ({label, input}) => {
+    const [inputValue, setInputValue] = useState(input);
+
+    const handleInputChange = (text) => {
+        setInputValue(text);
+    };
+
+    return (
+        <View style={styles.row}>
+            <Text style={styles.label} >{label}</Text>
+            <TextInput onChangeText={handleInputChange} value={inputValue} />
+      </View>
+    );
+};
 
   return (
     <ScrollView>
@@ -24,57 +42,33 @@ const ProfileEditScreen = () => {
         <View>
           <Text style={styles.subtitle}>Personal Details</Text>
         </View>
-        <View style={styles.row}>
-          <Text style={styles.label}>Name</Text>
-          <TextInput style={styles.input} value={inputValue} onChangeText={handleInputChange} />
-        </View>
-        <View style={styles.row}>
-          <Text style={styles.label}>Age</Text>
-          <TextInput style={styles.input} value='22' />
-        </View>
-        <View style={styles.row}>
-          <Text style={styles.label}>Contact Number</Text>
-          <TextInput style={styles.input} value='+44 774078517' />
-        </View>
-        <View style={styles.row}>
-          <Text style={styles.label}>Email Address</Text>
-          <TextInput style={styles.input} value='example@example.com' />
-        </View>
-        <View style={styles.row}>
-          <Text style={styles.label}>Date of Birth</Text>
-          <TextInput style={styles.input} value='10/05/2001' />
-        </View>
-        <View style={styles.row}>
-          <Text style={styles.label}>Location</Text>
-          <TextInput style={styles.input} value='London' />
-        </View>
-        <View style={styles.row}>
-          <Text style={styles.label}>Primary Language</Text>
-          <TextInput style={styles.input} value='Korean' />
-        </View>
-        <View style={styles.row}>
-          <Text style={styles.label}>Budget</Text>
-          <TextInput style={styles.input} value='£1400-1800pcm' />
-        </View>
-
+        <ProfileTextbox label="Name" input={user.name} />
+        <ProfileTextbox label="Age" input={user.age.toString()} />
+        <ProfileTextbox label="Contact Number" input={user.contactNumber} />
+        <ProfileTextbox label="Email Address" input={user.email} />
+        <ProfileTextbox label="Date of Birth" input={user.dob} />
+        <ProfileTextbox label="Nationality" input={user.nationality} />
+        <ProfileTextbox label="Primary Language" input={user.primaryLanguage} />
+        <ProfileTextbox label="Minimum Budget" input={user.minBudget.toString()} />
+        <ProfileTextbox label="Maximum Budget" input={user.maxBudget.toString()} />
         <View>
           <Text style={styles.subtitle}>Preferences</Text>
         </View>
         <View style={styles.row}>
           <Text style={styles.label}>Location</Text>
-          <TextInput style={styles.input} value='London' />
+          <TextInput style={styles.input} value={user.preferredLocation} />
         </View>
         <View style={styles.row}>
           <Text style={styles.label}>Gender</Text>
-          <TextInput style={styles.input} value='Male' />
+          <TextInput style={styles.input} value={user.gender} />
         </View>
         <View style={styles.row}>
           <Text style={styles.label}>Smoker?</Text>
-          <TextInput style={styles.input} value='No' />
+          <TextInput style={styles.input} value={user.smoker} />
         </View>
         <View style={styles.row}>
           <Text style={styles.label}>Has Pets?</Text>
-          <TextInput style={styles.input} value='No preference' />
+          <TextInput style={styles.input} value={user.hasPets} />
         </View>
       </View>
     </ScrollView>

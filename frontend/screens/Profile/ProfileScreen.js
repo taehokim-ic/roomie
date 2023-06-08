@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet, SafeAreaView, StatusBar, Button, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import UserContext from '../../context/UserContext';
 
 export default ProfileScreen = () => {
   const navigation = useNavigation();
@@ -13,13 +14,7 @@ export default ProfileScreen = () => {
     navigation.navigate('ProfileView', { instantAnimation: true });
   };
 
-  const user = {
-    name: 'Jihoon W.',
-    age: 22,
-    number: '+44 7705707370',
-    email: 'jihoon.w123@gmail.com',
-    dob: '10.02.2001',
-  }
+  const user = useContext(UserContext);
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -133,5 +128,5 @@ const styles = StyleSheet.create({
   fieldContainer: {
     borderWidth: 0.75,
     borderColor: '#ccc',
-  }
+  },
 });
