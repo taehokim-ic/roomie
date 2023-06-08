@@ -2,18 +2,19 @@ import * as React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { View, Image, ScrollView, Alert, PanResponder, Animated } from 'react-native';
 import { Text, Card, Button } from '@rneui/themed'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const UserProfileCard = ({ user, onNext }) => {
-    const { name, age, bio } = user;
-  
+    const { name, profile_url, bio, requirements, additional_info } = user;
+
     return (
         <Card>
             <View style={{flexDirection: 'row', justifyContent: 'center'}}>
                 <Text h4>{user.name}</Text>
             </View>
             <Image 
-                source={user.img} 
+                source={{uri: user.profile_url}} 
                 style={{width: 200, height: 200, borderRadius: 200/ 2, alignSelf: 'center', marginTop: 20, marginBottom: 20}}
             />
             <Card>
@@ -22,13 +23,16 @@ const UserProfileCard = ({ user, onNext }) => {
             </Card>
             <Card>
                 <Card.Title>Who am I looking for?</Card.Title>
-                <Text>{user.lookingFor}</Text>
+                <Text>{user.requirements}</Text>
             </Card>
             <Card>
                 <Card.Title>Additional information</Card.Title>
-                <Text>{user.addInfo}</Text>
+                <Text>{user.additional_info}</Text>
             </Card>
             <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+                <Button size="sm" type="clear" onPress={({})}>
+                    Translate
+                </Button>
                 <Button size="sm" type="clear" onPress={onNext}>
                     Save
                 </Button>
@@ -66,7 +70,7 @@ const HomeScreen = () => {
     const cardStyle = {
         transform: [{ translateX: pan.x }, { translateY: pan.y }, { rotate: pan.x.interpolate({ inputRange: [-200, 0, 200], outputRange: ["-10deg", "0deg", "10deg"] }) }],
     };
-    
+
     const [userProfiles, setUserProfiles] = useState([
         {
           name: 'John Doe',
@@ -101,6 +105,20 @@ const HomeScreen = () => {
             img: require('../../assets/users/user-4.jpg'),
         },
     ]);
+
+    useEffect(() => {
+        fetchData();
+      }, []);
+    
+      const fetchData = async () => {
+        try {
+          const response = await axios.get('https://roomie3.herokuapp.com/api/v1/profiles/recommeneded');
+          setUserProfiles(response.data);
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+    };
+    
       
     const [currentIndex, setCurrentIndex] = useState(0);
       

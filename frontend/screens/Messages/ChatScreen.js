@@ -78,6 +78,8 @@ const ChatScreen = () => {
         );
       };
 
+
+
     const renderSend = (props) => {
         return (
           <Send {...props}>
