@@ -1,15 +1,16 @@
 import React from 'react';
-import { View, Text, Button, StyleSheet, FlatList, ScrollView } from 'react-native';
-import { Container,
-    Card,
-    UserInfo,
-    UserImgWrapper,
-    UserImg,
-    UserInfoText,
-    UserName,
-    PostTime,
-    MessageText,
-    TextSection, } from '../../styles/MessageStyles';
+import { View, Text, TouchableOpacity, StyleSheet, FlatList, Image } from 'react-native';
+import { Container, 
+  Card, 
+  UserInfo, 
+  UserImgWrapper, 
+  UserImg, 
+  UserInfoText, 
+  UserName, 
+  PostTime, 
+  MessageText, 
+  TextSection } from '../../styles/MessageStyles';
+
 
 const Messages = [
   {
@@ -54,8 +55,52 @@ const Messages = [
   },
 ];
 
+const Matches = [
+  {
+    id: '1',
+    userImg: require('../../assets/users/user-8.jpg'),
+  },
+  {
+    id: '2',
+    userImg: require('../../assets/users/user-9.png'),
+  },
+  {
+    id: '3',
+    userImg: require('../../assets/users/user-10.png'),
+  },
+  {
+    id: '4',
+    userImg: require('../../assets/users/user-11.png'),
+  },
+];
+
 const MessagesScreen = ({navigation}) => {
-    return (
+  const goToMatches = () => {
+    navigation.navigate('Matches');
+  };
+
+  return (
+    <View style={styles.container}>
+      <TouchableOpacity onPress={goToMatches} style={styles.card}>
+      <View style={styles.cardContent}>
+        <Text style={styles.text}>People who saved you back</Text>
+        <FlatList
+          horizontal
+          data={Matches}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <View style={styles.circularImageContainer}>
+              <Image source={item.userImg} style={styles.userImage} />
+            </View>
+          )}
+          ListFooterComponent={() => (
+            <TouchableOpacity style={styles.arrowContainer}>
+              <Text style={styles.arrowText}>></Text>
+            </TouchableOpacity>
+          )}
+        />
+      </View>
+    </TouchableOpacity>
       <Container>
         <FlatList 
           data={Messages}
@@ -78,7 +123,8 @@ const MessagesScreen = ({navigation}) => {
           )}
         />
       </Container>
-    );
+    </View>
+  );
 };
 
 export default MessagesScreen;
@@ -88,5 +134,52 @@ const styles = StyleSheet.create({
     flex: 1, 
     alignItems: 'center', 
     justifyContent: 'center'
+  },
+  card: {
+    width: 700,
+    height: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10,
+    paddingTop: 6,
+    paddingRight: 40,
+    marginBottom: 6,
+  },
+  cardContent: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  circularImageContainer: {
+    width: 60,
+    height: 60,
+    borderRadius: 40,
+    backgroundColor: 'black',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginHorizontal: 7.5,
+  },
+  userImage: {
+    width: 55,
+    height: 55,
+    borderRadius: 40,
+    borderWidth: 0.01,
+  },
+  text: {
+    marginRight: 120,
+    marginBottom:5,
+    padding: 3,
+    fontSize: 15,
+  },
+  arrowContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginLeft: 10,
+    marginTop: 15,
+  },
+  arrowText: {
+    fontSize: 20,
+    color: 'black',
+    fontWeight: 'bold',
   },
 });
