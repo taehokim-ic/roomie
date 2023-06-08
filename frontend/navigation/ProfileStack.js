@@ -51,7 +51,7 @@ const ProfileStack = () => {
       <Stack.Screen
         name="ProfileView"
         component={ProfileViewScreen}
-        options={{ headerShown: false }}
+        options={{ title: "View Profile", headerShown: true }}
       />
     </Stack.Navigator>
   );
