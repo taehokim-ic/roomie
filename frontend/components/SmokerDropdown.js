@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     height: 30,
     width: 200,
-    marginLeft: 150,
+    marginLeft: 160,
     borderColor: 'gray',
     borderWidth: 0.5,
     borderRadius: 8,

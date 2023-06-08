@@ -4,11 +4,14 @@ import { View, StyleSheet } from 'react-native';
 
 import SearchButton from '../../components/SearchButton';
 import GearIconButton from '../../components/GearIconButton';
+import MinBudgetDropdown from '../../components/MinBudgetDropdown';
+import MaxBudgetDropdown from '../../components/MaxBudgetDropdown';
 import SmokerDropdown from '../../components/SmokerDropdown';
 import PetsDropdown from '../../components/PetsDropdown';
 import ApplyFiltersButton from '../../components/ApplyFiltersButton';
 import SearchFiltersText from '../../components/SearchFiltersText';
 import AdditionalSearchFiltersText from '../../components/AdditionalSearchFiltersText';
+
 
 
 const SearchFilter = () => {
@@ -30,6 +33,8 @@ const SearchFilter = () => {
     <View style={styles.container}>
       <SearchButton onPress={handleSearchButtonPress} title="Enter location"/>
       <GearIconButton onPress={handleGearIconButtonPress} color='#ea1552'/>
+      <MinBudgetDropdown />
+      <MaxBudgetDropdown />
       <SmokerDropdown />
       <PetsDropdown />
       <ApplyFiltersButton onPress={handleApplyFiltersButtonPress}/>

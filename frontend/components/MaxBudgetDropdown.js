@@ -1,20 +1,30 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
+import { FontAwesome } from '@expo/vector-icons';
 
 const data = [
-  { label: "Don't mind", value: '1' },
-  { label: 'No', value: '2' },
+  { label: 'None', value: '0' },
+  { label: '£1100 per month', value: '1' },
+  { label: '£1200 per month', value: '2' },
+  { label: '£1300 per month', value: '3' },
+  { label: '£1400 per month', value: '4' },
+  { label: '£1500 per month', value: '5' },
+  { label: '£1600 per month', value: '6' },
+  { label: '£1700 per month', value: '7' },
+  { label: '£1800 per month', value: '8' },
+  { label: '£1900 per month', value: '9' },
+  { label: '£2000 per month', value: '10' },
 ];
 
-const PetsDropdown = ({ position }) => {
+const MaxBudgetDropdown = ({ position }) => {
   const [value, setValue] = useState(null);
   const [isFocus, setIsFocus] = useState(false);
 
   const renderLabel = () => {
     return (
       <Text style={[styles.label, isFocus && { color: 'black' }]}>
-        Has pets?
+        Max Budget?
       </Text>
     );
   };
@@ -27,6 +37,7 @@ const PetsDropdown = ({ position }) => {
         placeholderStyle={styles.placeholderStyle}
         selectedTextStyle={styles.selectedTextStyle}
         inputSearchStyle={styles.inputSearchStyle}
+        iconStyle={styles.iconStyle}
         data={data}
         search
         maxHeight={300}
@@ -50,7 +61,7 @@ const styles = StyleSheet.create({
   container: {
     position: 'absolute',
     width: '100%',
-    marginTop: 490,
+    marginTop: 190,
     height: 40,
     backgroundColor: '#89e0c2',
     justifyContent: 'center',
@@ -67,6 +78,9 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     backgroundColor: '#eeeeee',
     paddingHorizontal: 8,
+  },
+  icon: {
+    marginRight: 5,
   },
   label: {
     position: 'absolute',
@@ -87,6 +101,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: 'black',
   },
+  iconStyle: {
+    width: 20,
+    height: 20,
+  },
   inputSearchStyle: {
     height: 40,
     fontSize: 16,
@@ -94,4 +112,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default PetsDropdown;
+export default MaxBudgetDropdown;
