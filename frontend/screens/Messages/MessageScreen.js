@@ -83,7 +83,7 @@ const MessagesScreen = ({navigation}) => {
     <View style={styles.container}>
       <TouchableOpacity onPress={goToMatches} style={styles.card}>
       <View style={styles.cardContent}>
-        <Text style={styles.text}>People who saved you back</Text>
+        <Text style={styles.text}>People who you have matched with</Text>
         <FlatList
           horizontal
           data={Matches}
