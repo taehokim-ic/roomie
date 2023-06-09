@@ -12,8 +12,8 @@ const data = [
     name: 'John D',
     age: '25',
     pronouns: 'He/Him',
-    institution: 'ABC University',
-    nationality: 'American',
+    institution: 'UCL',
+    nationality: 'Estonian',
     image: require('../../assets/users/user-1.jpg'),
   },
   {
@@ -21,8 +21,8 @@ const data = [
     name: 'Finlay W.',
     age: '20',
     pronouns: 'He/Him',
-    institution: 'XYZ College',
-    nationality: 'Canadian',
+    institution: 'LSE',
+    nationality: 'Portugese',
     image: require('../../assets/users/user-2.jpg'),
   },
   {
@@ -30,44 +30,44 @@ const data = [
     name: 'Jane S.',
     age: '28',
     pronouns: 'They/Them',
-    institution: 'PQR Institute',
-    nationality: 'Australian',
+    institution: 'Imperial',
+    nationality: 'Latvian',
     image: require('../../assets/users/user-3.jpg'),
   },
   {
     id: '4',
-    name: 'Jane S.',
-    age: '28',
-    pronouns: 'They/Them',
-    institution: 'PQR Institute',
+    name: 'Harry S.',
+    age: '22',
+    pronouns: 'He/Him',
+    institution: 'Imperial',
     nationality: 'Australian',
     image: require('../../assets/users/user-4.jpg'),
   },
   {
     id: '5',
-    name: 'Jane S.',
-    age: '28',
-    pronouns: 'They/Them',
-    institution: 'PQR Institute',
-    nationality: 'Australian',
+    name: 'Jacob L.',
+    age: '23',
+    pronouns: 'He/Him',
+    institution: 'UCL',
+    nationality: 'French',
     image: require('../../assets/users/user-5.jpg'),
   },
   {
     id: '6',
-    name: 'Jane S.',
+    name: 'Leah A.',
     age: '28',
     pronouns: 'They/Them',
-    institution: 'PQR Institute',
-    nationality: 'Australian',
+    institution: 'UCL',
+    nationality: 'German',
     image: require('../../assets/users/user-6.jpg'),
   },
   {
     id: '7',
-    name: 'Jane S.',
-    age: '28',
+    name: 'Brett F.',
+    age: '25',
     pronouns: 'They/Them',
-    institution: 'PQR Institute',
-    nationality: 'Australian',
+    institution: 'LSE',
+    nationality: 'Persian',
     image: require('../../assets/users/user-7.jpg'),
   },
 ];
@@ -122,8 +122,8 @@ const SearchScreen = () => {
             <Text fontSize={18} fontWeight="bold" flex={1} textAlign="left">{item.name}</Text>
             <Text flexShrink={1} textAlign="left">{item.age}</Text>
           </View>
-          <Text fontSize={12} marginBottom={2} textAlign="left">{item.pronouns}</Text>
-          <Text fontSize={12} marginBottom={2} textAlign="left">{item.institution}</Text>
+          <Text fontSize={12} marginBottom={2} textAlign="left">{"Prounouns: " + item.pronouns}</Text>
+          <Text fontSize={12} marginBottom={2} textAlign="left">{"Institution: " + item.institution}</Text>
           <Text fontSize={12} marginBottom={2} textAlign="left">{'Nationality: ' + item.nationality}</Text>
         </View>
       </Box>
@@ -150,7 +150,7 @@ const SearchScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
-    height: '90%',
+    height: '80%',
     width: '100%',
     borderRadius: 10,
     alignSelf: 'center',

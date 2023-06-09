@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
   container: {
     position: 'absolute',
     width: '100%',
-    marginTop: 140,
+    marginTop: '35%',
     height: 40,
     backgroundColor: '#89e0c2',
     justifyContent: 'center',
@@ -95,7 +95,6 @@ const styles = StyleSheet.create({
   },
   placeholderStyle: {
     fontSize: 16,
-    fontStyle: 'bold',
   },
   selectedTextStyle: {
     fontSize: 16,
