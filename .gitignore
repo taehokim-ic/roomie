@@ -17,6 +17,7 @@ env3.*
 env
 docs_build
 venv
+node_modules
 docs.zip
 archive.zip
 

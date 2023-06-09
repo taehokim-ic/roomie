@@ -33,18 +33,6 @@ const ProfileStack = () => {
         component={ProfileEditScreen}
         options={({ navigation, route }) => ({
           title: "Edit Profile",
-          headerRight: () => (
-            <CustomHeaderButton
-              title="Save"
-              onPress={() => {
-                const onSave = route.params?.onSave;
-                if (onSave) {
-                  onSave();
-                }
-                handleSave();
-              }}
-            />
-          ),
           headerShown: true,
         })}
       />

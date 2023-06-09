@@ -180,7 +180,7 @@ const ProfileEditScreen = () => {
           <Text style={styles.label}>Has Pets?</Text>
           <TextInput style={styles.input} value={hasPetsValue} onChangeText={handleHasPetsValue} />
         </View>
-        <View style={styles.row}>
+        <View style={styles.saveRow}>
           <Button title="Save" onPress={handleSave} />
         </View>
       </View>
@@ -238,6 +238,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    padding: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#E0E0E0',
+  },
+  saveRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    justifyContent: 'center',
     padding: 10,
     borderBottomWidth: 1,
     borderBottomColor: '#E0E0E0',
