@@ -6,74 +6,117 @@ import axios from 'axios';
 
 const ProfileEditScreen = () => {
   const navigation = useNavigation();
-
   const {user, setUser} = useContext(UserContext);
 
-  const handleSave = () => {
-    setUser({
-      id: "d274e899-53a6-4b25-8558-e28749032a4f",
-      name: "Jack",
-      picture_url: "https://hrgyksjnqypffnavbeqn.supabase.co/storage/v1/object/public/user_profile_pictures/josh_tran_profile.png",
-      bio: "I am a cool person",
-      requirements: [
-        "I am looking for a cool person"
-      ],
-      additional_info: "I am a cool person",
-      email: "gramdschmidt@gmail.com",
-      age: 31,
-      dob: "1992-02-02",
-      nationality: "American",
-      preferredLocation: "London",
-      gender: "Male",
-      smoking: "No",
-      hasPets: "No",
-      minBudget: 1000,
-      maxBudget: 2000,
-      primary_language: "English",
-      contact_number: "4142124122"
-    });
-    // axios.post('..../api/v1/profile/......', {
-    //   name: "John Smith",
-    //   profile_url: "https://hrgyksjnqypffnavbeqn.supabase.co/storage/v1/object/public/user_profile_pictures/josh_tran_profile.png",
-    //   bio: "I am a cool person",
-    //   requirements: ,
-    //   additional_info: ,
-    //   email: ,
-    //   age: ,
-    //   dob: ,
-    //   nationality: ,
-    //   preferredLocation: ,
-    //   gender: ,
-    //   smoking: ,
-    //   hasPets: ,
-    //   minBudget: ,
-    //   maxBudget: ,
-    //   primary_language: ,
-    //   contact_number: 
-    // })
-    // .then((response) => {
-    //   console.log(response);
-    // }, (error) => {
-    //   console.log(error);
-    // });
-    navigation.navigate('DefaultProfile', { instantAnimation: true });
+  const [nameValue, setNameValue] = useState(user.name);
+  const [ageValue, setAgeValue] = useState(user.age.toString());
+  const [contactNumberValue, setContactNumberValue] = useState(user.contact_number);
+  const [emailValue, setEmailValue] = useState(user.email);
+  const [dobValue, setDobValue] = useState(user.dob);
+  const [nationalityValue, setNationalityValue] = useState(user.nationality);
+  const [primaryLanguageValue, setPrimaryLanguageValue] = useState(user.primary_language);
+  const [minBudgetValue, setMinBudgetValue] = useState(user.minBudget.toString());
+  const [maxBudgetValue, setMaxBudgetValue] = useState(user.maxBudget.toString());
+  const [preferredLocationValue, setPreferredLocationValue] = useState(user.preferredLocation);
+  const [genderValue, setGenderValue] = useState(user.gender);
+  const [smokingValue, setSmokingValue] = useState(user.smoking);
+  const [hasPetsValue, setHasPetsValue] = useState(user.hasPets);
+
+  const handleNameValue = (text) => {
+    setNameValue(text);
   };
 
+  const handleAgeValue = (text) => {
+    setAgeValue(text);
+  };
 
-  const ProfileTextbox = ({label, input}) => {
-    const [inputValue, setInputValue] = useState(input);
+  const handleContactNumberValue = (text) => {
+    setContactNumberValue(text);
+  };
 
-    const handleInputChange = (text) => {
-        setInputValue(text);
+  const handleEmailValue = (text) => {
+    setEmailValue(text);
+  };
+
+  const handleDobValue = (text) => {
+    setDobValue(text);
+  };
+
+  const handleNationalityValue = (text) => {
+    setNationalityValue(text);
+  };
+
+  const handlePrimaryLanguageValue = (text) => {
+    setPrimaryLanguageValue(text);
+  };
+
+  const handleMinBudgetValue = (text) => {
+    setMinBudgetValue(text);
+  };
+
+  const handleMaxBudgetValue = (text) => {
+    setMaxBudgetValue(text);
+  };
+
+  const handlePreferredLocationValue = (text) => {
+    setPreferredLocationValue(text);
+  };
+
+  const handleGenderValue = (text) => {
+    setGenderValue(text);
+  };
+
+  const handleSmokingValue = (text) => {
+    setSmokingValue(text);
+  };
+
+  const handleHasPetsValue = (text) => {
+    setHasPetsValue(text);
+  };
+
+  const handleSave = () => {
+    const updatedUser = {
+      id: 'd274e899-53a6-4b25-8558-e28749032a4f',
+      name: nameValue,
+      picture_url: 'https://hrgyksjnqypffnavbeqn.supabase.co/storage/v1/object/public/user_profile_pictures/josh_tran_profile.png',
+      bio: 'I am a cool person',
+      requirements: [
+        'I am looking for a cool person'
+      ],
+      additional_info: 'I am a cool person',
+      email: emailValue,
+      age: ageValue,
+      dob: dobValue,
+      nationality: nationalityValue,
+      preferredLocation: preferredLocationValue,
+      gender: genderValue,
+      smoking: smokingValue,
+      hasPets: hasPetsValue,
+      minBudget: minBudgetValue,
+      maxBudget: maxBudgetValue,
+      primary_language: primaryLanguageValue,
+      contact_number: contactNumberValue
     };
+    console.log(updatedUser);
+    setUser(updatedUser);
 
-    return (
-        <View style={styles.row}>
-            <Text style={styles.label} >{label}</Text>
-            <TextInput onChangeText={handleInputChange} value={inputValue} />
-      </View>
-    );
-};
+    const url = 'http://roomie3.herokuapp.com/api/v1/profile/d274e899-53a6-4b25-8558-e28749032a4f';
+    
+    axios.post(url, JSON.stringify(updatedUser), {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+    })
+    .then((response) => {
+      console.log(response.data);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+
+    navigation.navigate('DefaultProfile', { instantAnimation: true });
+  };
 
   return (
     <ScrollView>
@@ -82,33 +125,60 @@ const ProfileEditScreen = () => {
         <View>
           <Text style={styles.subtitle}>Personal Details</Text>
         </View>
-        <ProfileTextbox label="Name" input={user.name} />
-        <ProfileTextbox label="Age" input={user.age.toString()} />
-        <ProfileTextbox label="Contact Number" input={user.contact_number} />
-        <ProfileTextbox label="Email Address" input={user.email} />
-        <ProfileTextbox label="Date of Birth" input={user.dob} />
-        <ProfileTextbox label="Nationality" input={user.nationality} />
-        <ProfileTextbox label="Primary Language" input={user.primary_language} />
-        <ProfileTextbox label="Minimum Budget" input={user.minBudget.toString()} />
-        <ProfileTextbox label="Maximum Budget" input={user.maxBudget.toString()} />
+        <View style={styles.row}>
+              <Text style={styles.label}>Name</Text>
+              <TextInput value={nameValue} onChangeText={handleNameValue} />
+        </View>
+        <View style={styles.row}>
+              <Text style={styles.label}>Age</Text>
+              <TextInput value={ageValue} onChangeText={handleAgeValue} />
+        </View>
+        <View style={styles.row}>
+              <Text style={styles.label}>Contact Number</Text>
+              <TextInput value={contactNumberValue} onChangeText={handleContactNumberValue} />
+        </View>
+        <View style={styles.row}>
+              <Text style={styles.label}>Email</Text>
+              <TextInput value={emailValue} onChangeText={handleEmailValue} />
+        </View>
+        <View style={styles.row}>
+              <Text style={styles.label}>Date of Birth</Text>
+              <TextInput value={dobValue} onChangeText={handleDobValue} />
+        </View>
+        <View style={styles.row}>
+              <Text style={styles.label}>Nationality</Text>
+              <TextInput value={nationalityValue} onChangeText={handleNationalityValue} />
+        </View>
+        <View style={styles.row}>
+              <Text style={styles.label}>Primary Language</Text>
+              <TextInput value={primaryLanguageValue} onChangeText={handlePrimaryLanguageValue} />
+        </View>
+        <View style={styles.row}>
+              <Text style={styles.label}>Minimum Budget</Text>
+              <TextInput value={minBudgetValue} onChangeText={handleMinBudgetValue} />
+        </View>
+        <View style={styles.row}>
+              <Text style={styles.label}>Maximum Budget</Text>
+              <TextInput value={maxBudgetValue} onChangeText={handleMaxBudgetValue} />
+        </View>
         <View>
           <Text style={styles.subtitle}>Preferences</Text>
         </View>
         <View style={styles.row}>
           <Text style={styles.label}>Location</Text>
-          <TextInput style={styles.input} value={user.preferredLocation} />
+          <TextInput style={styles.input} value={preferredLocationValue} onChangeText={handlePreferredLocationValue}  />
         </View>
         <View style={styles.row}>
           <Text style={styles.label}>Gender</Text>
-          <TextInput style={styles.input} value={user.gender} />
+          <TextInput style={styles.input} value={genderValue} onChangeText={handleGenderValue}  />
         </View>
         <View style={styles.row}>
           <Text style={styles.label}>Smoker?</Text>
-          <TextInput style={styles.input} value={user.smoking} />
+          <TextInput style={styles.input} value={smokingValue} onChangeText={handleSmokingValue} />
         </View>
         <View style={styles.row}>
           <Text style={styles.label}>Has Pets?</Text>
-          <TextInput style={styles.input} value={user.hasPets} />
+          <TextInput style={styles.input} value={hasPetsValue} onChangeText={handleHasPetsValue} />
         </View>
         <View style={styles.row}>
           <Button title="Save" onPress={handleSave} />
