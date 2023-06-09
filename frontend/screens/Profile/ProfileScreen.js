@@ -14,7 +14,7 @@ export default ProfileScreen = () => {
     navigation.navigate('ProfileView', { instantAnimation: true });
   };
 
-  const user = useContext(UserContext);
+  const {user, setUser} = useContext(UserContext);
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -42,7 +42,7 @@ export default ProfileScreen = () => {
       <View>
         <Text style={styles.subtitle}>Personal Details</Text>
           <View style={styles.fieldContainer}>
-            <Text style={styles.field}>Contact Number    {user.number}</Text>
+            <Text style={styles.field}>Contact Number    {user.contact_number}</Text>
           </View>
           <View style={styles.fieldContainer}>
             <Text style={styles.field}>Email Address         {user.email}</Text>

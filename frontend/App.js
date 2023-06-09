@@ -19,7 +19,7 @@ const App = () => {
     }, []);
 
     return (
-        <UserContext.Provider value={user}>
+        <UserContext.Provider value={{user, setUser}}>
             <TabsNavigation />
         </UserContext.Provider>
     );
