@@ -133,7 +133,7 @@ const SearchScreen = () => {
   return (
     <NativeBaseProvider>
       <View>
-        <SearchButton onPress={handleSearchButtonPress} title="Enter location"/>
+        <SearchButton onPress={handleSearchButtonPress} title="Enter institution"/>
         <GearIconButton onPress={handleGearIconButtonPress} />
       </View>
       <View style={styles.container}>
