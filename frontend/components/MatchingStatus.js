@@ -3,33 +3,13 @@ import { View, StyleSheet } from 'react-native';
 import StepIndicator from 'react-native-step-indicator';
 import {useRoute } from '@react-navigation/native';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
+import { color } from '@rneui/base';
 
 const MatchingStatus = () => {
 
-  const route = useRoute();
-
   const getInteraction = (state) => {
-    let pos = 1;
-
-    switch(state) {
-      case 1:
-        pos = 2;
-        break;
-      case 2:
-        pos = 3;
-        break;
-      case 3:
-        pos = 4;
-        break;
-      case 4:
-        pos = 5;
-        break;
-      default:
-        pos = 1;
-        break;
-    }
-
-    return pos;
+    
+    return state;
   }
 
   return (
@@ -37,8 +17,9 @@ const MatchingStatus = () => {
       <View style={styles.indictatorStyle}>
         <StepIndicator
           customStyles={stepIndicatorStyles}
-          currentPosition={0}
-          labels={['Compatibility', 'Flat-finding', 'Contract request', 'Sign contract', 'Final information']}
+          currentPosition={getInteraction(0)} // Add state of interaction here
+          labels={['Compatibility', 'Flat-finding', 'Request contract', 'Sign contract', 'Final information']}
+
         />
       </View>
     </View>
@@ -78,7 +59,7 @@ const stepIndicatorStyles = {
   stepIndicatorLabelUnFinishedColor: '#AAAAAA',
   labelColor: '#999999',
   labelSize: 11,
-  currentStepLabelColor: '#000000',
+  currentStepLabelColor: '#ffffff',
 };
 
 export default MatchingStatus;
