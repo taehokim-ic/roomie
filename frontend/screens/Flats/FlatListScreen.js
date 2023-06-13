@@ -1,43 +1,44 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, FlatList, Image, StyleSheet, TextInput } from 'react-native';
+import { View, Text, TouchableOpacity, FlatList, Image, ScrollView, StyleSheet, TextInput } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Feather } from '@expo/vector-icons';
-import {useNavigation} from '@react-navigation/native';
+import { StatusBar } from 'native-base';
 
-const FlatListScreen = () => {
-    const navigate = useNavigation();
-    const [flats, setFlats] = useState([
-        {
-          id: 1,
-          title: 'Spacious Apartment in the City',
-          rooms: 3,
-          flatmates: 2,
-          toilets: 2,
-          location: 'New York',
-          price: 2000,
-          picture: 'https://example.com/flat1.jpg',
-          propertyType: 'Apartment',
-          description: 'A spacious apartment with great city views.',
-          dateListed: '2023-06-01',
-        },
-        {
-          id: 2,
-          title: 'Cozy Studio near the Beach',
-          rooms: 1,
-          flatmates: 1,
-          toilets: 1,
-          location: 'Miami',
-          price: 1500,
-          picture: 'https://example.com/flat2.jpg',
-          propertyType: 'Studio',
-          description: 'A cozy studio just a few steps away from the beach.',
-          dateListed: '2023-06-05',
-        },
-      ]);
+const FlatListScreen = ({navigation}) => {
 
+  const [flats, setFlats] = useState([
+    {
+      id: 1,
+      title: 'Spacious Apartment in the City',
+      rooms: 3,
+      flatmates: 2,
+      toilets: 2,
+      location: 'New York',
+      price: 2000,
+      picture: 'https://media.rightmove.co.uk/49k/48934/131846453/48934_SLH190093_IMG_00_0000.jpeg',
+      propertyType: 'Apartment',
+      description: 'A spacious apartment with great city views.',
+      dateListed: '2023-06-01',
+    },
+    {
+      id: 2,
+      title: 'Cozy Studio near the Beach',
+      rooms: 1,
+      flatmates: 1,
+      toilets: 1,
+      location: 'Miami',
+      price: 1500,
+      picture: 'https://media.rightmove.co.uk/42k/41063/134329280/41063_PRD012257989_IMG_02_0000.jpeg',
+      propertyType: 'Studio',
+      description: 'A cozy studio just a few steps away from the beach.',
+      dateListed: '2023-06-05',
+    },
+  ]);
 
-  const [showFilter, setShowFilter] = useState(false);
-  const [selectedPreferences, setSelectedPreferences] = useState([]);
+  const handleItemPress = (item) => {
+    // Navigate to FlatViewScreen with the selected flat
+    navigation.navigate('FlatView', { flat: item });
+  };
 
   const renderItem = ({ item }) => (
     <TouchableOpacity onPress={() => handleItemPress(item)} style={styles.flatItem}>
@@ -50,37 +51,21 @@ const FlatListScreen = () => {
     </TouchableOpacity>
   );
 
-  const handleItemPress = (item) => {
-    console.log(item.title);
-  };
-
-  const handleFilterPress = () => {
-    setShowFilter(!showFilter);
-  };
-
-  const handleDonePress = () => {
-    setShowFilter(false);
-  };
-
-  const navigateToFlatView = () => {
-    navigate.navigate('FlatViewScreen');
-  };
-
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.title}>Discover Flats</Text>
-        <View style={styles.searchContainer}>
-          <TextInput
+    <SafeAreaView>
+            <View style={styles.header}>
+                <Text style={styles.title}>Discover Flats</Text>
+                <View style={styles.searchContainer}>
+                <TextInput
             style={styles.searchInput}
             placeholder="Search..."
             placeholderTextColor="#888"
             // Implement your search logic
           />
-          <TouchableOpacity style={styles.filterButton} onPress={handleFilterPress}>
+          <TouchableOpacity style={styles.filterButton}>
             <Feather name="sliders" size={20} color="#555" />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.submitButton} onPress={handleDonePress}>
+          <TouchableOpacity style={styles.submitButton}>
             <Text style={styles.submitButtonText}>Submit</Text>
           </TouchableOpacity>
         </View>
