@@ -5,18 +5,20 @@ import MatchingStatus from '../../components/MatchingStatus';
 
 const Compatibility = () => {
   return (
-    <View style={styles.container}>
-      <MatchingStatus />
-      <CustomButton
-        title="Not compatible"
-        onPress={() => console.log('Not compatible button pressed')}
-        styles={styles1}
-      />
-      <CustomButton
-        title="Let's flatshare"
-        onPress={() => console.log("Let's flatshare button pressed")}
-        styles={styles2}
-      />
+    <View>
+      <View style={styles.container}>
+        <MatchingStatus />
+        <CustomButton
+          title="Not compatible"
+          onPress={() => console.log('Not compatible button pressed')}
+          styles={styles1}
+        />
+        <CustomButton
+          title="Let's flatshare"
+          onPress={() => console.log("Let's flatshare button pressed")}
+          styles={styles2}
+        />
+      </View>
     </View>
   );
 };
@@ -34,10 +36,12 @@ const styles1 = StyleSheet.create({
   button: {
     backgroundColor: 'red',
     borderRadius: 20,
-    marginLeft: '7%',
-    top: '70%',
+    position: 'absolute',
+    top: '88%',
+    marginBottom: '5%',
+    left: '7%',
     width: '40%',
-    height: '8%',
+    height: '7%',
     borderColor: 'gray',
     borderWidth: 0.5,
     borderRadius: 20,
@@ -62,10 +66,12 @@ const styles2 = StyleSheet.create({
   button: {
     backgroundColor: '#49eb34',
     borderRadius: 20,
-    marginRight: '7%',
-    top: '70%',
+    right: '7%',
+    position: 'absolute',
+    top: '88%',
+    marginBottom: '5%',
     width: '40%',
-    height: '8%',
+    height: '7%',
     borderColor: 'gray',
     borderWidth: 0.5,
     borderRadius: 20,

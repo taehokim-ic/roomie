@@ -1,25 +1,35 @@
 import React, { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import StepIndicator from 'react-native-step-indicator';
-import { useNavigation } from '@react-navigation/native';
+import {useRoute } from '@react-navigation/native';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
-import { useBreakpointValue } from 'native-base';
 
 const MatchingStatus = () => {
 
-  const getCurrentPosition = () => {
-    let route = navigation.getCurrentRoute();
-    let rn = getFocusedRouteNameFromRoute(route);
+  const route = useRoute();
+
+  const getInteraction = (state) => {
     let pos = 1;
 
-    switch(rn) {
-      case 'Compatibility':
+    switch(state) {
+      case 1:
         pos = 2;
         break;
+      case 2:
+        pos = 3;
+        break;
+      case 3:
+        pos = 4;
+        break;
+      case 4:
+        pos = 5;
+        break;
       default:
-        pos = 0;
+        pos = 1;
         break;
     }
+
+    return pos;
   }
 
   return (
@@ -27,7 +37,7 @@ const MatchingStatus = () => {
       <View style={styles.indictatorStyle}>
         <StepIndicator
           customStyles={stepIndicatorStyles}
-          currentPosition={getCurrentPosition}
+          currentPosition={0}
           labels={['Compatibility', 'Flat-finding', 'Contract request', 'Sign contract', 'Final information']}
         />
       </View>
@@ -36,9 +46,13 @@ const MatchingStatus = () => {
 };
 
 const styles = StyleSheet.create({
-  
+  container: {
+    width: '100%',
+    height: '15%',
+    backgroundColor: '#1C5231',
+  },
   indictatorStyle: {
-    top: '5%',
+    top: '30%',
     height: '20%',
     alignContent: 'center'}
 })
