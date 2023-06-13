@@ -95,7 +95,7 @@ const MessagesScreen = ({navigation}) => {
           )}
           ListFooterComponent={() => (
             <TouchableOpacity style={styles.arrowContainer}>
-              <Text style={styles.arrowText}>></Text>
+              <Text style={styles.arrowText}></Text>
             </TouchableOpacity>
           )}
         />
@@ -106,7 +106,7 @@ const MessagesScreen = ({navigation}) => {
           data={Messages}
           keyExtractor={item=>item.id}
           renderItem={({item}) => (
-            <Card onPress={() => navigation.navigate('Chat', {userName: item.userName})}>
+            <Card onPress={() => navigation.navigate('Compatibility')}>
               <UserInfo>
                 <UserImgWrapper>
                   <UserImg source={item.userImg} />
