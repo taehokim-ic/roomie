@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, FlatList, Image, ScrollView, StyleSheet, TextInput } from 'react-native';
+import { Animated, View, Text, TouchableOpacity, FlatList, Image, ScrollView, StyleSheet, TextInput } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Feather } from '@expo/vector-icons';
 import axios from 'axios';
@@ -7,6 +7,10 @@ import axios from 'axios';
 const FlatListScreen = ({ navigation }) => {
   const [showFilterCard, setShowFilterCard] = useState(false);
   const [flats, setFlats] = useState([]);
+  const [city, setCity] = useState('');
+  const [bedrooms, setBedrooms] = useState('');
+  const [minPrice, setMinPrice] = useState('');
+  const [maxPrice, setMaxPrice] = useState('');
 
   const handleFilterButtonPress = () => {
     setShowFilterCard(!showFilterCard);
@@ -15,6 +19,41 @@ const FlatListScreen = ({ navigation }) => {
   const handleItemPress = (item) => {
     navigation.navigate('FlatView', { uuid: item.uuid });
   };
+
+  const applyFilter = async () => {
+    let url = 'http://roomie3.herokuapp.com/api/v1/properties';
+    if (city) {
+      url += `?city=${city}`;
+      if (bedrooms) {
+        url += `&number_of_bedrooms=${bedrooms}`;
+        if (minPrice) {
+          url += `&min_price=${minPrice}`;
+          if (maxPrice) {
+            url += `&max_price=${maxPrice}`;
+          }
+        }
+      }
+    } else if (bedrooms) {
+      url += `?number_of_bedrooms=${bedrooms}`;
+      if (minPrice) {
+        url += `&min_price=${minPrice}`;
+        if (maxPrice) {
+          url += `&max_price=${maxPrice}`;
+        }
+      }
+    } else if (minPrice) {
+      url += `?min_price=${minPrice}`;
+      if (maxPrice) {
+        url += `&max_price=${maxPrice}`;
+      }
+    } else if (maxPrice) {
+      url += `?max_price=${maxPrice}`;
+    }
+    console.log(url);
+    const response = await axios.get(url);
+    setShowFilterCard(false);
+    setFlats(response.data);
+  }
 
   const fetchFlats = async () => {
     const response = await axios.get('http://roomie3.herokuapp.com/api/v1/properties');
@@ -31,16 +70,38 @@ const FlatListScreen = ({ navigation }) => {
 
     return (
       <View style={styles.filterCard}>
-        <Text style={styles.filterCardTitle}>Filter Options</Text>
-        <View style={styles.filterOption}>
-          <Text style={styles.filterOptionLabel}>Location:</Text>
-        </View>
-        <View style={styles.filterOption}>
-          <Text style={styles.filterOptionLabel}>No of bedrooms:</Text>
-        </View>
-        <View style={styles.filterOption}>
-          <Text style={styles.filterOptionLabel}>Price:</Text>
-        </View>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalTitle}>Filter</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="City"
+              value={city}
+              onChangeText={setCity}
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="Number of Bedrooms"
+              value={bedrooms}
+              onChangeText={setBedrooms}
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="Minimum Price"
+              value={minPrice}
+              onChangeText={setMinPrice}
+              keyboardType="numeric"
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="Maximum Price"
+              value={maxPrice}
+              onChangeText={setMaxPrice}
+              keyboardType="numeric"
+            />
+            <TouchableOpacity style={styles.applyButton} onPress={applyFilter}>
+              <Text style={styles.applyButtonText}>Apply</Text>
+            </TouchableOpacity>
+          </View>
       </View>
     );
   };
@@ -181,10 +242,15 @@ const styles = StyleSheet.create({
     color: '#555',
   },
   filterCard: {
-    backgroundColor: '#fff',
+    backgroundColor: 'white',
+    borderTopWidth: 2,
+    borderLeftWidth: 2,
+    borderRightWidth: 2,
+    borderColor: '#95a5a6',
     padding: 16,
     marginTop: 16,
-    borderRadius: 8,
+    borderTopRightRadius: 8,
+    borderTopLeftRadius: 8,
     elevation: 4,
     position: 'absolute',
     bottom: 0,
@@ -210,6 +276,45 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
   applyFilterButtonText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#fff',
+    textAlign: 'center',
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  modalContent: {
+    width: '100%',
+    alignContent: 'center',
+    padding: 16,
+    backgroundColor: '#FFFFFF',
+    borderRadius: 8,
+  },
+  modalTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 16,
+    textAlign: 'center',
+  },
+  input: {
+    height: 40,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 4,
+    paddingHorizontal: 8,
+    marginBottom: 16,
+  },
+  applyButton: {
+    backgroundColor: '#007bff',
+    borderRadius: 8,
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+  },
+  applyButtonText: {
     fontSize: 16,
     fontWeight: 'bold',
     color: '#fff',

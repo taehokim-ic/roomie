@@ -1,97 +1,111 @@
-import React from 'react';
-import { View, Text, TouchableOpacity, Slider, StyleSheet } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, TouchableOpacity, Modal, StyleSheet, TextInput } from 'react-native';
 
-const FilterCard = ({ selectedPreferences, setSelectedPreferences, handleDonePress }) => {
-  const handleToiletsChange = (value) => {
-    setSelectedPreferences({ ...selectedPreferences, toilets: value });
+const FilterCard = () => {
+  const [isModalVisible, setModalVisible] = useState(false);
+  const [city, setCity] = useState('');
+  const [bedrooms, setBedrooms] = useState('');
+  const [minPrice, setMinPrice] = useState('');
+  const [maxPrice, setMaxPrice] = useState('');
+
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
   };
 
-  const handleBedroomsChange = (value) => {
-    setSelectedPreferences({ ...selectedPreferences, bedrooms: value });
-  };
-
-  const handlePriceChange = (value) => {
-    setSelectedPreferences({ ...selectedPreferences, price: value });
+  const handleApplyFilters = () => {
+    toggleModal();
   };
 
   return (
-    <View style={styles.filterCard}>
-      <Text style={styles.filterTitle}>Filter Preferences</Text>
-      <View style={styles.filterSection}>
-        <Text style={styles.filterSectionTitle}>Number of Toilets</Text>
-        <Slider
-          value={selectedPreferences.toilets}
-          minimumValue={0}
-          maximumValue={5}
-          step={1}
-          onValueChange={handleToiletsChange}
-        />
-        <Text style={styles.filterSectionValue}>{selectedPreferences.toilets}</Text>
-      </View>
-      <View style={styles.filterSection}>
-        <Text style={styles.filterSectionTitle}>Number of Bedrooms</Text>
-        <Slider
-          value={selectedPreferences.bedrooms}
-          minimumValue={0}
-          maximumValue={5}
-          step={1}
-          onValueChange={handleBedroomsChange}
-        />
-        <Text style={styles.filterSectionValue}>{selectedPreferences.bedrooms}</Text>
-      </View>
-      <View style={styles.filterSection}>
-        <Text style={styles.filterSectionTitle}>Price Range</Text>
-        <Slider
-          value={selectedPreferences.price}
-          minimumValue={0}
-          maximumValue={5000}
-          step={100}
-          onValueChange={handlePriceChange}
-        />
-        <Text style={styles.filterSectionValue}>${selectedPreferences.price}</Text>
-      </View>
-      <TouchableOpacity style={styles.filterDoneButton} onPress={handleDonePress}>
-        <Text style={styles.filterDoneButtonText}>Done</Text>
+    <View style={styles.container}>
+      <TouchableOpacity onPress={toggleModal} style={styles.button}>
+        <Text style={styles.buttonText}>Open Filter</Text>
       </TouchableOpacity>
+
+      <Modal visible={isModalVisible} animationType="slide" transparent={true}>
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalTitle}>Filter</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="City"
+              value={city}
+              onChangeText={setCity}
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="Number of Bedrooms"
+              value={bedrooms}
+              onChangeText={setBedrooms}
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="Minimum Price"
+              value={minPrice}
+              onChangeText={setMinPrice}
+              keyboardType="numeric"
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="Maximum Price"
+              value={maxPrice}
+              onChangeText={setMaxPrice}
+              keyboardType="numeric"
+            />
+            <TouchableOpacity onPress={handleApplyFilters} style={styles.applyButton}>
+              <Text style={styles.applyButtonText}>Apply</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  filterCard: {
-    backgroundColor: '#f1f1f1',
-    padding: 16,
-    borderTopLeftRadius: 8,
-    borderTopRightRadius: 8,
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  filterTitle: {
+  button: {
+    padding: 12,
+    backgroundColor: '#2196F3',
+    borderRadius: 8,
+  },
+  buttonText: {
+    color: '#FFFFFF',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  modalContent: {
+    width: '80%',
+    padding: 16,
+    backgroundColor: '#FFFFFF',
+    borderRadius: 8,
+  },
+  modalTitle: {
     fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 16,
+    textAlign: 'center',
   },
-  filterSection: {
+  input: {
+    height: 40,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 4,
+    paddingHorizontal: 8,
     marginBottom: 16,
   },
-  filterSectionTitle: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    marginBottom: 8,
-  },
-  filterSectionValue: {
-    fontSize: 14,
-    color: '#555',
-  },
-  filterDoneButton: {
-    backgroundColor: '#03c9a9',
+  applyButton: {
+    marginTop: 16,
+    padding: 12,
+    backgroundColor: '#2196F3',
     borderRadius: 8,
-    paddingVertical: 12,
-    alignItems: 'center',
-  },
-  filterDoneButtonText: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#fff',
-  },
-});
-
-export default FilterCard;
