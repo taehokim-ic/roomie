@@ -2,8 +2,20 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, FlatList, Image, ScrollView, StyleSheet, TextInput } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Feather } from '@expo/vector-icons';
+import { Picker } from '@react-native-picker/picker';
+import { useRef } from 'react';
 
 const FlatListScreen = ({navigation}) => {
+  const [showFilterCard, setShowFilterCard] = useState(false);
+
+  const handleFilterButtonPress = () => {
+    setShowFilterCard(!showFilterCard);
+  };
+
+  const handleItemPress = (item) => {
+    // Navigate to FlatViewScreen with the selected flat
+    navigation.navigate('FlatView', { flat: item });
+  };
 
   const [flats, setFlats] = useState([
     {
@@ -11,6 +23,7 @@ const FlatListScreen = ({navigation}) => {
       title: 'Spacious Apartment in the City',
       rooms: 3,
       flatmates: 2,
+      bedrooms: 2,
       toilets: 2,
       location: 'New York',
       price: 2000,
@@ -24,6 +37,7 @@ const FlatListScreen = ({navigation}) => {
       title: 'Cozy Studio near the Beach',
       rooms: 1,
       flatmates: 1,
+      bedrooms: 1,
       toilets: 1,
       location: 'Miami',
       price: 1500,
@@ -34,10 +48,26 @@ const FlatListScreen = ({navigation}) => {
     },
   ]);
 
-  const handleItemPress = (item) => {
-    // Navigate to FlatViewScreen with the selected flat
-    navigation.navigate('FlatView', { flat: item });
+  const renderFilterCard = () => {
+    if (!showFilterCard) return null;
+  
+    return (
+      <View style={styles.filterCard}>
+        <Text style={styles.filterCardTitle}>Filter Options</Text>
+        <View style={styles.filterOption}>
+          <Text style={styles.filterOptionLabel}>Location:</Text>
+        </View>
+        <View style={styles.filterOption}>
+          <Text style={styles.filterOptionLabel}>No of bedrooms:</Text>
+        </View>
+        <View style={styles.filterOption}>
+          <Text style={styles.filterOptionLabel}>Price:</Text>
+        </View>
+      </View>
+    );
   };
+  
+  
 
   const renderItem = ({ item }) => (
     <TouchableOpacity onPress={() => handleItemPress(item)} style={styles.flatItem}>
@@ -45,23 +75,19 @@ const FlatListScreen = ({navigation}) => {
       <View style={styles.flatDetails}>
         <Text style={styles.flatTitle}>{item.title}</Text>
         <Text style={styles.flatLocation}>{item.location}</Text>
+        <Text style={styles.flatBedrooms}>{item.bedrooms} bedrooms</Text>
         <Text style={styles.flatPrice}>${item.price}/month</Text>
       </View>
     </TouchableOpacity>
   );
-
+  
   return (
-    <SafeAreaView>
-            <View style={styles.header}>
-                <Text style={styles.title}>Discover Flats</Text>
-                <View style={styles.searchContainer}>
-                <TextInput
-            style={styles.searchInput}
-            placeholder="Search..."
-            placeholderTextColor="#888"
-            // Implement your search logic
-          />
-          <TouchableOpacity style={styles.filterButton}>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.title}>Discover Flats</Text>
+        <View style={styles.searchContainer}>
+          <TextInput style={styles.searchInput} placeholder="Search..." placeholderTextColor="#555" />
+          <TouchableOpacity style={styles.filterButton} onPress={handleFilterButtonPress}>
             <Feather name="sliders" size={20} color="#555" />
           </TouchableOpacity>
           <TouchableOpacity style={styles.submitButton}>
@@ -75,9 +101,11 @@ const FlatListScreen = ({navigation}) => {
         keyExtractor={(item) => item.id.toString()}
         contentContainerStyle={styles.flatList}
       />
+      {renderFilterCard()}
     </SafeAreaView>
   );
 };
+
 
 const styles = StyleSheet.create({
   container: {
@@ -168,6 +196,42 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#555',
   },
+  filterCard: {
+    backgroundColor: '#fff',
+    padding: 16,
+    marginTop: 16,
+    borderRadius: 8,
+    elevation: 4,
+    position: 'absolute',
+    bottom: 0,
+    width: '100%',
+  },
+  filterCardTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 16,
+  },
+  filterSection: {
+    marginBottom: 16,
+  },
+  filterSectionTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginBottom: 8,
+  },
+  applyFilterButton: {
+    backgroundColor: '#007bff',
+    borderRadius: 8,
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+  },
+  applyFilterButtonText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#fff',
+    textAlign: 'center',
+  },
 });
+
 
 export default FlatListScreen;
