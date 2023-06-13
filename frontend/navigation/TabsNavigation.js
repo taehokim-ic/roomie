@@ -11,6 +11,7 @@ import SearchStack from './SearchStack';
 import ProfileStack from './ProfileStack';
 import MessagesStack from './MessageStack';
 import FlatListScreen from '../screens/Flats/FlatListScreen';
+import FlatStack from './FlatStack';
 
 const homeName = 'Home';
 const messageName = 'Message';
@@ -55,7 +56,7 @@ const TabsNavigation = () => {
                 tabBarStyle: {display: getTabBarVisibility(route)},
             })}
             >
-            <Tab.Screen name={homeName} component={FlatListScreen} />
+            <Tab.Screen name={homeName} component={FlatStack} />
             <Tab.Screen name={searchName} component={SearchStack} />
             <Tab.Screen name={messageName} component={MessagesStack} />
             <Tab.Screen name={profileName} component={ProfileStack} />
