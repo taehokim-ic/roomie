@@ -1,34 +1,39 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { View, FlatList, TouchableOpacity, Text, Image, StyleSheet, SafeAreaView, TextInput } from 'react-native';
 import { Feather } from '@expo/vector-icons';
+import axios from 'axios';
 
-const data = [
-  {
-    id: '1',
-    name: 'John D',
-    age: '25',
-    pronouns: 'He/Him',
-    institution: 'UCL',
-    nationality: 'Estonian',
-    image: require('../../assets/users/user-1.jpg'),
-  },
-  // ... other data objects
-];
+const SearchScreen = ({navigation}) => {
 
-const SearchScreen = () => {
+  const [users, setUsers] = useState([]);
+
+  const fetchUsers = async () => {
+    try {
+      const response = await axios.get('http://roomie3.herokuapp.com/api/v1/people');
+      setUsers(response.data);
+    }
+    catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchUsers();
+  }, []);
+
   const handleCardPress = (id) => {
-    // Handle card press event
+    navigation.navigate('Profile', { uuid: id });
   };
 
   const renderCard = ({ item }) => (
-    <TouchableOpacity onPress={() => handleCardPress(item.id)}>
+    <TouchableOpacity onPress={() => handleCardPress(item.uuid)}>
       <View style={styles.cardContainer}>
-        <Image source={item.image} style={styles.profileImage} />
+        <Image source={{uri: item.picture_url}} style={styles.profileImage} />
         <View style={styles.profileInfo}>
           <Text style={styles.name}>{item.name}</Text>
           <Text style={styles.subtitle}>{`${item.age} | ${item.pronouns}`}</Text>
           <Text style={styles.subtitle}>{`Institution: ${item.institution}`}</Text>
-          <Text style={styles.subtitle}>{`Nationality: ${item.nationality}`}</Text>
+          <Text style={styles.subtitle}>{`Preferred Location: ${item.preferred_location}`}</Text>
         </View>
       </View>
     </TouchableOpacity>
@@ -50,9 +55,9 @@ const SearchScreen = () => {
       </View>
       <View style={styles.container}>
         <FlatList
-          data={data}
+          data={users}
           renderItem={renderCard}
-          keyExtractor={(item) => item.id}
+          keyExtractor={item => item.uuid.toString()}
         />
       </View>
     </SafeAreaView>
