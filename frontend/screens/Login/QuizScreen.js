@@ -1,56 +1,126 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 
 const QuizScreen = ({ navigation }) => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [age, setAge] = useState('');
+  const [number, setNumber] = useState('');
+  const [dob, setDob] = useState('');
+  const [nationality, setNationality] = useState('');
+  const [language, setLanguage] = useState('');
+  const [minBudget, setMinBudget] = useState('');
+  const [maxBudget, setMaxBudget] = useState('');
+  const [institution, setInstitution] = useState('');
+  const [sex, setSex] = useState('');
+  const [smoker, setSmoker] = useState('');
+  const [pets, setPets] = useState('');
+
 
   const handleSubmit = () => {
     // Process the form data here (e.g., validation, API calls, etc.)
-    console.log('Name:', name);
-    console.log('Email:', email);
-    console.log('Age:', age);
-
+    
     // Reset form fields
-    setName('');
-    setEmail('');
-    setAge('');
+    setNumber('');
+    setDob('');
+    setNationality('');
+    setLanguage('');
+    setMinBudget('');
+    setMaxBudget('');
+    setInstitution('');
+    setSex('');
+    setSmoker('');
+    setPets('');
 
     navigation.navigate('UserApp');
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>
-      Form</Text>
+    <ScrollView>
+      <View style={styles.container}>
+        <Text style={styles.title}>About Me</Text>
+        <Text style={styles.tagline}>Fill out information about yourself to help people find you!</Text>
 
-      <TextInput
-        style={styles.input}
-        placeholder="Name"
-        value={name}
-        onChangeText={setName}
-      />
+        <View>
+          <Text style={styles.question}>What is your contact number?</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Contact Number"
+            value={number}
+            onChangeText={setNumber}
+            keyboardType="numeric"
+          />
+        </View>
 
-      <TextInput
-        style={styles.input}
-        placeholder="Email"
-        value={email}
-        onChangeText={setEmail}
-      />
+        <Text style={styles.question}>When is your date of birth?</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Date of Birth (DDMMYYYY)"
+          value={dob}
+          onChangeText={setDob}
+          keyboardType="numeric"
+        />
 
-      <TextInput
-        style={styles.input}
-        placeholder="Age"
-        value={age}
-        onChangeText={setAge}
-        keyboardType="numeric"
-      />
+        <Text style={styles.question}>What is your nationality?</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Nationality"
+          value={nationality}
+          onChangeText={setNationality}
+        />
 
-      <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-        <Text style={styles.buttonText}>Submit</Text>
-      </TouchableOpacity>
-    </View>
+        <Text style={styles.question}>What is your primary language?</Text>
+        <TextInput  
+          style={styles.input}
+          placeholder="Primary Language"
+          value={language}
+          onChangeText={setLanguage}
+        />
+
+        <Text style={styles.question}>What is your minimum budget for a flat per month?</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Minimum budget (£)"
+          value={minBudget}
+          onChangeText={setMinBudget}
+          keyboardType="numeric"
+        />
+
+        <Text style={styles.question}>What is your maximum budget for a flat per month?</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Maximum budget (£)"
+          value={maxBudget}
+          onChangeText={setMaxBudget}
+          keyboardType="numeric"
+        />
+
+        <Text style={styles.question}>Which institution will you be studying at?</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Institution name"
+          value={institution}
+          onChangeText={setInstitution}
+        />
+
+        <Text style={styles.question}>What is your sex?</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Male/Female"
+          value={sex}
+          onChangeText={setSex}
+        />
+
+        <Text style={styles.question}>Are you a smoker?</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Yes/No"
+          value={smoker}
+          onChangeText={setSmoker}
+        />
+
+        <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+          <Text style={styles.buttonText}>Submit</Text>
+        </TouchableOpacity>
+      </View>
+    </ScrollView>
   );
 };
 
@@ -62,14 +132,26 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   title: {
+    marginTop:48,
     fontSize: 24,
     color: '#fff', // White text color
-    marginBottom: 16,
+    marginBottom: 32,
     textAlign: 'center',
+  },
+  tagline: {
+    fontSize: 18,
+    color: '#fff', // White text color
+    marginBottom: 24,
+    textAlign: 'center',
+  },
+  question: {
+    fontSize: 15,
+    color: '#fff', // White text color
+    marginBottom: 5,
   },
   input: {
     backgroundColor: '#fff', // White input background color
-    marginBottom: 8,
+    marginBottom: 18,
     padding: 8,
     borderRadius: 4,
   },
