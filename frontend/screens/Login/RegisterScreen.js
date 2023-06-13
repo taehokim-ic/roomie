@@ -22,6 +22,7 @@ const RegisterScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
+      <Text style={styles.roomie}>Welcome to Roomie!</Text>
       <Text style={styles.title}>Register</Text>
 
       <TextInput
@@ -73,10 +74,17 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     padding: 16,
   },
+  roomie: {
+    fontSize: 32,
+    fontWeight: 'bold',
+    marginBottom: 80,
+    color: '#006600'
+  },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 16,
+    color: '#006600'
   },
   input: {
     width: '100%',
