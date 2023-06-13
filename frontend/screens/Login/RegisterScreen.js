@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 
 const RegisterScreen = ({ navigation }) => {
-  const [name, setName] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [surname, setSurname] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleRegister = () => {
     // Reset form fields
-    // setName('');
+    // setFirstName('');
     // setEmail('');
     // setPassword('');
 
@@ -25,9 +26,16 @@ const RegisterScreen = ({ navigation }) => {
 
       <TextInput
         style={styles.input}
-        placeholder="Name"
-        value={name}
-        onChangeText={setName}
+        placeholder="First Name"
+        value={firstName}
+        onChangeText={setFirstName}
+      />
+
+      <TextInput
+        style={styles.input}
+        placeholder="Surname"
+        value={surname}
+        onChangeText={setSurname}
       />
 
       <TextInput

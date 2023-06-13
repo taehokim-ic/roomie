@@ -4,7 +4,7 @@ import { NativeBaseProvider, Box, Text, extendTheme, Image } from 'native-base';
 import { TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import SearchButton from '../../components/SearchButton';
-import GearIconButton from '../../components/GearIconButton';
+import FilterButton from '../../components/FilterButton';
 
 const data = [
   {
@@ -85,7 +85,7 @@ const SearchScreen = () => {
     navigation.navigate('MainFilter');
   }
 
-  const handleGearIconButtonPress = () => {
+  const handleFilterButtonPress = () => {
     navigation.navigate('SearchFilter')
   }
 
@@ -133,8 +133,8 @@ const SearchScreen = () => {
   return (
     <NativeBaseProvider>
       <View>
-        <SearchButton onPress={handleSearchButtonPress} title="Enter institution"/>
-        <GearIconButton onPress={handleGearIconButtonPress} />
+        <SearchButton onPress={handleSearchButtonPress} title="Choose institution"/>
+        <FilterButton onPress={handleFilterButtonPress} />
       </View>
       <View style={styles.container}>
         <FlatList
