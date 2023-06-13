@@ -75,7 +75,7 @@ const FlatListScreen = ({ navigation }) => {
       <FlatList
         data={flats}
         renderItem={renderItem}
-        keyExtractor={(item) => item.id}
+        keyExtractor={item => item.uuid.toString()}
         contentContainerStyle={styles.flatList}
       />
       </View>

@@ -12,7 +12,7 @@ const Stack = createNativeStackNavigator();
 export default function AppNavigation() {
   return (
       <NavigationContainer>
-        <Stack.Navigator screenOptions={{ animation: 'fade' }} initialRouteName="Register">
+        <Stack.Navigator screenOptions={{ animation: 'fade' }} initialRouteName="UserApp">
           <Stack.Screen 
               name = 'UserApp' 
               component={TabsNavigation}
