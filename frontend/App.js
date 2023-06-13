@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import TabsNavigation from './navigation/TabsNavigation';
 import UserContext from './context/UserContext';
 import axios from 'axios';
+import AppNavigation from './navigation/AppNavigation';
 
 const App = () => {
 
@@ -20,7 +21,7 @@ const App = () => {
 
     return (
         <UserContext.Provider value={{user, setUser}}>
-            <TabsNavigation />
+            <AppNavigation />
         </UserContext.Provider>
     );
 }
