@@ -67,7 +67,7 @@ const FlatListScreen = ({ navigation }) => {
             <Feather name="sliders" size={20} color="#555" />
           </TouchableOpacity>
           <TouchableOpacity style={styles.submitButton}>
-            <Text style={styles.submitButtonText}>Submit</Text>
+            <Text style={styles.submitButtonText}>Search</Text>
           </TouchableOpacity>
         </View>
       </View>
