@@ -9,7 +9,10 @@ export default function AppNavigation() {
   return (
       <NavigationContainer>
         <Stack.Navigator screenOptions={{ animation: 'fade'}}>
-          <Stack.Screen name = 'UserApp' component={TabsNavigation} />
+          <Stack.Screen 
+          name = 'UserApp' 
+          component={TabsNavigation}
+          options = {{headerShown: false}} />
         </Stack.Navigator>
       </NavigationContainer>
   );
