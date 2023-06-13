@@ -6,6 +6,11 @@ import axios from 'axios';
 const SearchScreen = ({navigation}) => {
 
   const [users, setUsers] = useState([]);
+  const [showFilterCard, setShowFilterCard] = useState(false);
+  const [language, setLanguage] = useState('');
+  const [institution, setInstitution] = useState('');
+  const [location, setLocation] = useState('');
+  const [smoker, setSmoker] = useState('');
 
   const fetchUsers = async () => {
     try {
@@ -21,8 +26,87 @@ const SearchScreen = ({navigation}) => {
     fetchUsers();
   }, []);
 
+  const handleFilterButtonPress = () => {
+    setShowFilterCard(!showFilterCard);
+  };
+
   const handleCardPress = (id) => {
     navigation.navigate('Profile', { uuid: id });
+  };
+
+  const applyFilter = async () => {
+    let url = 'http://roomie3.herokuapp.com/api/v1/people';
+    if (language) {
+      url += `?language=${language}`;
+      if (institution) {
+        url += `&institution=${institution}`;
+        if (location) {
+          url += '&location=${location}';
+          if (smoker) {
+            url += '&smoker=${smoker}';
+          }
+        }
+      }
+    } else if (institution) {
+      url += `?institution=${institution}`;
+      if (location) {
+        url += '&location=${location}';
+        if (smoker) {
+          url += '&smoker=${smoker}';
+        }
+      }
+    } else if (location) {
+      url += `?location=${location}`;
+      if (smoker) {
+        url += '&smoker=${smoker}';
+      }
+    } else if (smoker) {
+      url += `?smoker=${smoker}`;
+    }
+    console.log(url);
+    const response = await axios.get(url);
+    setShowFilterCard(false);
+    setUsers(response.data);
+  }
+
+  const renderFilterCard = () => {
+    if (!showFilterCard) return null;
+
+    return (
+      <View style={styles.filterCard}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalTitle}>Filter</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Language"
+              value={language}
+              onChangeText={setLanguage}
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="Institution"
+              value={institution}
+              onChangeText={setInstitution}
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="Location"
+              value={location}
+              onChangeText={setLocation}
+              keyboardType="numeric"
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="Smoker"
+              value={smoker}
+              onChangeText={setSmoker}
+            />
+            <TouchableOpacity style={styles.applyButton} onPress={applyFilter}>
+              <Text style={styles.applyButtonText}>Apply</Text>
+            </TouchableOpacity>
+          </View>
+      </View>
+    );
   };
 
   const renderCard = ({ item }) => (
@@ -45,7 +129,7 @@ const SearchScreen = ({navigation}) => {
         <Text style={styles.title}>Find your flatmates</Text>
         <View style={styles.searchContainer}>
           <TextInput style={styles.searchInput} placeholder="Search..." placeholderTextColor="#555" />
-          <TouchableOpacity style={styles.filterButton}>
+          <TouchableOpacity style={styles.filterButton} onPress={handleFilterButtonPress}>
             <Feather name="sliders" size={20} color="#555" />
           </TouchableOpacity>
           <TouchableOpacity style={styles.submitButton}>
@@ -60,6 +144,7 @@ const SearchScreen = ({navigation}) => {
           keyExtractor={item => item.uuid.toString()}
         />
       </View>
+      {renderFilterCard()}
     </SafeAreaView>
   );
 };
@@ -151,6 +236,85 @@ const styles = StyleSheet.create({
     fontSize: 12,
     marginBottom: 4,
     color: '#888888',
+  },
+  filterCard: {
+    backgroundColor: 'white',
+    borderTopWidth: 2,
+    borderLeftWidth: 2,
+    borderRightWidth: 2,
+    borderColor: '#95a5a6',
+    padding: 16,
+    marginTop: 16,
+    borderTopRightRadius: 8,
+    borderTopLeftRadius: 8,
+    elevation: 4,
+    position: 'absolute',
+    bottom: 0,
+    width: '100%',
+  },
+  filterCardTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 16,
+  },
+  filterSection: {
+    marginBottom: 16,
+  },
+  filterSectionTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginBottom: 8,
+  },
+  applyFilterButton: {
+    backgroundColor: '#007bff',
+    borderRadius: 8,
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+  },
+  applyFilterButtonText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#fff',
+    textAlign: 'center',
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  modalContent: {
+    width: '100%',
+    alignContent: 'center',
+    padding: 16,
+    backgroundColor: '#FFFFFF',
+    borderRadius: 8,
+  },
+  modalTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 16,
+    textAlign: 'center',
+  },
+  input: {
+    height: 40,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 4,
+    paddingHorizontal: 8,
+    marginBottom: 16,
+  },
+  applyButton: {
+    backgroundColor: '#007bff',
+    borderRadius: 8,
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+  },
+  applyButtonText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#fff',
+    textAlign: 'center',
   },
 });
 

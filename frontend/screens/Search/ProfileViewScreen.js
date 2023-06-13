@@ -12,17 +12,6 @@ const ProfilePage = ({navigation}) => {
   const [prompt2, setPrompt2] = useState('');
   const [prompt3, setPrompt3] = useState('');
 
-  // const flatmateProfile = {
-  //   profilePicture: require('../../assets/profile-picture.png'),
-  //   name: 'John Doe',
-  //   age: '25',
-  //   bio: 'I am a friendly and tidy person looking for a flat to share. I enjoy cooking, playing guitar, and exploring new places.',
-  //   pronouns: 'He/Him',
-  //   institution: 'UCL',
-  //   nationality: 'Estonian',
-  //   contactInfo: 'john.doe@example.com',
-  // };
-
   const fetchProfile = async () => {
     try {
       const response = await axios.get('http://roomie3.herokuapp.com/api/v1/person?uuid=' + uuid);
