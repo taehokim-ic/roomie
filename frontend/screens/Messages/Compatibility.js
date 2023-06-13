@@ -1,13 +1,16 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet } from 'react-native';
 import CustomButton from '../../components/CustomButton';
 import MatchingStatus from '../../components/MatchingStatus';
+import ChatIcon from '../../components/ChatIcon';
 
 const Compatibility = () => {
   return (
     <View>
       <View style={styles.container}>
         <MatchingStatus />
+        <ChatIcon />
+
         <CustomButton
           title="Not compatible"
           onPress={() => console.log('Not compatible button pressed')}
@@ -25,8 +28,6 @@ const Compatibility = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
     height: '100%',
     backgroundColor: '#1C5231',
   }
@@ -37,8 +38,8 @@ const styles1 = StyleSheet.create({
     backgroundColor: 'red',
     borderRadius: 20,
     position: 'absolute',
-    top: '88%',
-    marginBottom: '5%',
+    top: '85%',
+    marginBottom: '3%',
     left: '7%',
     width: '40%',
     height: '7%',
@@ -68,8 +69,8 @@ const styles2 = StyleSheet.create({
     borderRadius: 20,
     right: '7%',
     position: 'absolute',
-    top: '88%',
-    marginBottom: '5%',
+    top: '85%',
+    marginBottom: '3%',
     width: '40%',
     height: '7%',
     borderColor: 'gray',
