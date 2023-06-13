@@ -26,7 +26,6 @@ const MessagesStack = () => {
       <Stack.Screen 
         name="Compatibility" 
         component={Compatibility}
-        options={{ headerShown: false}}
       />
     </Stack.Navigator>
   );

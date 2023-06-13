@@ -1,11 +1,25 @@
 import React, { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import StepIndicator from 'react-native-step-indicator';
+import { useNavigation } from '@react-navigation/native';
+import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
+import { useBreakpointValue } from 'native-base';
 
 const MatchingStatus = () => {
 
-  const getCurrentPosition = (route) => {
-    
+  const getCurrentPosition = () => {
+    let route = navigation.getCurrentRoute();
+    let rn = getFocusedRouteNameFromRoute(route);
+    let pos = 1;
+
+    switch(rn) {
+      case 'Compatibility':
+        pos = 2;
+        break;
+      default:
+        pos = 0;
+        break;
+    }
   }
 
   return (

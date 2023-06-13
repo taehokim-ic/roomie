@@ -1,10 +1,12 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import CustomButton from '../../components/CustomButton';
+import MatchingStatus from '../../components/MatchingStatus';
 
 const Compatibility = () => {
   return (
     <View style={styles.container}>
+      <MatchingStatus />
       <CustomButton
         title="Not compatible"
         onPress={() => console.log('Not compatible button pressed')}
