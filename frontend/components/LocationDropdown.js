@@ -35,7 +35,7 @@ const LocationDropdown = ({ position }) => {
         maxHeight={300}
         labelField="label"
         valueField="value"
-        placeholder={!isFocus ? 'Please select' : '...'}
+        placeholder={!isFocus ? 'Choose from a list' : '...'}
         searchPlaceholder="Search..."
         value={value}
         onFocus={() => setIsFocus(true)}
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     width: '100%',
     marginTop: 430,
     height: 80,
-    backgroundColor: '#89e0c2',
+    backgroundColor: 'white',
     justifyContent: 'center',
     alignContent: 'center',
     alignSelf: 'center',
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     borderColor: 'gray',
     borderWidth: 0.5,
     borderRadius: 20,
-    backgroundColor: '#43CE9E',
+    backgroundColor: '#027148',
     shadowColor: '#000000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.4,
@@ -96,6 +96,7 @@ const styles = StyleSheet.create({
   iconStyle: {
     width: 20,
     height: 20,
+    tintColor: '#000000',
   },
   inputSearchStyle: {
     height: 40,

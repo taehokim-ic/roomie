@@ -49,10 +49,10 @@ const PetsDropdown = ({ position }) => {
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
-    width: '100%',
-    marginTop: '123%',
+    width: '200%',
+    marginTop: '49%',
     height: 40,
-    backgroundColor: '#89e0c2',
+    backgroundColor: 'white',
     justifyContent: 'center',
     alignContent: 'center',
     padding: 16,
@@ -60,8 +60,8 @@ const styles = StyleSheet.create({
   dropdown: {
     position: 'absolute',
     height: 30,
-    width: 200,
-    marginLeft: 160,
+    width: 150,
+    marginLeft: 220,
     borderColor: 'gray',
     borderWidth: 0.5,
     borderRadius: 8,

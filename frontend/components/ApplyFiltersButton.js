@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
   buttonContainer: {
     backgroundColor: '#1C5231',
     position: 'absolute',
-    bottom: 90,
+    bottom: -500, // Adjust this value to set the desired distance from the bottom
     left: 45,
     width: 300,
     height: 45,

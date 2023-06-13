@@ -1,30 +1,25 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
-import { FontAwesome } from '@expo/vector-icons';
 
 const data = [
-  { label: 'None', value: '0' },
-  { label: '£100 per month', value: '1' },
-  { label: '£200 per month', value: '2' },
-  { label: '£300 per month', value: '3' },
-  { label: '£400 per month', value: '4' },
-  { label: '£500 per month', value: '5' },
-  { label: '£600 per month', value: '6' },
-  { label: '£700 per month', value: '7' },
-  { label: '£800 per month', value: '8' },
-  { label: '£900 per month', value: '9' },
-  { label: '£1000 per month', value: '10' },
+    { label: 'No preference', value: '0' },
+    { label: 'Korean', value: '1' },
+    { label: 'Chinese', value: '2' },
+    { label: 'Indian', value: '3' },
+    { label: 'British', value: '4' },
+    { label: 'French', value: '5' },
+    { label: 'German', value: '6' },
 ];
 
-const MinBudgetDropdown = ({ position }) => {
+const NationalityDropdown = ({ position }) => {
   const [value, setValue] = useState(null);
   const [isFocus, setIsFocus] = useState(false);
 
   const renderLabel = () => {
     return (
       <Text style={[styles.label, isFocus && { color: 'black' }]}>
-        Min Budget?
+        Preferred nationality?
       </Text>
     );
   };
@@ -37,7 +32,6 @@ const MinBudgetDropdown = ({ position }) => {
         placeholderStyle={styles.placeholderStyle}
         selectedTextStyle={styles.selectedTextStyle}
         inputSearchStyle={styles.inputSearchStyle}
-        iconStyle={styles.iconStyle}
         data={data}
         search
         maxHeight={300}
@@ -60,8 +54,8 @@ const MinBudgetDropdown = ({ position }) => {
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
-    width: '100%',
-    marginTop: '35%',
+    width: '200%',
+    marginTop: '31%',
     height: 40,
     backgroundColor: 'white',
     justifyContent: 'center',
@@ -71,16 +65,13 @@ const styles = StyleSheet.create({
   dropdown: {
     position: 'absolute',
     height: 30,
-    width: 200,
-    marginLeft: 160,
+    width: 150,
+    marginLeft: 220,
     borderColor: 'gray',
     borderWidth: 0.5,
     borderRadius: 8,
     backgroundColor: '#eeeeee',
     paddingHorizontal: 8,
-  },
-  icon: {
-    marginRight: 5,
   },
   label: {
     position: 'absolute',
@@ -100,10 +91,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: 'black',
   },
-  iconStyle: {
-    width: 20,
-    height: 20,
-  },
   inputSearchStyle: {
     height: 40,
     fontSize: 16,
@@ -111,4 +98,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MinBudgetDropdown;
+export default NationalityDropdown;

@@ -16,7 +16,7 @@ const MainFilter = () => {
     <View style={styles.container}>
       <Text style = {styles.text}>Which institution will you be studying at?</Text>
       <LocationDropdown />
-      <CustomButton onPress={handleButtonPress} styles={styles} title={"Can\'t find insitution"}/>
+      <CustomButton onPress={handleButtonPress} styles={styles} title={"I an\'t find my insitution"}/>
     </View>
   );
 };
@@ -24,10 +24,10 @@ const MainFilter = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#89e0c2',
+    backgroundColor: 'white',
   },
   button: {
-    backgroundColor: '#43CE9E',
+    backgroundColor: '#027148',
     borderRadius: 20,
     width: '80%',
     height: 80,
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
   },
   text: {
     alignSelf: 'center',
-    top: 340,
+    top: 100,
     color: 'black',
     fontSize: 24,
     fontWeight: 'bold',
