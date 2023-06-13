@@ -34,20 +34,23 @@ const StatusBar = ({ status }) => {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    height: '5%',
-    width: '40%',
-    borderRadius: 4,
+    height: 27,
+    width: 110,
+    marginRight: 50,
+    borderRadius: 8,
+    borderColor: 'white',
+    borderWidth: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
   icon: {
     color: 'white',
-    fontSize: 20,
+    fontSize: 16,
     marginRight: 5,
   },
   text: {
     color: 'white',
-    fontSize: 16,
+    fontSize: 12,
     fontWeight: 'bold',
   },
 });

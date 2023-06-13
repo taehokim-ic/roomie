@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, FlatList } from 'react-native';
 import CustomButton from '../../components/CustomButton';
 import MatchingStatus from '../../components/MatchingStatus';
 import ChatIcon from '../../components/ChatIcon';
@@ -14,13 +14,35 @@ const Compatibility = (name) => {
     navigation.navigate('FlatFinding');
   }
 
+  const data = [
+    { id: '1', text: 'Rent', status: 'agree' },
+    { id: '2', text: 'Location', status: 'disagree' },
+    { id: '3', text: 'Furniture', status: 'pending' },
+    { id: '4', text: 'Lifestyle', status: 'disagree' },
+    { id: '5', text: 'Allergies', status: 'pending' },
+    // Add more items as needed
+  ];
+
+  const renderItem = ({ item }) => (
+    <View style={scrollStyles.itemContainer}>
+      <Text style={scrollStyles.itemText}>{item.text}</Text>
+      <StatusBar status={item.status} />
+    </View>
+  );
+
   return (
     <View>
       <View style={styles.container}>
         <MatchingStatus />
         <ChatIcon />
         <Text style={styles.text}>Recommended criteria that you should agree upon before choosing to live with INSERT_NAME...</Text>
-        <StatusBar />
+        <View style={scrollStyles.container}>
+          <FlatList
+            data={data}
+            renderItem={renderItem}
+            keyExtractor={(item) => item.id}
+          />
+        </View>
         <CustomButton
           title="Not compatible"
           onPress={() => console.log('Not compatible button pressed')}
@@ -112,5 +134,41 @@ const styles2 = StyleSheet.create({
     fontWeight: 'bold',
   },
 })
+
+const scrollStyles = StyleSheet.create({
+  container: {
+    height: '40%',
+    padding: 16,
+    backgroundColor: '#1C5231',
+    position: 'absolute',
+    top: 250,
+  },
+  itemContainer: {
+    backgroundColor: '#1C5231',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '95%',
+    height: 50,
+    borderColor: 'white',
+    borderWidth: 0.25,
+    borderRadius: 10,
+    alignItems: 'center',
+    marginBottom: 10,
+    alignSelf: 'center'
+  },
+  itemText: {
+    color: 'white',
+    fontWeight: 'bold',
+    marginLeft: 30,
+    fontSize: 16,
+  },
+  item2Text: {
+    color: 'white',
+    fontWeight: 'bold',
+    position: 'absolute',
+    left: 160,
+    fontSize: 12,
+  }
+});
 
 export default Compatibility;
