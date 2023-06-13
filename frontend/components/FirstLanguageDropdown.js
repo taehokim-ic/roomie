@@ -4,27 +4,25 @@ import { Dropdown } from 'react-native-element-dropdown';
 import { FontAwesome } from '@expo/vector-icons';
 
 const data = [
-  { label: 'None', value: '0' },
-  { label: '£100 per month', value: '1' },
-  { label: '£200 per month', value: '2' },
-  { label: '£300 per month', value: '3' },
-  { label: '£400 per month', value: '4' },
-  { label: '£500 per month', value: '5' },
-  { label: '£600 per month', value: '6' },
-  { label: '£700 per month', value: '7' },
-  { label: '£800 per month', value: '8' },
-  { label: '£900 per month', value: '9' },
-  { label: '£1000 per month', value: '10' },
+  { label: 'No preference', value: '0' },
+  { label: 'Korean', value: '1' },
+  { label: 'Mandarin', value: '2' },
+  { label: 'Hindi', value: '3' },
+  { label: 'English', value: '4' },
+  { label: 'French', value: '5' },
+  { label: 'German', value: '6' },
+  { label: 'Cantonese', value: '7' },
+  { label: 'Arabic', value: '8' },
 ];
 
-const MinBudgetDropdown = ({ position }) => {
+const FirstLanguageDropdown = ({ position }) => {
   const [value, setValue] = useState(null);
   const [isFocus, setIsFocus] = useState(false);
 
   const renderLabel = () => {
     return (
       <Text style={[styles.label, isFocus && { color: 'black' }]}>
-        Min Budget?
+        First Language?
       </Text>
     );
   };
@@ -60,8 +58,8 @@ const MinBudgetDropdown = ({ position }) => {
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
-    width: '100%',
-    marginTop: '35%',
+    width: '200%',
+    marginTop: '22%',
     height: 40,
     backgroundColor: 'white',
     justifyContent: 'center',
@@ -71,8 +69,8 @@ const styles = StyleSheet.create({
   dropdown: {
     position: 'absolute',
     height: 30,
-    width: 200,
-    marginLeft: 160,
+    width: 150,
+    marginLeft: 220,
     borderColor: 'gray',
     borderWidth: 0.5,
     borderRadius: 8,
@@ -111,4 +109,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MinBudgetDropdown;
+export default FirstLanguageDropdown;
