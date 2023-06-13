@@ -12,7 +12,11 @@ const Stack = createNativeStackNavigator();
 export default function AppNavigation() {
   return (
       <NavigationContainer>
-        <Stack.Navigator screenOptions={{ animation: 'fade' }} initialRouteName="Register">
+        <Stack.Navigator screenOptions={{ animation: 'fade' }} initialRouteName="UserApp">
+          <Stack.Screen 
+              name = 'UserApp' 
+              component={TabsNavigation}
+              options = {{headerShown: false}} />
           <Stack.Screen
             name="Register"
             component={RegisterScreen}
@@ -28,10 +32,6 @@ export default function AppNavigation() {
             component={QuizScreen}
             options={{ headerShown: false }}
           />
-          <Stack.Screen 
-            name = 'UserApp' 
-            component={TabsNavigation}
-            options = {{headerShown: false}} />
         </Stack.Navigator>
       </NavigationContainer>
   );
