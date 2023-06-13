@@ -2,10 +2,11 @@ import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-const TenancyAgreementScreen = () => {
+const TenancyAgreementScreen = ({navigation}) => {
   const handleSignAgreement = () => {
     // Implement the logic to redirect the user to the electronic signing website
     console.log('Redirecting to sign the tenancy agreement');
+    navigation.navigate('Success');
   };
 
   return (

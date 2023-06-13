@@ -1,7 +1,12 @@
 import React from 'react';
 import { View, Text, ScrollView, Image, StyleSheet, TouchableOpacity } from 'react-native';
 
-const FlatViewScreen = () => {
+const FlatViewScreen = ({navigation}) => {
+
+  const navigateTenancy = () => {
+    navigation.navigate('Rentals');
+  };
+
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContent}>
@@ -35,7 +40,7 @@ const FlatViewScreen = () => {
           {/* Add more flat details as needed */}
         </View>
       </ScrollView>
-      <TouchableOpacity style={styles.bookViewingButton}>
+      <TouchableOpacity style={styles.bookViewingButton} onPress={navigateTenancy}>
         <Text style={styles.bookViewingButtonText}>Book Viewing</Text>
       </TouchableOpacity>
     </View>
