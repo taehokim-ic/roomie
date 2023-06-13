@@ -20,7 +20,7 @@ const Tab = createBottomTabNavigator();
 
 const getTabBarVisibility = (route) => {
     let rn = getFocusedRouteNameFromRoute(route);
-    if (rn == 'MainFilter' || rn == 'SearchFilter') return 'none';
+    if (rn == 'MainFilter' || rn == 'SearchFilter' || rn == 'Compatibility') return 'none';
     return 'flex'
 }
 

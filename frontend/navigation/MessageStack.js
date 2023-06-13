@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import MessageScreen from "../screens/Messages/MessageScreen";
 import ChatScreen from "../screens/Messages/ChatScreen";
 import MatchesScreen from "../screens/Messages/MatchesScreen";
+import Compatibility from "../screens/Messages/Compatibility";
 
 const Stack = createNativeStackNavigator();
 
@@ -22,6 +23,7 @@ const MessagesStack = () => {
       />
 
       <Stack.Screen name="Matches" component={MatchesScreen} />
+      <Stack.Screen name="Compatibility" component={Compatibility} />
     </Stack.Navigator>
   );
 };
