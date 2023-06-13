@@ -1,48 +1,64 @@
-import React from 'react';
-import { View, Text, ScrollView, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import React, {useState, useEffect} from 'react';
+import { View, Text, ScrollView, Image, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
+import { useRoute } from '@react-navigation/native';
+import axios from 'axios';
 
 const FlatViewScreen = ({navigation}) => {
+
+  const [flat, setFlat] = useState({});
+
+  const route = useRoute();
+  const { uuid } = route.params;
 
   const navigateTenancy = () => {
     navigation.navigate('Rentals');
   };
 
+  const fetchData = async () => {
+    const response = await axios.get('http://roomie3.herokuapp.com/api/v1/property?uuid=' + uuid);
+    setFlat(response.data);
+    navigation.setOptions({ title: response.data.location });
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
     <View style={styles.container}>
+      <View style={styles.flatContainer}>
       <ScrollView contentContainerStyle={styles.scrollContent}>
-        <ScrollView contentContainerStyle={styles.imageContainer} horizontal>
-          <Image
-            source={{ uri: 'https://media.rightmove.co.uk/49k/48934/131846453/48934_SLH190093_IMG_00_0000.jpeg' }}
-            style={styles.flatImage}
-            resizeMode="cover"
-          />
-          <Image
-            source={{ uri: 'https://media.rightmove.co.uk/49k/48934/131846453/48934_SLH190093_IMG_01_0000.jpeg' }}
-            style={styles.flatImage}
-            resizeMode="cover"
-          />
-          <Image
-            source={{ uri: 'https://media.rightmove.co.uk/49k/48934/131846453/48934_SLH190093_IMG_02_0000.jpeg' }}
-            style={styles.flatImage}
-            resizeMode="cover"
-          />
-          {/* Add more images to the gallery */}
-        </ScrollView>
+        <View style={styles.imageContainer}>
+              <FlatList
+          data={flat.image_urls}
+          keyExtractor={(item, index) => index.toString()}
+          styles={styles.flatImage}
+          renderItem={({ item }) => (
+            <Image
+              source={{ uri: item }}
+              style={styles.flatImage}
+              resizeMode="cover"
+            />
+          )}
+          horizontal
+        />
+        </View>
         <View style={styles.flatDetails}>
-          <Text style={styles.flatTitle}>Modern Flat in City Center</Text>
-          <Text style={styles.flatPrice}>$1200/month</Text>
+          <Text style={styles.flatTitle}>{flat.location}</Text>
+          <Text style={styles.flatPrice}>£{flat.price}/month</Text>
+          <Text style={styles.flatLocation}>{flat.city}</Text>
           <Text style={styles.flatDescription}>
-            Spacious and well-furnished flat located in the heart of the city. Close to all amenities and public transportation. Ideal for young professionals or students.
+            {flat.description}
           </Text>
-          <Text style={styles.flatLocation}>City Center, New York</Text>
-          <Text style={styles.flatFeatures}>3 Bedrooms | 2 Bathrooms</Text>
-          <Text style={styles.flatFeatures}>Fully Furnished | Balcony</Text>
+          <Text style={styles.flatFeatures}>{flat.number_of_bedrooms} Bedrooms | {flat.number_of_toilets} Bathrooms</Text>
+          <Text style={styles.flatFeatures}>Fully Furnished</Text>
           {/* Add more flat details as needed */}
         </View>
       </ScrollView>
       <TouchableOpacity style={styles.bookViewingButton} onPress={navigateTenancy}>
         <Text style={styles.bookViewingButtonText}>Book Viewing</Text>
       </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -52,15 +68,20 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
+  flatContainer: {
+    flex: 1,
+    backgroundColor: '#f1f1f1',
+  },
   scrollContent: {
     flexGrow: 1,
   },
   imageContainer: {
+    width: '100%',
     height: 300,
     paddingHorizontal: 16,
   },
   flatImage: {
-    height: 300,
+    height: 280,
     width: 350,
     marginTop: 20,
     marginBottom: 20,
@@ -86,7 +107,7 @@ const styles = StyleSheet.create({
   },
   flatDescription: {
     fontSize: 16,
-    color: '#555',
+    color: 'black',
     marginBottom: 16,
   },
   flatLocation: {

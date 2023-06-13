@@ -1,56 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, FlatList, Image, ScrollView, StyleSheet, TextInput } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Feather } from '@expo/vector-icons';
-import { Picker } from '@react-native-picker/picker';
-import { useRef } from 'react';
+import axios from 'axios';
 
-const FlatListScreen = ({navigation}) => {
+const FlatListScreen = ({ navigation }) => {
   const [showFilterCard, setShowFilterCard] = useState(false);
+  const [flats, setFlats] = useState([]);
 
   const handleFilterButtonPress = () => {
     setShowFilterCard(!showFilterCard);
   };
 
   const handleItemPress = (item) => {
-    // Navigate to FlatViewScreen with the selected flat
-    navigation.navigate('FlatView', { flat: item });
+    navigation.navigate('FlatView', { uuid: item.uuid });
   };
 
-  const [flats, setFlats] = useState([
-    {
-      id: 1,
-      title: 'Spacious Apartment in the City',
-      rooms: 3,
-      flatmates: 2,
-      bedrooms: 2,
-      toilets: 2,
-      location: 'New York',
-      price: 2000,
-      picture: 'https://media.rightmove.co.uk/49k/48934/131846453/48934_SLH190093_IMG_00_0000.jpeg',
-      propertyType: 'Apartment',
-      description: 'A spacious apartment with great city views.',
-      dateListed: '2023-06-01',
-    },
-    {
-      id: 2,
-      title: 'Cozy Studio near the Beach',
-      rooms: 1,
-      flatmates: 1,
-      bedrooms: 1,
-      toilets: 1,
-      location: 'Miami',
-      price: 1500,
-      picture: 'https://media.rightmove.co.uk/42k/41063/134329280/41063_PRD012257989_IMG_02_0000.jpeg',
-      propertyType: 'Studio',
-      description: 'A cozy studio just a few steps away from the beach.',
-      dateListed: '2023-06-05',
-    },
-  ]);
+  const fetchFlats = async () => {
+    const response = await axios.get('http://roomie3.herokuapp.com/api/v1/properties');
+    setFlats(response.data);
+    console.log(response.data);
+  };
+
+  useEffect(() => {
+    fetchFlats();
+  }, []);
 
   const renderFilterCard = () => {
     if (!showFilterCard) return null;
-  
+
     return (
       <View style={styles.filterCard}>
         <Text style={styles.filterCardTitle}>Filter Options</Text>
@@ -66,17 +44,15 @@ const FlatListScreen = ({navigation}) => {
       </View>
     );
   };
-  
-  
 
   const renderItem = ({ item }) => (
     <TouchableOpacity onPress={() => handleItemPress(item)} style={styles.flatItem}>
-      <Image source={{ uri: item.picture }} style={styles.flatImage} />
+      <Image source={{ uri: item.image_url }} style={styles.flatImage} />
       <View style={styles.flatDetails}>
-        <Text style={styles.flatTitle}>{item.title}</Text>
-        <Text style={styles.flatLocation}>{item.location}</Text>
-        <Text style={styles.flatBedrooms}>{item.bedrooms} bedrooms</Text>
-        <Text style={styles.flatPrice}>${item.price}/month</Text>
+        <Text style={styles.flatTitle}>{item.location}</Text>
+        <Text style={styles.flatLocation}>{item.city}</Text>
+        <Text style={styles.flatBedrooms}>{item.number_of_bedrooms.toString()} bedrooms</Text>
+        <Text style={styles.flatPrice}>£{item.price.toString()}/month</Text>
       </View>
     </TouchableOpacity>
   );
@@ -95,29 +71,36 @@ const FlatListScreen = ({navigation}) => {
           </TouchableOpacity>
         </View>
       </View>
+      <View style={styles.flatListContainer}>
       <FlatList
         data={flats}
         renderItem={renderItem}
-        keyExtractor={(item) => item.id.toString()}
+        keyExtractor={(item) => item.id}
         contentContainerStyle={styles.flatList}
       />
+      </View>
       {renderFilterCard()}
     </SafeAreaView>
   );
 };
 
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f1f1f1',
+    backgroundColor: 'white',
   },
   header: {
     paddingHorizontal: 16,
+    paddingTop: 16,
     paddingBottom: 16,
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
     backgroundColor: '#fff',
+  },
+  flatListContainer: {
+    flex: 1,
+    marginBottom: -33,
+    backgroundColor: '#f1f1f1',
   },
   title: {
     fontSize: 28,
@@ -160,16 +143,17 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
   flatList: {
+    backgroundColor: '#f1f1f1',
     paddingHorizontal: 16,
     paddingTop: 16,
   },
   flatItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 16,
+    marginBottom: 12,
     backgroundColor: '#fff',
     borderRadius: 8,
-    padding: 8,
+    padding: 14,
   },
   flatImage: {
     width: 80,
