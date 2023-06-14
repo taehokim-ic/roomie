@@ -17,6 +17,21 @@ const MessagesScreen = ({navigation}) => {
   const [requests, setRequests] = useState([]);
   const [Messages, setMessages] = useState([]);
 
+  const handleCardPress = ({navigation, state} ) => {
+    let screenName = "Compatibility";
+ 
+    switch(state) {
+      case 0:
+        screenName = "Compatibility";
+        break;
+      case 1:
+        screenName = "FlatFinding"
+        break;
+    }
+ 
+    navigation.navigate('Interaction', {screen: screenName})
+  }
+
   const fetchRequests = async () => {
     try {
       const response = await axios.get('http://roomie3.herokuapp.com/api/v1/people?current_user_uuid=05b3bbd1-4e75-4ad3-9d71-4c4c8d08717d');
@@ -94,7 +109,8 @@ const MessagesScreen = ({navigation}) => {
           data={Messages}
           keyExtractor={item=>item.uuid}
           renderItem={({item}) => (
-            <Card onPress={() => navigation.navigate('Interaction')}>
+            // <Card onPress={() => navigation.navigate('Interaction')}>
+            <Card onPress={() => handleCardPress({navigation, state: 1})}>
               <UserInfo>
                 <UserImgWrapper>
                   <UserImg source={item.userImg} />
