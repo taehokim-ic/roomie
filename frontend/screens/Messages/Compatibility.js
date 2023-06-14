@@ -5,6 +5,7 @@ import MatchingStatus from '../../components/MatchingStatus';
 import ChatIcon from '../../components/ChatIcon';
 import StatusBar from '../../components/StatusBar';
 import { useNavigation } from '@react-navigation/native';
+import StatusBarButton from '../../components/StatusBarButton';
 
 const Compatibility = (name) => {
 
@@ -28,6 +29,7 @@ const Compatibility = (name) => {
     <View style={scrollStyles.itemContainer}>
       <Text style={scrollStyles.itemText}>{item.text}</Text>
       <StatusBar status={item.status} />
+      <StatusBarButton />
     </View>
   );
 

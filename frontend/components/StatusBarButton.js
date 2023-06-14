@@ -17,7 +17,7 @@ const StatusBarButton = () => {
     <View style={styles.container}>
       {clickCount % 2 === 0 ? (
         <TouchableOpacity style={styles.button} onPress={handlePress}>
-          <Ionicons name="ellipsis-horizontal" size={24} color="red" />
+          <Ionicons name="ellipsis-horizontal" size={24} color="white" />
         </TouchableOpacity>
       ) : (
         <TouchableOpacity
@@ -46,12 +46,12 @@ const StatusBarButton = () => {
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
-    right: 0,
+    right: 2,
     alignItems: 'center',
     justifyContent: 'center',
   },
   buttonContainer: {
-    backgroundColor: '#1C5231',
+    backgroundColor: 'transparent',
     padding: 10,
     borderRadius: 10,
     alignItems: 'center',
@@ -59,13 +59,14 @@ const styles = StyleSheet.create({
   button: {
     width: 40,
     height: 40,
-    backgroundColor: '#1C5231',
+    backgroundColor: 'transparent',
     alignItems: 'center',
     justifyContent: 'center',
+    zIndex: 999,
   },
   buttonAfter: {
     width: 120,
-    height: 40,
+    height: 30,
     backgroundColor: 'white',
     alignItems: 'center',
     justifyContent: 'center',
