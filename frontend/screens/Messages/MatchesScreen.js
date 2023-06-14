@@ -1,166 +1,191 @@
-import * as React from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
-import {
-  View,
-  Image,
-  ScrollView,
-  Alert,
-  PanResponder,
-  Animated,
-} from "react-native";
-import { Text, Card, Button } from "@rneui/themed";
-import { useState, useEffect } from "react";
-import axios from "axios";
+import React, {useState, useEffect} from 'react';
+import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import { useRoute } from '@react-navigation/native';
+import axios from 'axios';
 
-const MatchProfileCard = ({ match, onNext }) => {
-  const { name, profile_url, bio, requirements, additional_info } = match;
+const ProfilePage = ({navigation}) => {
+  const route = useRoute();
+  const { uuid } = route.params;
 
-  return (
-    <View>
-      <Card>
-        <View style={{ flexDirection: "row", justifyContent: "center" }}>
-          <Text h4>{match.name}</Text>
-        </View>
-        <Image
-          source={{ uri: match.profile_url }}
-          style={{
-            width: 200,
-            height: 200,
-            borderRadius: 200 / 2,
-            alignSelf: "center",
-            marginTop: 20,
-            marginBottom: 20,
-          }}
-        />
-        <Card>
-          <Card.Title>Bio</Card.Title>
-          <Text>{match.bio}</Text>
-        </Card>
-        <Card>
-          <Card.Title>Who am I looking for?</Card.Title>
-          <Text>{match.requirements}</Text>
-        </Card>
-        <Card>
-          <Card.Title>Additional information</Card.Title>
-          <Text>{match.additional_info}</Text>
-        </Card>
-        <View style={{ flexDirection: "row", justifyContent: "center" }}>
-          <Button size="sm" type="clear" onPress={{}}>
-            Translate
-          </Button>
-          <Button size="sm" type="clear" onPress={onNext}>
-            Message
-          </Button>
-          <Button size="sm" type="clear" onPress={onNext}>
-            Skip
-          </Button>
-        </View>
-      </Card>
-    </View>
-  );
-};
+  const [flatmateProfile, setFlatmateProfile] = useState({});
+  const [prompt1, setPrompt1] = useState('');
+  const [prompt2, setPrompt2] = useState('');
+  const [prompt3, setPrompt3] = useState('');
 
-const MatchesScreen = ({ navigation }) => {
-  const pan = useState(new Animated.ValueXY())[0];
-
-  const panResponder = useState(
-    PanResponder.create({
-      onMoveShouldSetPanResponder: () => true,
-      onPanResponderMove: Animated.event([null, { dx: pan.x, dy: pan.y }], {
-        useNativeDriver: false,
-      }),
-      onPanResponderRelease: (_, gesture) => {
-        if (gesture.dx > 120) {
-          handleSkip();
-        }
-        Animated.spring(pan, {
-          toValue: { x: 0, y: 0 },
-          useNativeDriver: false,
-        }).start();
-      },
-    })
-  )[0];
-
-  const cardStyle = {
-    transform: [
-      { translateX: pan.x },
-      { translateY: pan.y },
-      {
-        rotate: pan.x.interpolate({
-          inputRange: [-200, 0, 200],
-          outputRange: ["-10deg", "0deg", "10deg"],
-        }),
-      },
-    ],
-  };
-
-  const [matchProfiles, setMatchProfiles] = useState([
-    {
-      name: "John Doe",
-      age: 25,
-      bio: "I am a software engineer passionate about React Native.",
-      lookingFor: "I am looking for a flatshare in London.",
-      addInfo:
-        "I have a peanut allergy, so please bear that in mind. I'm also a vegetarian, but I don't mind if you eat meat. I'm also a big fan of K-pop, so if you are too, that's a bonus!",
-      img: require("../../assets/users/user-8.jpg"),
-    },
-    {
-      name: "Jane Smith",
-      age: 30,
-      bio: "I love traveling and exploring new places.",
-      lookingFor: "Looking to share a flat with someone in their 20s.",
-      addInfo:
-        "I have a peanut allergy, so please bear that in mind. I'm also a vegetarian, but I don't mind if you eat meat. I'm also a big fan of K-pop, so if you are too, that's a bonus!",
-      img: require("../../assets/users/user-9.png"),
-    },
-    {
-      name: "Rieko Smith",
-      age: 25,
-      bio: "I am a software engineer passionate about React Native.",
-      lookingFor: "I am looking for a flatshare in London.",
-      addInfo:
-        "I have a peanut allergy, so please bear that in mind. I'm also a vegetarian, but I don't mind if you eat meat. I'm also a big fan of K-pop, so if you are too, that's a bonus!",
-      img: require("../../assets/users/user-10.png"),
-    },
-    {
-      name: "Diana Smith",
-      age: 25,
-      bio: "I am a software engineer passionate about React Native.",
-      lookingFor: "I am looking for a flatshare in London.",
-      addInfo:
-        "I have a peanut allergy, so please bear that in mind. I'm also a vegetarian, but I don't mind if you eat meat. I'm also a big fan of K-pop, so if you are too, that's a bonus!",
-      img: require("../../assets/users/user-11.png"),
-    },
-  ]);
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  const fetchData = async () => {
+  const fetchProfile = async () => {
     try {
-      const response = await axios.get(
-        "https://roomie3.herokuapp.com/api/v1/profiles/recommeneded"
-      );
-      setMatchProfiles(response.data);
-    } catch (error) {
-      console.error("Error fetching data:", error);
+      const response = await axios.get('http://roomie3.herokuapp.com/api/v1/person?uuid=' + uuid);
+      setFlatmateProfile(response.data);
+      navigation.setOptions({ title: response.data.name });
+      console.log(response.data);
+      setPrompt1(response.data.prompts[0]);
+      setPrompt2(response.data.prompts[1]);
+      setPrompt3(response.data.prompts[2]);
+    }
+    catch (error) {
+      console.log(error);
     }
   };
 
-  const [currentIndex, setCurrentIndex] = useState(0);
+  useEffect(() => {
+    fetchProfile();
+  }, []);
 
-  const handleSkip = () => {
-    setCurrentIndex((prevIndex) => prevIndex + 1);
+  const handleAccept = () => {
+    // Handle accept button press
   };
 
-  const currentMatch = matchProfiles[currentIndex];
+  const handleDecline = () => {
+    // Handle decline button press
+  };
 
   return (
-      <Animated.ScrollView style={cardStyle} {...panResponder.panHandlers}>
-        <MatchProfileCard match={currentMatch} onNext={handleSkip} />
-      </Animated.ScrollView>
+    <ScrollView style={styles.contentContainer}>
+    <View style={styles.container}>
+      {/* Profile Picture */}
+      <Image source={{uri: flatmateProfile.picture_url}} style={styles.profilePicture} />
+
+      {/* Main Summary */}
+      <View style={styles.card}>
+        <Text style={styles.name}>
+          {flatmateProfile.name}, <Text style={styles.age}>{flatmateProfile.age}</Text>
+        </Text>
+        <Text style={styles.bio}>{flatmateProfile.bio}</Text>
+      </View>
+
+      {/* Extra Content */}
+      <View style={styles.card}>
+        <Text style={styles.cardTitle}>Additional Information</Text>
+        <View style={styles.infoRow}>
+          <Text style={styles.subtitle}>Pronouns:</Text>
+          <Text style={styles.info}>{flatmateProfile.pronouns}</Text>
+        </View>
+        <View style={styles.infoRow}>
+          <Text style={styles.subtitle}>Institution:</Text>
+          <Text style={styles.info}>{flatmateProfile.institution}</Text>
+        </View>
+        <View style={styles.infoRow}>
+          <Text style={styles.subtitle}>Nationality:</Text>
+          <Text style={styles.info}>{flatmateProfile.nationality}</Text>
+        </View>
+      </View>
+
+      <View style={styles.card}>
+          <View style={styles.promptContainer}>
+            <Text style={styles.cardTitle}>Q. Are you a morning person or a night owl?</Text>
+            <Text style={styles.answer}>{prompt1}</Text>
+          </View>
+      </View>
+
+      <View style={styles.card}>
+          <View style={styles.promptContainer}>
+            <Text style={styles.cardTitle}>Q. How do you feel about occasional gatherings at the apartment?</Text>
+            <Text style={styles.answer}>{prompt2}</Text>
+          </View>
+      </View>
+
+      <View style={styles.card}>
+          <View style={styles.promptContainer}>
+            <Text style={styles.cardTitle}>Q. What is your typical work or study schedule?</Text>
+            <Text style={styles.answer}>{prompt3}</Text>
+          </View>
+      </View>
+
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity style={[styles.button, styles.acceptButton]} onPress={handleAccept}>
+          <Text style={styles.buttonText}>Accept</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={[styles.button, styles.declineButton]} onPress={handleDecline}>
+          <Text style={styles.buttonText}>Decline</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+    </ScrollView>
   );
 };
 
-export default MatchesScreen;
+const styles = StyleSheet.create({
+  contentContainer: {
+    paddingBottom: 30, // Extra space at the bottom for scrolling
+  },
+  container: {
+    flex: 1,
+    padding: 16,
+    backgroundColor: '#F2F2F2',
+  },
+  profilePicture: {
+    width: 120,
+    height: 120,
+    borderRadius: 60,
+    alignSelf: 'center',
+    marginBottom: 16,
+  },
+  card: {
+    backgroundColor: '#FFFFFF',
+    borderRadius: 8,
+    padding: 16,
+    marginBottom: 16,
+  },
+  name: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 8,
+    textAlign: 'center',
+  },
+  age: {
+    fontWeight: 'normal',
+    fontSize: 20,
+  },
+  bio: {
+    fontSize: 14,
+    textAlign: 'center',
+    color: '#888888',
+    marginBottom: 16,
+  },
+  cardTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 8,
+  },
+  infoRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 4,
+  },
+  subtitle: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    marginRight: 8,
+  },
+  info: {
+    fontSize: 14,
+    color: '#888888',
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: 8,
+    marginTop: 16,
+  },
+  button: {
+    flex: 1,
+    height: 48,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 8,
+    marginHorizontal: 8,
+  },
+  acceptButton: {
+    backgroundColor: '#007bff',
+  },
+  declineButton: {
+    backgroundColor: '#dc3545',
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+});
+
+export default ProfilePage;
