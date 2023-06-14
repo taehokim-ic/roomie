@@ -14,7 +14,7 @@ const ChatIcon = () => {
     <TouchableOpacity onPress={handleChatPress}>
       <View style={styles.icon}>
         <AntDesign name="message1" size={36} color="white" />
-        <Text style={{ marginTop: 5, color: 'white' }}>Tap to Chat!</Text>
+        <Text style={{ marginTop: 5, color: 'white', fontWeight: 'bold' }}>Tap to Chat!</Text>
       </View>
     </TouchableOpacity>
   );

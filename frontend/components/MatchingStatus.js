@@ -5,19 +5,14 @@ import {useRoute } from '@react-navigation/native';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 import { color } from '@rneui/base';
 
-const MatchingStatus = () => {
-
-  const getInteraction = (state) => {
-    
-    return state;
-  }
+const MatchingStatus = ({state}) => {
 
   return (
     <View style={styles.container}>
       <View style={styles.indictatorStyle}>
         <StepIndicator
           customStyles={stepIndicatorStyles}
-          currentPosition={getInteraction(0)} // Add state of interaction here
+          currentPosition={state} // Add state of interaction here
           labels={['Compatibility', 'Flat-finding', 'Request contract', 'Sign contract', 'Final information']}
 
         />
