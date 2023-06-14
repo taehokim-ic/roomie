@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import SexRadioButton from '../../components/SexRadioButton';
+import YesOrNoRadioButton from '../../components/YesOrNoRadioButton';
 
 const QuizScreen = ({ navigation }) => {
   const [number, setNumber] = useState('');
@@ -38,17 +40,6 @@ const QuizScreen = ({ navigation }) => {
         <Text style={styles.title}>About Me</Text>
         <Text style={styles.tagline}>Fill out information about yourself to help people find you!</Text>
 
-        <View>
-          <Text style={styles.question}>What is your contact number?</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Contact Number"
-            value={number}
-            onChangeText={setNumber}
-            keyboardType="numeric"
-          />
-        </View>
-
         <Text style={styles.question}>When is your date of birth?</Text>
         <TextInput
           style={styles.input}
@@ -74,47 +65,35 @@ const QuizScreen = ({ navigation }) => {
           onChangeText={setLanguage}
         />
 
-        <Text style={styles.question}>What is your minimum budget for a flat per month?</Text>
-        <TextInput
+        <Text style={styles.question}>What institution will you be studying at?</Text>
+        <TextInput  
           style={styles.input}
-          placeholder="Minimum budget (£)"
-          value={minBudget}
-          onChangeText={setMinBudget}
-          keyboardType="numeric"
+          placeholder="Institution Name"
+          value={language}
+          onChangeText={setLanguage}
         />
 
-        <Text style={styles.question}>What is your maximum budget for a flat per month?</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Maximum budget (£)"
-          value={maxBudget}
-          onChangeText={setMaxBudget}
-          keyboardType="numeric"
-        />
+        <Text style={styles.question}>What is your budget for a flat per month?</Text>
+        <View style={styles.budgetContainer}>
+          <TextInput
+            style={styles.numinput}
+            placeholder="Min. (£)"
+            value={minBudget}
+            onChangeText={setMinBudget}
+            keyboardType="numeric"
+          />
+          <TextInput
+            style={styles.numinput}
+            placeholder="Max. (£)"
+            value={maxBudget}
+            onChangeText={setMaxBudget}
+            keyboardType="numeric"
+          />
+        </View>
 
-        <Text style={styles.question}>Which institution will you be studying at?</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Institution name"
-          value={institution}
-          onChangeText={setInstitution}
-        />
+        <SexRadioButton />
 
-        <Text style={styles.question}>What is your sex?</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Male/Female"
-          value={sex}
-          onChangeText={setSex}
-        />
-
-        <Text style={styles.question}>Are you a smoker?</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Yes/No"
-          value={smoker}
-          onChangeText={setSmoker}
-        />
+        <YesOrNoRadioButton />
 
         <TouchableOpacity style={styles.button} onPress={handleSubmit}>
           <Text style={styles.buttonText}>Submit</Text>
@@ -135,11 +114,11 @@ const styles = StyleSheet.create({
     marginTop:48,
     fontSize: 24,
     color: '#fff', // White text color
-    marginBottom: 32,
+    marginBottom: 12,
     textAlign: 'center',
   },
   tagline: {
-    fontSize: 18,
+    fontSize: 16,
     color: '#fff', // White text color
     marginBottom: 24,
     textAlign: 'center',
@@ -155,15 +134,29 @@ const styles = StyleSheet.create({
     padding: 8,
     borderRadius: 4,
   },
+  numinput: {
+    backgroundColor: '#fff', // White input background color
+    marginBottom: 18,
+    padding: 8,
+    borderRadius: 4,
+    width: 100,
+  },
   button: {
     backgroundColor: '#006600', // Dark green button background color
     padding: 12,
     borderRadius: 4,
     alignItems: 'center',
+    marginTop: 20,
+    marginBottom: 100,
   },
   buttonText: {
     color: '#fff', // White button text color
     fontSize: 16,
+  },
+  budgetContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginRight: 140,
   },
 });
 
