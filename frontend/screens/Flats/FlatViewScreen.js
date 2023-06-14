@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
   },
   flatContainer: {
     flex: 1,
-    backgroundColor: '#f1f1f1',
+    backgroundColor: '#fff',
   },
   scrollContent: {
     flexGrow: 1,
@@ -121,7 +121,8 @@ const styles = StyleSheet.create({
     marginBottom: 4,
   },
   bookViewingButton: {
-    backgroundColor: '#1C5231',
+    // flat ui dark blue
+    backgroundColor: '#446cb3',
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: 16,

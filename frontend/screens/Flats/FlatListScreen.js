@@ -20,6 +20,17 @@ const FlatListScreen = ({ navigation }) => {
     navigation.navigate('FlatView', { uuid: item.uuid });
   };
 
+  const clearFilter = async () => {
+    setCity('');
+    setBedrooms('');
+    setMinPrice('');
+    setMaxPrice('');
+    let url = 'http://roomie3.herokuapp.com/api/v1/properties';
+    const response = await axios.get(url);
+    setShowFilterCard(false);
+    setFlats(response.data);
+  };
+
   const applyFilter = async () => {
     let url = 'http://roomie3.herokuapp.com/api/v1/properties';
     if (city) {
@@ -100,6 +111,9 @@ const FlatListScreen = ({ navigation }) => {
             />
             <TouchableOpacity style={styles.applyButton} onPress={applyFilter}>
               <Text style={styles.applyButtonText}>Apply</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.cancelButton} onPress={clearFilter}>
+              <Text style={styles.cancelButtonText}>Clear Filters</Text>
             </TouchableOpacity>
           </View>
       </View>
@@ -315,6 +329,19 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
   applyButtonText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#fff',
+    textAlign: 'center',
+  },
+  cancelButton: {
+    backgroundColor: '#e74c3c',
+    marginTop: 4,
+    borderRadius: 8,
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+  },
+  cancelButtonText: {
     fontSize: 16,
     fontWeight: 'bold',
     color: '#fff',

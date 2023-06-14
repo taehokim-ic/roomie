@@ -34,6 +34,17 @@ const SearchScreen = ({navigation}) => {
     navigation.navigate('Profile', { uuid: id });
   };
 
+  const clearFilter = async () => {
+    setLanguage('');
+    setInstitution('');
+    setLocation('');
+    setSmoker('');
+    let url = 'http://roomie3.herokuapp.com/api/v1/people';
+    const response = await axios.get(url);
+    setShowFilterCard(false);
+    setUsers(response.data);
+  };
+
   const applyFilter = async () => {
     let url = 'http://roomie3.herokuapp.com/api/v1/people';
     if (language) {
@@ -104,6 +115,9 @@ const SearchScreen = ({navigation}) => {
             <TouchableOpacity style={styles.applyButton} onPress={applyFilter}>
               <Text style={styles.applyButtonText}>Apply</Text>
             </TouchableOpacity>
+            <TouchableOpacity style={styles.cancelButton} onPress={clearFilter}>
+            <Text style={styles.cancelButtonText}>Clear Filters</Text>
+          </TouchableOpacity>
           </View>
       </View>
     );
@@ -311,6 +325,19 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
   applyButtonText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#fff',
+    textAlign: 'center',
+  },
+  cancelButton: {
+    backgroundColor: '#dc3545',
+    borderRadius: 8,
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+    marginTop: 4,
+  },
+  cancelButtonText: {
     fontSize: 16,
     fontWeight: 'bold',
     color: '#fff',
