@@ -14,6 +14,7 @@ const ProfilePage = ({navigation}) => {
 
   const fetchProfile = async () => {
     try {
+      console.log(uuid);
       const response = await axios.get('http://roomie3.herokuapp.com/api/v1/person?uuid=' + uuid);
       setFlatmateProfile(response.data);
       navigation.setOptions({ title: response.data.name });

@@ -11,6 +11,8 @@ import { Container,
   MessageText, 
   TextSection } from '../../styles/MessageStyles';
 import axios from 'axios';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import BrowseMatchesScreen from './BrowseMatchesScreen';
 
 const MessagesScreen = ({navigation}) => {
   const [users, setUsers] = useState([]);
@@ -30,6 +32,10 @@ const MessagesScreen = ({navigation}) => {
     }
  
     navigation.navigate('Interaction', {screen: screenName})
+  }
+
+  const browseMatches = () => {
+    navigation.navigate('BrowseMatches');
   }
 
   const fetchRequests = async () => {
@@ -82,7 +88,7 @@ const MessagesScreen = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={goToMatches} style={styles.card}>
+      <View style={styles.card}>
       <View style={styles.cardContent}>
         <Text style={styles.text}>People who sent you connection requests</Text>
         <FlatList
@@ -91,19 +97,20 @@ const MessagesScreen = ({navigation}) => {
           keyExtractor={item => item.uuid}
           renderItem={({ item }) => (
             <View style={styles.circularImageContainer}>
-              {/* <TouchableOpacity onPress={() => navigation.navigate('Matches', {uuid : item.id})}> */}
+              <TouchableOpacity onPress={() => navigation.navigate('Matches', {uuid : item.uuid})}>
                 <Image source={item.userImg} style={styles.userImage} />
-              {/* </TouchableOpacity> */}
+              </TouchableOpacity>
             </View>
           )}
           ListFooterComponent={() => (
-            <TouchableOpacity style={styles.arrowContainer}>
-              <Text style={styles.arrowText}></Text>
+            <TouchableOpacity
+              style={styles.arrowContainer}>
+              <Icon name="chevron-right" size={20} color="black" onPress={browseMatches} />
             </TouchableOpacity>
           )}
         />
       </View>
-    </TouchableOpacity>
+    </View>
       <Container>
         <FlatList 
           data={Messages}
