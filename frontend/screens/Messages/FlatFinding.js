@@ -1,18 +1,17 @@
 import React from 'react';
 import { Text, View, StyleSheet, FlatList } from 'react-native';
-import CustomButton from '../../components/CustomButton';
 import MatchingStatus from '../../components/MatchingStatus';
 import ChatIcon from '../../components/ChatIcon';
-import StatusBar from '../../components/StatusBar';
-import { useNavigation } from '@react-navigation/native';
+import StatusBarButton from '../../components/StatusBarButton';
 
-const FlatFinding = (name) => {
+const FlatFinding = () => {
 
   return (
     <View>
       <View style={styles.container}>
         <MatchingStatus state={1}/>
         <ChatIcon />
+        <StatusBarButton />
       </View>
     </View>
   );

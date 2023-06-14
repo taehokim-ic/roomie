@@ -110,7 +110,7 @@ const MessagesScreen = ({navigation}) => {
           keyExtractor={item=>item.uuid}
           renderItem={({item}) => (
             // <Card onPress={() => navigation.navigate('Interaction')}>
-            <Card onPress={() => handleCardPress({navigation, state: 1})}>
+            <Card onPress={() => handleCardPress({navigation, state: 0})}>
               <UserInfo>
                 <UserImgWrapper>
                   <UserImg source={item.userImg} />
