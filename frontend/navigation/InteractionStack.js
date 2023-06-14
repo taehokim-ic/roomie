@@ -10,7 +10,7 @@ const InteractionStack = () => {
   
   return (
     <Stack.Navigator 
-      screenOptions={{ animation: 'fade'}}>
+      screenOptions={{}}>
         <Stack.Screen
           name="Compatible"
           component={Compatibility}

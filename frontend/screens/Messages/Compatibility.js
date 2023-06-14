@@ -1,6 +1,5 @@
 import React from 'react';
-import { Text, View, StyleSheet, FlatList } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Text, View, StyleSheet, FlatList, PanResponder } from 'react-native';
 import CustomButton from '../../components/CustomButton';
 import MatchingStatus from '../../components/MatchingStatus';
 import ChatIcon from '../../components/ChatIcon';
@@ -38,32 +37,45 @@ const Compatibility = (name) => {
     </View>
   );
 
+  const panResponder = React.useRef(
+    PanResponder.create({
+      onStartShouldSetPanResponder: () => true,
+      onPanResponderEnd: (event, gestureState) => {
+        if (gestureState.dx < -50 && gestureState.vx < -0.5) {
+          // Swipe right detected
+          handleChatIconPress();
+        }
+      },
+    })
+  ).current;
+
   return (
-    <View>
-      <View style={styles.container}>
-        <MatchingStatus state={0}/>
-        <ChatIcon onPress={handleChatIconPress} />
-        <Text style={styles.text}>Recommended criteria that you should agree upon before choosing to live with INSERT_NAME...</Text>
-        <View style={scrollStyles.container}>
-          <FlatList
-            data={data}
-            renderItem={renderItem}
-            keyExtractor={(item) => item.id}
-          />
-        </View>
-        <Text style={styles.update}>Update your status...</Text>
-        <Text style={styles.recommend}>We strongly recommend that you explore these criteria before making a decision!</Text>
-        <CustomButton
-          title="Not compatible"
-          onPress={() => console.log('Not compatible button pressed')}
-          styles={styles1}
-        />
-        <CustomButton
-          title="Let's flatshare"
-          onPress={handleFlatShare}
-          styles={styles2}
+    <View 
+      style={styles.container}
+      {...panResponder.panHandlers}
+    >
+      <MatchingStatus state={0}/>
+      <Text style={styles.text}>Are you compatible?</Text>
+      <View style={scrollStyles.container}>
+        <FlatList
+          data={data}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.id}
         />
       </View>
+      <Text style={styles.update}>Update your status...</Text>
+      <Text style={styles.recommend}>We strongly recommend that you agree on these criteria!</Text>
+
+      <CustomButton
+        title="Not compatible"
+        onPress={() => console.log('Not compatible button pressed')}
+        styles={styles1}
+      />
+      <CustomButton
+        title="Let's flatshare"
+        onPress={handleFlatShare}
+        styles={styles2}
+      />
     </View>
   );
 };
@@ -74,31 +86,31 @@ const styles = StyleSheet.create({
     backgroundColor: '#1C5231',
   },
   text: {
-    width: '60%',
+    width: '50%',
     position: 'absolute',
-    top: '20%',
-    left: '5%',
+    top: '16%',
+    alignSelf: 'center',
     color: '#FFD700',
-    fontSize: 16,
+    fontSize: 20,
     fontWeight: 'bold',
   },
   update: {
     position: 'absolute',
     width: '40%',
-    top: '33%',
+    top: '23%',
     right: 0,
-    color: '#dddddd',
+    color: '#ffffff',
     fontSize: 10,
     fontWeight: 'bold',
   },
   recommend: {
     position: 'absolute',
-    width: '80%',
-    top: '83%',
+    width: '100%',
+    top: '74%',
+    left: '6%',
     color: '#FFD700',
     fontSize: 12,
     fontWeight: 'bold',
-    alignSelf: 'center',
   }
 });
 
@@ -161,11 +173,11 @@ const styles2 = StyleSheet.create({
 
 const scrollStyles = StyleSheet.create({
   container: {
-    height: '48%',
+    height: '50%',
     padding: 16,
     backgroundColor: '#1C5231',
     position: 'absolute',
-    top: 230,
+    top: 160,
   },
   itemContainer: {
     backgroundColor: '#369E5F',
