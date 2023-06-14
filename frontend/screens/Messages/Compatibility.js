@@ -15,6 +15,10 @@ const Compatibility = (name) => {
     navigation.navigate('FlatFinding');
   }
 
+  const handleChatIconPress = () => {
+    navigation.navigate('InteractionChat');
+  }
+
   const data = [
     { id: '1', text: 'Rent', status: 'agree' },
     { id: '2', text: 'Location', status: 'disagree' },
@@ -37,7 +41,7 @@ const Compatibility = (name) => {
     <View>
       <View style={styles.container}>
         <MatchingStatus state={0}/>
-        <ChatIcon />
+        <ChatIcon onPress={handleChatIconPress} />
         <Text style={styles.text}>Recommended criteria that you should agree upon before choosing to live with INSERT_NAME...</Text>
         <View style={scrollStyles.container}>
           <FlatList
