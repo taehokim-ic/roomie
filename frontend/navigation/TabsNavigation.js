@@ -15,7 +15,7 @@ import FlatStack from './FlatStack';
 
 const homeName = 'Home';
 const messageName = 'Message';
-const searchName = 'Search';
+const searchName = 'Resources';
 const profileName = 'Profile';
 
 const Tab = createBottomTabNavigator();
@@ -40,7 +40,7 @@ const TabsNavigation = () => {
                     } else if (rn === messageName) {
                         iconName = focused ? 'chatbox' : 'chatbox-outline';
                     } else if (rn === searchName) {
-                        iconName = focused ? 'search' : 'search-outline';
+                        iconName = focused ? 'book' : 'book-outline';
                     } else if (rn === profileName) {
                         iconName = focused ? 'person' : 'person-outline';
                     }
@@ -56,9 +56,9 @@ const TabsNavigation = () => {
                 tabBarStyle: {display: getTabBarVisibility(route)},
             })}
             >
-            <Tab.Screen name={homeName} component={FlatStack} />
-            <Tab.Screen name={searchName} component={SearchStack} />
+            <Tab.Screen name={homeName} component={SearchStack} />
             <Tab.Screen name={messageName} component={MessagesStack} />
+            <Tab.Screen name={searchName} component={FlatStack} />
             <Tab.Screen name={profileName} component={ProfileStack} />
         </Tab.Navigator>
     );

@@ -4,6 +4,7 @@ import FlatListScreen from "../screens/Flats/FlatListScreen";
 import FlatViewScreen from "../screens/Flats/FlatViewScreen";
 import TenancyAgreementScreen from "../screens/Flats/TenancyAgreementsScreen";
 import SuccessScreen from "../screens/Flats/SuccessScreen";
+import HomeScreen from "../screens/Home/Resources";
 // import ChatLandlordScreen from "../screens/Flats/ChatLandlordScreen";
 
 const Stack = createNativeStackNavigator();
@@ -16,6 +17,11 @@ const FlatStack = () => {
         component={ChatLandlordScreen}
         options={{ headerShown: false }}
         /> */}
+        <Stack.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{ headerShown: false }}
+        />
         <Stack.Screen
         name="FlatList"
         component={FlatListScreen}
