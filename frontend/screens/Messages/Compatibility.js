@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, View, StyleSheet, FlatList } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import CustomButton from '../../components/CustomButton';
 import MatchingStatus from '../../components/MatchingStatus';
 import ChatIcon from '../../components/ChatIcon';
@@ -167,7 +168,7 @@ const scrollStyles = StyleSheet.create({
     top: 230,
   },
   itemContainer: {
-    backgroundColor: '#1C5231',
+    backgroundColor: '#369E5F',
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: '95%',
