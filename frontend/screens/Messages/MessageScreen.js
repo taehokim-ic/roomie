@@ -106,7 +106,7 @@ const MessagesScreen = ({navigation}) => {
           data={Messages}
           keyExtractor={item=>item.id}
           renderItem={({item}) => (
-            <Card onPress={() => navigation.navigate('Compatibility')}>
+            <Card onPress={() => navigation.navigate('Interaction')}>
               <UserInfo>
                 <UserImgWrapper>
                   <UserImg source={item.userImg} />

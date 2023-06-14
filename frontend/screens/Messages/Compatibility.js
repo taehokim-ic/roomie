@@ -17,9 +17,10 @@ const Compatibility = (name) => {
   const data = [
     { id: '1', text: 'Rent', status: 'agree' },
     { id: '2', text: 'Location', status: 'disagree' },
-    { id: '3', text: 'Furniture', status: 'pending' },
+    { id: '3', text: 'Furniture', status: 'agree' },
     { id: '4', text: 'Lifestyle', status: 'disagree' },
     { id: '5', text: 'Allergies', status: 'pending' },
+    { id: '6', text: 'Pets', status: 'disagree' },
     // Add more items as needed
   ];
 
@@ -43,6 +44,8 @@ const Compatibility = (name) => {
             keyExtractor={(item) => item.id}
           />
         </View>
+        <Text style={styles.update}>Update your status...</Text>
+        <Text style={styles.recommend}>We strongly recommend that you explore these criteria before making a decision</Text>
         <CustomButton
           title="Not compatible"
           onPress={() => console.log('Not compatible button pressed')}
@@ -69,9 +72,26 @@ const styles = StyleSheet.create({
     top: '20%',
     left: '5%',
     color: '#dddddd',
-    fontSize: '16',
+    fontSize: 16,
     fontWeight: 'bold',
-
+  },
+  update: {
+    position: 'absolute',
+    width: '40%',
+    top: '33%',
+    right: 0,
+    color: '#dddddd',
+    fontSize: 10,
+    fontWeight: 'bold',
+  },
+  recommend: {
+    position: 'absolute',
+    width: '80%',
+    top: '82%',
+    color: '#dddddd',
+    fontSize: 10,
+    fontWeight: 'bold',
+    alignSelf: 'center',
   }
 });
 
@@ -137,11 +157,11 @@ const styles2 = StyleSheet.create({
 
 const scrollStyles = StyleSheet.create({
   container: {
-    height: '40%',
+    height: '48%',
     padding: 16,
     backgroundColor: '#1C5231',
     position: 'absolute',
-    top: 250,
+    top: 230,
   },
   itemContainer: {
     backgroundColor: '#1C5231',
