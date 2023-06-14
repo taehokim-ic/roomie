@@ -11,9 +11,10 @@ const MatchingStatus = ({state}) => {
     <View style={styles.container}>
       <View style={styles.indictatorStyle}>
         <StepIndicator
+          stepCount={3}
           customStyles={stepIndicatorStyles}
           currentPosition={state} // Add state of interaction here
-          labels={['Compatibility', 'Flat-finding', 'Request contract', 'Sign contract', 'Final information']}
+          labels={['Compatibility', 'Flat-finding', 'Moving to the UK']}
 
         />
       </View>
