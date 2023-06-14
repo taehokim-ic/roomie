@@ -33,6 +33,7 @@ const ProfilePage = ({navigation}) => {
 
   const handleMessagePress = () => {
     // Handle message button press
+    
   };
 
   return (
@@ -89,7 +90,7 @@ const ProfilePage = ({navigation}) => {
 
       {/* Message Button */}
       <TouchableOpacity style={styles.messageButton} onPress={handleMessagePress}>
-        <Text style={styles.messageButtonText}>Message</Text>
+        <Text style={styles.messageButtonText}>Connect</Text>
       </TouchableOpacity>
     </View>
     </ScrollView>

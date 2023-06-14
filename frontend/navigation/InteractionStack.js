@@ -2,8 +2,7 @@ import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Compatibility from "../screens/Messages/Compatibility";
 import FlatFinding from "../screens/Messages/FlatFinding";
-import { Fade } from "native-base";
-import { useRoute } from "@react-navigation/native";
+import ChatScreen from "../screens/Messages/ChatScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -11,7 +10,7 @@ const InteractionStack = () => {
   
   return (
     <Stack.Navigator 
-      screenOptions={{ animation: 'fade'}}>
+      screenOptions={{}}>
         <Stack.Screen
           name="Compatible"
           component={Compatibility}
@@ -20,6 +19,11 @@ const InteractionStack = () => {
         <Stack.Screen
           name="FlatFinding"
           component={FlatFinding}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="InteractionChat"
+          component={ChatScreen}
           options={{ headerShown: false }}
         />
     </Stack.Navigator>

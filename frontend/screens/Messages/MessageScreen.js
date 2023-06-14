@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, FlatList, Image } from 'react-native';
 import { Container, 
   Card, 
@@ -10,118 +10,114 @@ import { Container,
   PostTime, 
   MessageText, 
   TextSection } from '../../styles/MessageStyles';
-
-
-const Messages = [
-  {
-    id: '1',
-    userName: 'Klaus Smith',
-    userImg: require('../../assets/users/user-1.jpg'),
-    messageTime: '4 mins ago',
-    messageText:
-      'Hi, looking forward to getting to know you.',
-  },
-  {
-    id: '2',
-    userName: 'Amanda Kady',
-    userImg: require('../../assets/users/user-3.jpg'),
-    messageTime: '2 hours ago',
-    messageText:
-      'How are you doing?',
-  },
-  {
-    id: '3',
-    userName: 'Rieko Smith',
-    userImg: require('../../assets/users/user-4.jpg'),
-    messageTime: '1 hours ago',
-    messageText:
-      'Where abouts are you based?',
-  },
-  {
-    id: '4',
-    userName: 'Diana Smith',
-    userImg: require('../../assets/users/user-6.jpg'),
-    messageTime: '1 day ago',
-    messageText:
-      'What do you do for a living?',
-  },
-  {
-    id: '5',
-    userName: 'Katie Jones',
-    userImg: require('../../assets/users/user-7.jpg'),
-    messageTime: '2 days ago',
-    messageText:
-      'Good luck with your search.',
-  },
-];
-
-const Matches = [
-  {
-    id: '1',
-    userImg: require('../../assets/users/user-8.jpg'),
-  },
-  {
-    id: '2',
-    userImg: require('../../assets/users/user-9.png'),
-  },
-  {
-    id: '3',
-    userImg: require('../../assets/users/user-10.png'),
-  },
-  {
-    id: '4',
-    userImg: require('../../assets/users/user-11.png'),
-  },
-];
-
-const handleCardPress = ({navigation, state} ) => {
-  let screenName = "Compatibility";
-
-  switch(state) {
-    case 0:
-      screenName = "Compatibility";
-      break;
-    case 1:
-      screenName = "FlatFinding"
-      break;
-  }
-
-  navigation.navigate('Interaction', {screen: screenName})
-}
+import axios from 'axios';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import BrowseMatchesScreen from './BrowseMatchesScreen';
 
 const MessagesScreen = ({navigation}) => {
+  const [users, setUsers] = useState([]);
+  const [requests, setRequests] = useState([]);
+  const [Messages, setMessages] = useState([]);
+
+  const handleCardPress = ({navigation, state} ) => {
+    let screenName = "Compatibility";
+ 
+    switch(state) {
+      case 0:
+        screenName = "Compatibility";
+        break;
+      case 1:
+        screenName = "FlatFinding"
+        break;
+    }
+ 
+    navigation.navigate('Interaction', {screen: screenName})
+  }
+
+  const browseMatches = () => {
+    navigation.navigate('BrowseMatches');
+  }
+
+  const fetchRequests = async () => {
+    try {
+      const response = await axios.get('http://roomie3.herokuapp.com/api/v1/people?current_user_uuid=05b3bbd1-4e75-4ad3-9d71-4c4c8d08717d');
+      console.log(response.data);
+      console.log("[Message Screen] Fetched data");
+      const res = response.data.slice(0,4).map((user) => {
+        return {
+          uuid: user.uuid,
+          userImg: {uri: user.picture_url},
+        }
+      });
+      console.log(res);
+      setRequests(res);
+    }
+    catch (error) {
+      console.log(error);
+    }
+  };
+
+  const fetchUsers = async () => {
+    try {
+      const response = await axios.get('http://roomie3.herokuapp.com/api/v1/people?current_user_uuid=05b3bbd1-4e75-4ad3-9d71-4c4c8d08717d');
+      const res = response.data.slice(0,4).map((user) => {
+        return {
+          uuid: user.uuid,
+          userName: user.name,
+          userImg: {uri: user.picture_url},
+          messageTime: '4 mins ago',
+          messageText: 'Hi, looking forward to getting to know you.',
+        }
+      });
+      setMessages(res);
+    }
+    catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchUsers();
+    fetchRequests();
+  }, []);
+
   const goToMatches = () => {
-    navigation.navigate('Matches');
+    // send uuid as param
+    navigation.navigate('Matches', {uuid: '1234'});
   };
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={goToMatches} style={styles.card}>
+      <View style={styles.card}>
       <View style={styles.cardContent}>
-        <Text style={styles.text}>             People who you have matched with</Text>
+        <Text style={styles.text}>People who sent you connection requests</Text>
         <FlatList
           horizontal
-          data={Matches}
-          keyExtractor={(item) => item.id}
+          data={requests}
+          keyExtractor={item => item.uuid}
           renderItem={({ item }) => (
             <View style={styles.circularImageContainer}>
-              <Image source={item.userImg} style={styles.userImage} />
+              <TouchableOpacity onPress={() => navigation.navigate('Matches', {uuid : item.uuid})}>
+                <Image source={item.userImg} style={styles.userImage} />
+              </TouchableOpacity>
             </View>
           )}
           ListFooterComponent={() => (
-            <TouchableOpacity style={styles.arrowContainer}>
-              <Text style={styles.arrowText}></Text>
+            <TouchableOpacity
+              style={styles.arrowContainer}>
+              <Icon name="chevron-right" size={20} color="black" onPress={browseMatches} />
             </TouchableOpacity>
           )}
         />
       </View>
-    </TouchableOpacity>
+    </View>
       <Container>
         <FlatList 
           data={Messages}
-          keyExtractor={item=>item.id}
+          keyExtractor={item=>item.uuid}
           renderItem={({item}) => (
-            <Card onPress={() => handleCardPress({navigation, state: 1})}> {/* Use backend to controll this */}
+            // <Card onPress={() => navigation.navigate('Interaction')}>
+            <Card onPress={() => handleCardPress({navigation, state: 0})}>
               <UserInfo>
                 <UserImgWrapper>
                   <UserImg source={item.userImg} />
@@ -181,7 +177,6 @@ const styles = StyleSheet.create({
     borderWidth: 0.01,
   },
   text: {
-    marginRight: 120,
     marginBottom:5,
     padding: 3,
     fontSize: 15,

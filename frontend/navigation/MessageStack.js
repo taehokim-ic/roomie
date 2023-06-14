@@ -6,6 +6,7 @@ import MatchesScreen from "../screens/Messages/MatchesScreen";
 import Compatibility from "../screens/Messages/Compatibility";
 import FlatFinding from "../screens/Messages/FlatFinding";
 import InteractionStack from "./InteractionStack";
+import BrowseMatchesScreen from "../screens/Messages/BrowseMatchesScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -28,6 +29,11 @@ const MessagesStack = () => {
       <Stack.Screen 
         name="Interaction" 
         component={InteractionStack}
+      />
+      <Stack.Screen
+        name="BrowseMatches"
+        component={BrowseMatchesScreen}
+        options={{ headerShown: true }}
       />
     </Stack.Navigator>
   );

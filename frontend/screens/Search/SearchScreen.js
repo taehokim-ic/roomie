@@ -14,7 +14,7 @@ const SearchScreen = ({navigation}) => {
 
   const fetchUsers = async () => {
     try {
-      const response = await axios.get('http://roomie3.herokuapp.com/api/v1/people');
+      const response = await axios.get('http://roomie3.herokuapp.com/api/v1/people?current_user_uuid=05b3bbd1-4e75-4ad3-9d71-4c4c8d08717d');
       setUsers(response.data);
     }
     catch (error) {
@@ -39,40 +39,25 @@ const SearchScreen = ({navigation}) => {
     setInstitution('');
     setLocation('');
     setSmoker('');
-    let url = 'http://roomie3.herokuapp.com/api/v1/people';
+    let url = 'http://roomie3.herokuapp.com/api/v1/people?current_user_uuid=05b3bbd1-4e75-4ad3-9d71-4c4c8d08717d';
     const response = await axios.get(url);
     setShowFilterCard(false);
     setUsers(response.data);
   };
 
   const applyFilter = async () => {
-    let url = 'http://roomie3.herokuapp.com/api/v1/people';
+    let url = 'http://roomie3.herokuapp.com/api/v1/people?current_user_uuid=05b3bbd1-4e75-4ad3-9d71-4c4c8d08717d';
     if (language) {
-      url += `?language=${language}`;
-      if (institution) {
-        url += `&institution=${institution}`;
-        if (location) {
-          url += '&location=${location}';
-          if (smoker) {
-            url += '&smoker=${smoker}';
-          }
-        }
-      }
-    } else if (institution) {
-      url += `?institution=${institution}`;
-      if (location) {
-        url += '&location=${location}';
-        if (smoker) {
-          url += '&smoker=${smoker}';
-        }
-      }
-    } else if (location) {
-      url += `?location=${location}`;
-      if (smoker) {
-        url += '&smoker=${smoker}';
-      }
-    } else if (smoker) {
-      url += `?smoker=${smoker}`;
+      url += `&language=${language}`;
+    }
+    if (institution) {
+      url += `&institution=${institution}`;
+    }
+    if (location) {
+      url += '&location=${location}';
+    }
+    if (smoker) {
+      url += '&smoker=${smoker}';
     }
     console.log(url);
     const response = await axios.get(url);
