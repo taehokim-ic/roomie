@@ -15,7 +15,7 @@ const Compatibility = (name) => {
     navigation.navigate('FlatFinding');
   }
 
-  const handleChatIconPress = () => {
+  const handleChatSwipe = () => {
     navigation.navigate('InteractionChat');
   }
 
@@ -43,7 +43,7 @@ const Compatibility = (name) => {
       onPanResponderEnd: (event, gestureState) => {
         if (gestureState.dx < -50 && gestureState.vx < -0.5) {
           // Swipe right detected
-          handleChatIconPress();
+          handleChatSwipe();
         }
       },
     })

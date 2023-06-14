@@ -1,8 +1,9 @@
 import * as React from 'react';
 import {useEffect, useState} from 'react';
-import {View, StatusBar, Text} from 'react-native';
+import {View, StatusBar, Text, PanResponder} from 'react-native';
 import { Bubble, GiftedChat, Send } from 'react-native-gifted-chat';
 import {MaterialCommunityIcons} from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
 const ChatScreen = () => {
     const [messages, setMessages] = React.useState([]);
@@ -95,8 +96,29 @@ const ChatScreen = () => {
         );
       };
 
+      const panResponder = React.useRef(
+        PanResponder.create({
+          onStartShouldSetPanResponder: () => true,
+          onPanResponderEnd: (event, gestureState) => {
+            if (gestureState.dx > 50 && gestureState.vx > 0.5) {
+              // Swipe right detected
+              handleChatSwipe();
+            }
+          },
+        })
+      ).current;
+      
+      const navigation = useNavigation();
+
+      const handleChatSwipe = () => {
+        navigation.goBack();
+      }
+
     return (
-        <View style={{flex: 1}}>
+        <View 
+          style={{flex: 1}}
+          {...panResponder.panHandlers}
+        >
             <GiftedChat
                 messages={messages}
                 onSend={messages => onSend(messages)}
