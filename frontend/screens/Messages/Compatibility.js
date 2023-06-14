@@ -39,7 +39,10 @@ const Compatibility = (name) => {
 
   const panResponder = React.useRef(
     PanResponder.create({
-      onStartShouldSetPanResponder: () => true,
+      onStartShouldSetPanResponder: (event, gestureState) => {
+        // Return false to allow other gestures to handle the touch event first
+        return true;
+      },
       onPanResponderEnd: (event, gestureState) => {
         if (gestureState.dx < -50 && gestureState.vx < -0.5) {
           // Swipe right detected
@@ -50,10 +53,7 @@ const Compatibility = (name) => {
   ).current;
 
   return (
-    <View 
-      style={styles.container}
-      {...panResponder.panHandlers}
-    >
+    <View style={styles.container}>
       <MatchingStatus state={0}/>
       <Text style={styles.text}>Are you compatible?</Text>
       <View style={scrollStyles.container}>
@@ -76,6 +76,9 @@ const Compatibility = (name) => {
         onPress={handleFlatShare}
         styles={styles2}
       />
+      <View style={styles.swipe} {...panResponder.panHandlers}>
+        <Text>Swipe!</Text>
+      </View>
     </View>
   );
 };
@@ -97,7 +100,7 @@ const styles = StyleSheet.create({
   update: {
     position: 'absolute',
     width: '40%',
-    top: '23%',
+    top: '22%',
     right: 0,
     color: '#ffffff',
     fontSize: 10,
@@ -111,6 +114,14 @@ const styles = StyleSheet.create({
     color: '#FFD700',
     fontSize: 12,
     fontWeight: 'bold',
+  },
+  swipe: {
+    position: 'absolute',
+    alignSelf: 'center',
+    height: '10%',
+    width: '100%',
+    bottom: '10%',
+    backgroundColor: 'blue',
   }
 });
 
@@ -178,6 +189,7 @@ const scrollStyles = StyleSheet.create({
     backgroundColor: '#1C5231',
     position: 'absolute',
     top: 160,
+    zIndex: 100,
   },
   itemContainer: {
     backgroundColor: '#369E5F',
