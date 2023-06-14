@@ -16,6 +16,7 @@ const InteractionStack = () => {
         <Stack.Screen
           name="FlatFinding"
           component={FlatFinding}
+          options={{ headerShown: false }}
         />
     </Stack.Navigator>
   );

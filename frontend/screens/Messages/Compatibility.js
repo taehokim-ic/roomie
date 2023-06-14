@@ -34,7 +34,7 @@ const Compatibility = (name) => {
   return (
     <View>
       <View style={styles.container}>
-        <MatchingStatus />
+        <MatchingStatus state={0}/>
         <ChatIcon />
         <Text style={styles.text}>Recommended criteria that you should agree upon before choosing to live with INSERT_NAME...</Text>
         <View style={scrollStyles.container}>
@@ -45,7 +45,7 @@ const Compatibility = (name) => {
           />
         </View>
         <Text style={styles.update}>Update your status...</Text>
-        <Text style={styles.recommend}>We strongly recommend that you explore these criteria before making a decision</Text>
+        <Text style={styles.recommend}>We strongly recommend that you explore these criteria before making a decision!</Text>
         <CustomButton
           title="Not compatible"
           onPress={() => console.log('Not compatible button pressed')}
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: '20%',
     left: '5%',
-    color: '#dddddd',
+    color: '#FFD700',
     fontSize: 16,
     fontWeight: 'bold',
   },
@@ -87,9 +87,9 @@ const styles = StyleSheet.create({
   recommend: {
     position: 'absolute',
     width: '80%',
-    top: '82%',
-    color: '#dddddd',
-    fontSize: 10,
+    top: '83%',
+    color: '#FFD700',
+    fontSize: 12,
     fontWeight: 'bold',
     alignSelf: 'center',
   }
@@ -100,14 +100,13 @@ const styles1 = StyleSheet.create({
     backgroundColor: 'red',
     borderRadius: 20,
     position: 'absolute',
-    top: '88%',
-    marginBottom: '3%',
-    left: '7%',
-    width: '40%',
+    bottom: '0%',
+    left: '0%',
+    width: '50%',
     height: '7%',
     borderColor: 'gray',
-    borderWidth: 0.5,
-    borderRadius: 20,
+    borderWidth: 1,
+    borderRadius: 4,
     paddingVertical: '5%',
     paddingHorizontal: 15,
     alignItems: 'center',
@@ -119,7 +118,7 @@ const styles1 = StyleSheet.create({
     shadowRadius: 4,
   },
   buttonText: {
-    color: 'white',
+    color: 'black',
     fontSize: 16,
     fontWeight: 'bold',
   },
@@ -128,16 +127,14 @@ const styles1 = StyleSheet.create({
 const styles2 = StyleSheet.create({
   button: {
     backgroundColor: '#49eb34',
-    borderRadius: 20,
-    right: '7%',
+    right: '0%',
     position: 'absolute',
-    top: '88%',
-    marginBottom: '3%',
-    width: '40%',
+    bottom: '0%',
+    width: '50%',
     height: '7%',
     borderColor: 'gray',
-    borderWidth: 0.5,
-    borderRadius: 20,
+    borderWidth: 1,
+    borderRadius: 4,
     paddingVertical: '5%',
     paddingHorizontal: 15,
     alignItems: 'center',
