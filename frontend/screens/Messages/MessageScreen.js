@@ -74,6 +74,21 @@ const Matches = [
   },
 ];
 
+const handleCardPress = ({navigation, state} ) => {
+  let screenName = "Compatibility";
+
+  switch(state) {
+    case 0:
+      screenName = "Compatibility";
+      break;
+    case 1:
+      screenName = "FlatFinding"
+      break;
+  }
+
+  navigation.navigate('Interaction', {screen: screenName})
+}
+
 const MessagesScreen = ({navigation}) => {
   const goToMatches = () => {
     navigation.navigate('Matches');
@@ -106,7 +121,7 @@ const MessagesScreen = ({navigation}) => {
           data={Messages}
           keyExtractor={item=>item.id}
           renderItem={({item}) => (
-            <Card onPress={() => navigation.navigate('Interaction')}>
+            <Card onPress={() => handleCardPress({navigation, state: 1})}> {/* Use backend to controll this */}
               <UserInfo>
                 <UserImgWrapper>
                   <UserImg source={item.userImg} />
