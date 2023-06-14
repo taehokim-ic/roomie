@@ -121,7 +121,7 @@ const MessagesScreen = ({navigation}) => {
           data={Messages}
           keyExtractor={item=>item.id}
           renderItem={({item}) => (
-            <Card onPress={() => handleCardPress({navigation, state: 1})}> {/* Use backend to controll this */}
+            <Card onPress={() => handleCardPress({navigation, state: 1})}>
               <UserInfo>
                 <UserImgWrapper>
                   <UserImg source={item.userImg} />
