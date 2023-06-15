@@ -2,12 +2,15 @@ import React, {createContext, useContext, useEffect, useState} from 'react';
 import { ActivityIndicator } from 'react-native';
 import {StreamChat, Channel} from 'stream-chat';
 import { OverlayProvider, Chat } from 'stream-chat-expo'
+import { useNavigation } from '@react-navigation/native';
 
 export const ChatContext = createContext({});
 
 const ChatContextProvider = ({children}) => {
     const [chatClient, setChatClient] = useState<StreamChat>();
     const [currentChannel, setCurrentChannel] = useState<Channel>();
+
+    const navigation = useNavigation();
 
     const user = {
         id: '05b3bbd1-4e75-4ad3-9d71-4c4c8d08717d',
@@ -50,9 +53,25 @@ const ChatContextProvider = ({children}) => {
         }};
     }, []);
 
+    const startDMChat = async (userId) => {
+        // console.log('startDMChat');
+        console.log('userId', userId);
+        console.log('chatClientID', chatClient.userID);
+        if (!chatClient) return;
+
+        const newChannel = chatClient.channel('messaging', {
+            members: [chatClient.userID, userId],
+        });
+
+        await newChannel.watch();
+        setCurrentChannel(newChannel);
+        navigation.navigate('ChatRoom');
+        // navigation.goBack();
+    };
+
     if (!chatClient) return <ActivityIndicator />;
 
-    const value = { chatClient, currentChannel, setCurrentChannel};
+    const value = { chatClient, currentChannel, startDMChat, setCurrentChannel};
     return (
         <OverlayProvider>
             <Chat client={chatClient}>

@@ -1,11 +1,14 @@
 import React, {useState, useEffect} from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import { useRoute } from '@react-navigation/native';
+import { useChatContext } from '../../context/ChatContext';
 import axios from 'axios';
 
 const ProfilePage = ({navigation}) => {
   const route = useRoute();
   const { uuid } = route.params;
+
+  const {startDMChat} = useChatContext();
 
   const [flatmateProfile, setFlatmateProfile] = useState({});
   const [prompt1, setPrompt1] = useState('');
@@ -33,7 +36,7 @@ const ProfilePage = ({navigation}) => {
   }, []);
 
   const handleAccept = () => {
-    // Handle accept button press
+    startDMChat(flatmateProfile.uuid);
   };
 
   const handleDecline = () => {

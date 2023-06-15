@@ -19,15 +19,16 @@ const MessagesStack = () => {
     <ChatContextProvider>
     <Stack.Navigator>
     <Stack.Screen
-        name="Channel"
-        component={ChannelScreen}
-        options={{ headerShown: true }}
-      />
-    <Stack.Screen
         name="Messages"
         component={MessageScreen}
         options={{ headerShown: true }}
       />
+    <Stack.Screen
+        name="Channel"
+        component={ChannelScreen}
+        options={{ headerShown: true }}
+      />
+
       <Stack.Screen
         name="ChatRoom"
         component={ChatScreen2}
