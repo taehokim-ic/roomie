@@ -57,8 +57,8 @@ const TabsNavigation = () => {
             })}
             >
             <Tab.Screen name={homeName} component={SearchStack} />
-            <Tab.Screen name={messageName} component={MessagesStack} />
             <Tab.Screen name={searchName} component={FlatStack} />
+            <Tab.Screen name={messageName} component={MessagesStack} />
             <Tab.Screen name={profileName} component={ProfileStack} />
         </Tab.Navigator>
     );
