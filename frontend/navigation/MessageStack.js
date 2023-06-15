@@ -7,12 +7,18 @@ import Compatibility from "../screens/Messages/Compatibility";
 import FlatFinding from "../screens/Messages/FlatFinding";
 import InteractionStack from "./InteractionStack";
 import BrowseMatchesScreen from "../screens/Messages/BrowseMatchesScreen";
+import ConfirmationScreen from "../screens/Messages/ConfirmationScreen";
 
 const Stack = createNativeStackNavigator();
 
 const MessagesStack = () => {
   return (
     <Stack.Navigator>
+      <Stack.Screen
+        name="Confirmation"
+        component={ConfirmationScreen}
+        options={{ headerShown: false }}
+      />
       <Stack.Screen
         name="Messages"
         component={MessageScreen}
