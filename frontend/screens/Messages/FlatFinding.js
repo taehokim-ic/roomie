@@ -1,8 +1,11 @@
 import React from 'react';
-import { Text, View, StyleSheet, FlatList, TouchableOpacity, Image } from 'react-native';
+import { Text, View, StyleSheet, FlatList, TouchableOpacity, Image, PanResponder } from 'react-native';
 import MatchingStatus from '../../components/MatchingStatus';
+import { useNavigation } from '@react-navigation/native';
 
 const FlatFinding = () => {
+
+  const navigation = useNavigation();
 
   const data = [
     { id: 1, image: require('../../assets/flatfinding/house.jpg'), text: 'Browse Flats' },
@@ -17,9 +20,28 @@ const FlatFinding = () => {
     // You can perform additional actions or navigate to a different screen
   };
 
+  const panResponder = React.useRef(
+    PanResponder.create({
+      onStartShouldSetPanResponder: (event, gestureState) => {
+        // Return false to allow other gestures to handle the touch event first
+        return true;
+      },
+      onPanResponderEnd: (event, gestureState) => {
+        if (gestureState.dx < -50 && gestureState.vx < -0.5) {
+          // Swipe right detected
+          handleChatSwipe();
+        }
+      },
+    })
+  ).current;
+
+  const handleChatSwipe = () => {
+    navigation.navigate('InteractionChat');
+  }
+
   return (
     <View>
-      <View style={oldStyles.container}>
+      <View style={oldStyles.container} {...panResponder.panHandlers} >
         <MatchingStatus state={1}/>
         <View style={styles.container}>
           {data.map((item) => (
