@@ -9,7 +9,7 @@ const HomeScreen = ({ navigation }) => {
       id: 1,
       image: require('../../assets/resources/bede-hall-bedroom-02.jpg'),
       title: 'Accommodation Listings',
-      description: 'Find the perfect place to live during your stay in the UK.',
+      description: 'Find the perfect place to live during your stay in London.',
       route: 'AccommodationScreen',
     },
     {
@@ -61,8 +61,8 @@ const HomeScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
         <ScrollView style={{marginTop: 10}}>
-            <Text style={{ fontSize: 24, fontWeight: 'bold', marginBottom: 16 }}>
-                Get help moving to the UK
+            <Text style={{ fontSize: 24, fontWeight: 'bold', marginBottom: 16, alignSelf: 'center' }}>
+                Get help moving to London
             </Text>
             <View style={{ marginTop: 16 }}>
                 {sections.map((section) => renderSection(section))}
@@ -102,6 +102,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   sectionDescription: {
+    marginTop: 5,
     fontSize: 14,
     color: '#666',
   },
