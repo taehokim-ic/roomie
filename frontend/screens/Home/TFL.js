@@ -1,29 +1,35 @@
 import React from 'react';
-import { View, ScrollView, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, ScrollView, Text, Image, TouchableOpacity, StyleSheet, Linking } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const TFL = ({ navigation }) => {
+
+  const openTFlWebsite = ({url}) => {
+    Linking.openURL(url)
+      .catch((err) => console.error('An error occurred', err));
+  }
+
   const sections = [
     {
       id: 1,
-      image: require('../../assets/resources/bede-hall-bedroom-02.jpg'),
+      image: require('../../assets/tfl/underground.jpg'),
       title: 'Transport for London Services',
-      description: 'Explore the most popular service for transport in London',
-      route: 'TFL',
+      description: 'Explore the different types of transport services provided by TFL',
+      url: 'https://tfl.gov.uk',
     },
     {
       id: 2,
-      image: require('../../assets/resources/Border-Force-Online-Test-UK-1.jpg'),
+      image: require('../../assets/tfl/fares.jpg'),
       title: 'Fares',
-      description: 'Explore London\'s cycling scheme, with over 780 docking stations.',
-      route: 'Visa and Immigration',
+      description: 'Get a better understanding of the cost of transport in London',
+      url: 'https://tfl.gov.uk/fares/find-fares',
     },
     {
       id: 3,
-      image: require('../../assets/resources/guide.jpg'),
+      image: require('../../assets/tfl/tfl.jpg'),
       title: 'Download the app!',
-      description: 'Download the official TFL app and begin exploring your ',
-      route: 'City Guides',
+      description: 'Download the official TFL oyster and contactless app to enhance your experience',
+      url: 'https://tfl.gov.uk/fares/how-to-pay-and-where-to-buy-tickets-and-oyster/tfl-oyster-and-contactless-app#on-this-page-1',
     },
   ];
 
@@ -32,7 +38,7 @@ const TFL = ({ navigation }) => {
       <TouchableOpacity
         key={section.id}
         style={styles.sectionCard}
-        onPress={() => navigation.navigate(section.route)}
+        onPress={() => openTFlWebsite({url: section.url})}
       >
         <Image source={section.image} style={styles.sectionImage} />
         <View style={styles.sectionInfo}>
@@ -46,6 +52,9 @@ const TFL = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
         <ScrollView>
+            <Text style={{ fontSize: 24, fontWeight: 'bold', marginBottom: 30, alignSelf: 'center' }}>
+                Useful links to get you started
+            </Text>
             <View>
                 {sections.map((section) => renderSection(section))}
             </View>
@@ -59,7 +68,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     paddingHorizontal: 16,
-    paddingTop: 16,
   },
   sectionCard: {
     flexDirection: 'row',
