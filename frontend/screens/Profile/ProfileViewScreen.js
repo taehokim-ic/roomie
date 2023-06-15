@@ -53,6 +53,14 @@ const ProfileViewScreen = () => {
           <Text style={styles.subtitle}>Nationality:</Text>
           <Text style={styles.info}>{user.nationality}</Text>
         </View>
+        <View style={styles.infoRow}>
+          <Text style={styles.subtitle}>Budget:</Text>
+          <Text style={styles.info}>£800 - £1200</Text>
+        </View>
+        <View style={styles.infoRow}>
+          <Text style={styles.subtitle}>Smoker?</Text>
+          <Text style={styles.info}>No</Text>
+        </View>
       </View>
 
       <View style={styles.card}>
