@@ -84,32 +84,37 @@ const MessagesScreen = ({navigation}) => {
   return (
     <View style={styles.container}>
       <View style={styles.card}>
-      <View style={styles.cardContent}>
-        <Text style={styles.text}>People who sent you connection requests</Text>
-        { requests.length > 0 ? (
-        <FlatList
-          horizontal
-          data={requests}
-          keyExtractor={item => item.uuid}
-          renderItem={({ item }) => (
-            <View style={styles.circularImageContainer}>
-              <TouchableOpacity onPress={() => navigation.navigate('Matches', {uuid : item.uuid})}>
-                <Image source={item.userImg} style={styles.userImage} />
-              </TouchableOpacity>
-            </View>
-          )}
-          ListFooterComponent={() => (
-            <TouchableOpacity
-              style={styles.arrowContainer}>
-              <Icon name="chevron-right" size={20} color="black" onPress={browseMatches} />
-            </TouchableOpacity>
-          )}
-        />) : (
-          <View style={styles.arrowContainer}>
-            <Text style={styles.arrowText}>No requests yet</Text>
-            </View>
-        )}
-      </View>
+      { requests.length > 0 ? 
+      (
+        <View style={styles.cardContent}>
+          <View>
+            <Text style={styles.text}>People who sent you connection requests</Text>
+            <FlatList
+              horizontal
+              data={requests}
+              keyExtractor={item => item.uuid}
+              renderItem={({ item }) => (
+                <View style={styles.circularImageContainer}>
+                  <TouchableOpacity onPress={() => navigation.navigate('Matches', {uuid : item.uuid})}>
+                    <Image source={item.userImg} style={styles.userImage} />
+                  </TouchableOpacity>
+                </View>
+              )}
+              ListFooterComponent={() => (
+                <TouchableOpacity
+                  style={styles.arrowContainer}>
+                  <Icon name="chevron-right" size={20} color="black" onPress={browseMatches} />
+                </TouchableOpacity>
+              )}
+            />
+          </View>
+        </View>
+      ) : 
+      (
+          <View>
+            <Text style={styles.text}>You have not received any connection requests yet</Text>
+          </View>
+      )}
     </View>
       <Container>
         <FlatList 
@@ -148,12 +153,11 @@ const styles = StyleSheet.create({
   },
   card: {
     width: 700,
-    height: 100,
+    height: 50,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 10,
     paddingTop: 6,
-    paddingRight: 40,
     marginBottom: 6,
   },
   cardContent: {
@@ -184,12 +188,10 @@ const styles = StyleSheet.create({
   arrowContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    marginLeft: 10,
-    marginTop: 15,
   },
   arrowText: {
-    fontSize: 20,
+    fontSize: 14,
     color: 'black',
-    fontWeight: 'bold',
+    // fontWeight: 'bold',
   },
 });
