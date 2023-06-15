@@ -41,8 +41,18 @@
     "react-native-step-indicator": "^1.0.3",
     "react-native-textinput-effects": "^0.6.3",
     "stream-chat": "^8.9.0",
+    "stream-chat-expo": "^5.15.1",
     "stream-chat-react-native": "^5.15.1",
-    "styled-components": "^5.3.3"
+    "styled-components": "^5.3.3",
+    "@react-native-community/netinfo": "9.3.7",
+    "expo-av": "~13.2.1",
+    "expo-document-picker": "~11.2.2",
+    "expo-file-system": "~15.2.2",
+    "expo-haptics": "~12.2.1",
+    "expo-image-manipulator": "~11.1.1",
+    "expo-media-library": "~15.2.3",
+    "expo-sharing": "~11.2.2",
+    "react-native-svg": "13.4.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

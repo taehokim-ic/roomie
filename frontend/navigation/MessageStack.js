@@ -8,13 +8,20 @@ import FlatFinding from "../screens/Messages/FlatFinding";
 import InteractionStack from "./InteractionStack";
 import BrowseMatchesScreen from "../screens/Messages/BrowseMatchesScreen";
 import ConfirmationScreen from "../screens/Messages/ConfirmationScreen";
+import ChatContextProvider from "../context/ChatContext";
+import ChannelScreen from "../screens/Messages/ChannelScreen";
 
 const Stack = createNativeStackNavigator();
 
 const MessagesStack = () => {
   return (
+    <ChatContextProvider>
     <Stack.Navigator>
-
+      <Stack.Screen
+        name="Channel"
+        component={ChannelScreen}
+        options={{ headerShown: false }}
+      />
       <Stack.Screen
         name="Messages"
         component={MessageScreen}
@@ -42,6 +49,7 @@ const MessagesStack = () => {
         options={{ headerShown: true }}
       />
     </Stack.Navigator>
+    </ChatContextProvider>
   );
 };
 
