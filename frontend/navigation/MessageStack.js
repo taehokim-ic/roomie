@@ -31,7 +31,7 @@ const MessagesStack = () => {
         component={InteractionStack}
       />
       <Stack.Screen
-        name="BrowseMatches"
+        name="Your Connection Requests"
         component={BrowseMatchesScreen}
         options={{ headerShown: true }}
       />

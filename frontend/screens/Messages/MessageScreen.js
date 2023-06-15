@@ -35,7 +35,7 @@ const MessagesScreen = ({navigation}) => {
   }
 
   const browseMatches = () => {
-    navigation.navigate('BrowseMatches');
+    navigation.navigate('Your Connection Requests');
   }
 
   const fetchRequests = async () => {

@@ -5,6 +5,9 @@ import FlatViewScreen from "../screens/Flats/FlatViewScreen";
 import TenancyAgreementScreen from "../screens/Flats/TenancyAgreementsScreen";
 import SuccessScreen from "../screens/Flats/SuccessScreen";
 import HomeScreen from "../screens/Home/Resources";
+import SupportScreen from "../screens/Home/SupportScreen";
+import TransportScreen from "../screens/Home/TransportScreen";
+import CityGuideScreen from "../screens/Home/CityGuides";
 // import ChatLandlordScreen from "../screens/Flats/ChatLandlordScreen";
 
 const Stack = createNativeStackNavigator();
@@ -21,6 +24,21 @@ const FlatStack = () => {
         name="Home"
         component={HomeScreen}
         options={{ headerShown: false }}
+        />
+        <Stack.Screen
+        name="Support Networks"
+        component={SupportScreen}
+        options={{ headerShown: true }}
+        />
+        <Stack.Screen
+        name="Transport Links"
+        component={TransportScreen}
+        options={{ headerShown: true }}
+        />
+        <Stack.Screen
+        name="City Guides"
+        component={CityGuideScreen}
+        options={{ headerShown: true }}
         />
         <Stack.Screen
         name="FlatList"

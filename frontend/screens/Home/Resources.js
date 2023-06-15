@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, ScrollView, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
 
@@ -24,21 +24,21 @@ const HomeScreen = ({ navigation }) => {
       image: require('../../assets/resources/guide.jpg'),
       title: 'City Guides',
       description: 'Discover useful information about your new city.',
-      route: 'CityScreen',
+      route: 'City Guides',
     },
     {
       id: 4,
       image: require('../../assets/resources/transport-london.jpg'),
       title: 'Transportation Information',
       description: 'Learn about transportation options in the UK.',
-      route: 'TransportationScreen',
+      route: 'Transport Links',
     },
     {
       id: 5,
       image: require('../../assets/resources/support.jpg'),
       title: 'Local Support Network',
       description: 'Connect with local support networks and student associations.',
-      route: 'SupportScreen',
+      route: 'Support Networks',
     },
   ];
 
@@ -60,14 +60,14 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-        <View style={{marginTop: 10}}>
+        <ScrollView style={{marginTop: 10}}>
             <Text style={{ fontSize: 24, fontWeight: 'bold', marginBottom: 16 }}>
                 Get help moving to the UK
             </Text>
             <View style={{ marginTop: 16 }}>
                 {sections.map((section) => renderSection(section))}
             </View>
-        </View>
+        </ScrollView>
     </SafeAreaView>
   );
 };
@@ -76,7 +76,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    padding: 16,
+    paddingHorizontal: 16,
+    paddingTop: 16,
   },
   sectionCard: {
     flexDirection: 'row',
@@ -96,10 +97,9 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   sectionTitle: {
-    marginTop: 6,
-    fontSize: 18,
+    marginTop: 4,
+    fontSize: 16,
     fontWeight: 'bold',
-    marginBottom: 8,
   },
   sectionDescription: {
     fontSize: 14,
