@@ -122,63 +122,67 @@ const ProfileEditScreen = () => {
     <ScrollView>
       <View>
         <StatusBar barStyle="dark-content" translucent={false} />
-        <View>
-          <Text style={styles.subtitle}>Personal Details</Text>
+        <View style={styles.detailsContainer}>
+          <View>
+            <Text style={styles.subtitle}>Personal Details</Text>
+          </View>
+          <View style={styles.row}>
+                <Text style={styles.label}>Name</Text>
+                <TextInput value={nameValue} onChangeText={handleNameValue} />
+          </View>
+          <View style={styles.row}>
+                <Text style={styles.label}>Age</Text>
+                <TextInput value={ageValue} onChangeText={handleAgeValue} />
+          </View>
+          <View style={styles.row}>
+                <Text style={styles.label}>Contact Number</Text>
+                <TextInput value={contactNumberValue} onChangeText={handleContactNumberValue} />
+          </View>
+          <View style={styles.row}>
+                <Text style={styles.label}>Email</Text>
+                <TextInput value={emailValue} onChangeText={handleEmailValue} />
+          </View>
+          <View style={styles.row}>
+                <Text style={styles.label}>Date of Birth</Text>
+                <TextInput value={dobValue} onChangeText={handleDobValue} />
+          </View>
+          <View style={styles.row}>
+                <Text style={styles.label}>Nationality</Text>
+                <TextInput value={nationalityValue} onChangeText={handleNationalityValue} />
+          </View>
+          <View style={styles.row}>
+                <Text style={styles.label}>Primary Language</Text>
+                <TextInput value={primaryLanguageValue} onChangeText={handlePrimaryLanguageValue} />
+          </View>
+          <View style={styles.row}>
+                <Text style={styles.label}>Minimum Budget</Text>
+                <TextInput value={minBudgetValue} onChangeText={handleMinBudgetValue} />
+          </View>
+          <View style={styles.row}>
+                <Text style={styles.label}>Maximum Budget</Text>
+                <TextInput value={maxBudgetValue} onChangeText={handleMaxBudgetValue} />
+          </View>
         </View>
-        <View style={styles.row}>
-              <Text style={styles.label}>Name</Text>
-              <TextInput value={nameValue} onChangeText={handleNameValue} />
-        </View>
-        <View style={styles.row}>
-              <Text style={styles.label}>Age</Text>
-              <TextInput value={ageValue} onChangeText={handleAgeValue} />
-        </View>
-        <View style={styles.row}>
-              <Text style={styles.label}>Contact Number</Text>
-              <TextInput value={contactNumberValue} onChangeText={handleContactNumberValue} />
-        </View>
-        <View style={styles.row}>
-              <Text style={styles.label}>Email</Text>
-              <TextInput value={emailValue} onChangeText={handleEmailValue} />
-        </View>
-        <View style={styles.row}>
-              <Text style={styles.label}>Date of Birth</Text>
-              <TextInput value={dobValue} onChangeText={handleDobValue} />
-        </View>
-        <View style={styles.row}>
-              <Text style={styles.label}>Nationality</Text>
-              <TextInput value={nationalityValue} onChangeText={handleNationalityValue} />
-        </View>
-        <View style={styles.row}>
-              <Text style={styles.label}>Primary Language</Text>
-              <TextInput value={primaryLanguageValue} onChangeText={handlePrimaryLanguageValue} />
-        </View>
-        <View style={styles.row}>
-              <Text style={styles.label}>Minimum Budget</Text>
-              <TextInput value={minBudgetValue} onChangeText={handleMinBudgetValue} />
-        </View>
-        <View style={styles.row}>
-              <Text style={styles.label}>Maximum Budget</Text>
-              <TextInput value={maxBudgetValue} onChangeText={handleMaxBudgetValue} />
-        </View>
-        <View>
-          <Text style={styles.subtitle}>Preferences</Text>
-        </View>
-        <View style={styles.row}>
-          <Text style={styles.label}>Location</Text>
-          <TextInput style={styles.input} value={preferredLocationValue} onChangeText={handlePreferredLocationValue}  />
-        </View>
-        <View style={styles.row}>
-          <Text style={styles.label}>Gender</Text>
-          <TextInput style={styles.input} value={genderValue} onChangeText={handleGenderValue}  />
-        </View>
-        <View style={styles.row}>
-          <Text style={styles.label}>Smoker?</Text>
-          <TextInput style={styles.input} value={smokingValue} onChangeText={handleSmokingValue} />
-        </View>
-        <View style={styles.row}>
-          <Text style={styles.label}>Has Pets?</Text>
-          <TextInput style={styles.input} value={hasPetsValue} onChangeText={handleHasPetsValue} />
+        <View style={styles.detailsContainer}>
+          <View>
+            <Text style={styles.subtitle}>Preferences</Text>
+          </View>
+          <View style={styles.row}>
+            <Text style={styles.label}>Location</Text>
+            <TextInput style={styles.input} value={preferredLocationValue} onChangeText={handlePreferredLocationValue}  />
+          </View>
+          <View style={styles.row}>
+            <Text style={styles.label}>Gender</Text>
+            <TextInput style={styles.input} value={genderValue} onChangeText={handleGenderValue}  />
+          </View>
+          <View style={styles.row}>
+            <Text style={styles.label}>Smoker?</Text>
+            <TextInput style={styles.input} value={smokingValue} onChangeText={handleSmokingValue} />
+          </View>
+          <View style={styles.row}>
+            <Text style={styles.label}>Has Pets?</Text>
+            <TextInput style={styles.input} value={hasPetsValue} onChangeText={handleHasPetsValue} />
+          </View>
         </View>
         <View style={styles.saveRow}>
           <Button title="Save" onPress={handleSave} />
@@ -208,8 +212,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     textAlign: 'left',
     fontWeight: 'bold',
-    marginLeft: 15,
-    marginTop: 30,
+    marginLeft: 5,
     borderBottomWidth: 1,
     borderBottomColor: '#E0E0E0',
   },
@@ -247,9 +250,18 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     justifyContent: 'center',
-    padding: 10,
     borderBottomWidth: 1,
     borderBottomColor: '#E0E0E0',
+  },
+  detailsContainer: {
+    backgroundColor: '#fff', // White background color
+    padding: 16,
+    marginTop: 20,
+    marginBottom: 10,
+    marginLeft: 20,
+    marginRight: 20,
+    borderRadius: 8,
+    paddingTop: 20,
   },
 });
 
