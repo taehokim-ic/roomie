@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, Image, FlatList, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import axios from 'axios';
 
@@ -8,6 +8,17 @@ const ProfilePage = ({navigation}) => {
   const { uuid } = route.params;
 
   const [flatmateProfile, setFlatmateProfile] = useState({});
+  // const [interests, setInterests] = useState([]);
+  const interests = [
+    { id: '1', name: 'Sports' },
+    { id: '2', name: 'Music' },
+    { id: '3', name: 'Travel' },
+    { id: '4', name: 'Food' },
+    { id: '5', name: 'Art' },
+    { id: '6', name: 'Technology' },
+    { id: '7', name: 'Books' },
+    { id: '8', name: 'Fashion' },
+  ];
   const [prompt1, setPrompt1] = useState('');
   const [prompt2, setPrompt2] = useState('');
   const [prompt3, setPrompt3] = useState('');
@@ -21,6 +32,7 @@ const ProfilePage = ({navigation}) => {
       setPrompt1(response.data.prompts[0]);
       setPrompt2(response.data.prompts[1]);
       setPrompt3(response.data.prompts[2]);
+      // setInterests(response.data.interests);
     }
     catch (error) {
       console.log(error);
@@ -30,6 +42,12 @@ const ProfilePage = ({navigation}) => {
   useEffect(() => {
     fetchProfile();
   }, []);
+
+  const renderItem = ({ item }) => (
+    <View style={styles.bubble}>
+      <Text style={styles.text}>{item.name}</Text>
+    </View>
+  );
 
   const handleMessagePress = () => {
     // Handle message button press
@@ -49,6 +67,17 @@ const ProfilePage = ({navigation}) => {
         </Text>
         <Text style={styles.bio}>{flatmateProfile.bio}</Text>
       </View>
+
+      {/* <View style={styles.card}>
+        <Text style={styles.cardTitle}>Interests</Text>
+        <FlatList
+          data={interests}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.id}
+          contentContainerStyle={styles.contentContainer2}
+          numColumns={3}
+        />
+      </View> */}
 
       {/* Extra Content */}
       <View style={styles.card}>
@@ -98,8 +127,21 @@ const ProfilePage = ({navigation}) => {
 };
 
 const styles = StyleSheet.create({
+  bubble: {
+    backgroundColor: '#03c9a9',
+    borderRadius: 20,
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    margin: 4,
+  },
+  text: {
+    fontSize: 14,
+    color: '#333333',
+  },
   contentContainer: {
-    paddingBottom: 30, // Extra space at the bottom for scrolling
+    // flexDirection: 'row',
+    // flexWrap: 'wrap',
+    // justifyContent: 'center',
   },
   container: {
     flex: 1,

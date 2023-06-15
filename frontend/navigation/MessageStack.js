@@ -14,17 +14,17 @@ const Stack = createNativeStackNavigator();
 const MessagesStack = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen
-        name="Confirmation"
-        component={ConfirmationScreen}
-        options={{ headerShown: false }}
-      />
+
       <Stack.Screen
         name="Messages"
         component={MessageScreen}
         options={{ headerShown: true }}
       />
-
+      <Stack.Screen
+        name="Confirmation"
+        component={ConfirmationScreen}
+        options={{ headerShown: false }}
+      />
       <Stack.Screen
         name="Chat"
         component={ChatScreen}

@@ -40,7 +40,7 @@ const MessagesScreen = ({navigation}) => {
 
   const fetchRequests = async () => {
     try {
-      const response = await axios.get('http://roomie3.herokuapp.com/api/v1/people?current_user_uuid=05b3bbd1-4e75-4ad3-9d71-4c4c8d08717d');
+      const response = await axios.get('http://roomie3.herokuapp.com/api/v1/connection_reqs?uuid=05b3bbd1-4e75-4ad3-9d71-4c4c8d08717d');
       console.log(response.data);
       console.log("[Message Screen] Fetched data");
       const res = response.data.slice(0,4).map((user) => {
@@ -81,16 +81,12 @@ const MessagesScreen = ({navigation}) => {
     fetchRequests();
   }, []);
 
-  const goToMatches = () => {
-    // send uuid as param
-    navigation.navigate('Matches', {uuid: '1234'});
-  };
-
   return (
     <View style={styles.container}>
       <View style={styles.card}>
       <View style={styles.cardContent}>
         <Text style={styles.text}>People who sent you connection requests</Text>
+        { requests.length > 0 ? (
         <FlatList
           horizontal
           data={requests}
@@ -108,7 +104,11 @@ const MessagesScreen = ({navigation}) => {
               <Icon name="chevron-right" size={20} color="black" onPress={browseMatches} />
             </TouchableOpacity>
           )}
-        />
+        />) : (
+          <View style={styles.arrowContainer}>
+            <Text style={styles.arrowText}>No requests yet</Text>
+            </View>
+        )}
       </View>
     </View>
       <Container>
