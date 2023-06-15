@@ -2,6 +2,8 @@ import React, {useState, useEffect} from 'react';
 import { View, FlatList, TouchableOpacity, Text, Image, StyleSheet, SafeAreaView, TextInput } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import axios from 'axios';
+import { Dropdown } from 'react-native-element-dropdown';
+import { FontAwesome } from '@expo/vector-icons';
 
 const SearchScreen = ({navigation}) => {
 
@@ -54,16 +56,52 @@ const SearchScreen = ({navigation}) => {
       url += `&institution=${institution}`;
     }
     if (location) {
-      url += '&location=${location}';
+      url += `&location=${location}`;
     }
     if (smoker) {
-      url += '&smoker=${smoker}';
+      url += `&smoker=${smoker}`;
     }
-    console.log(url);
     const response = await axios.get(url);
     setShowFilterCard(false);
     setUsers(response.data);
-  }
+  };
+
+  const languages = [
+    { label: 'Mandarin', value: 'Mandarin' },
+    { label: 'Korean', value: 'Korean' },
+    { label: 'Japanese', value: 'Japanese' },
+    { label: 'French', value: 'French' },
+    { label: 'Spanish', value: 'Spanish' },
+  ];
+
+  const institutions = [
+    { label: 'EF London', value: 'EF London' },
+    { label: 'Berlitz London', value: 'Berlitz London' },
+    { label: 'International House London', value: 'International House London' },
+    { label: 'British Study Centres London', value: 'British Study Centres London' },
+    { label: 'St Giles London Central', value: 'St Giles London Central' },
+    { label: 'The Language Gallery - London', value: 'The Language Gallery - London' },
+    { label: 'LSI London Central', value: 'LSI London Central' },
+    { label: 'Regent London', value: 'Regent London' },
+    { label: 'Stafford House London', value: 'Stafford House London' },
+    { label: 'King\'s English School London', value: 'King\s English School London' },
+  ];
+
+  // const locations = [
+  //   { label: 'London', value: 'London' },
+  //   { label: 'EF London', value: 'EF London' },
+  //   { label: 'Stafford House London', value: 'Stafford House London' },
+  //   { label: 'English', value: 'English' },
+  //   { label: 'French', value: 'French' },
+  //   { label: 'German', value: 'German' },
+  //   { label: 'Cantonese', value: 'Cantonese' },
+  //   { label: 'Arabic', value: 'Arabic' },
+  // ];
+
+  const smokers = [
+    { label: 'Yes', value: true },
+    { label: 'No', value: false },
+  ];
 
   const renderFilterCard = () => {
     if (!showFilterCard) return null;
@@ -72,31 +110,74 @@ const SearchScreen = ({navigation}) => {
       <View style={styles.filterCard}>
           <View style={styles.modalContent}>
             <Text style={styles.modalTitle}>Filter</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="Language"
+            <Text style={styles.filter}>Language</Text>
+            <View style={styles.container}>
+            <Dropdown
+              style={styles.dropdown}
+              placeholderStyle={styles.placeholderStyle}
+              selectedTextStyle={styles.selectedTextStyle}
+              iconStyle={styles.iconStyle}
+              data={languages}
+              maxHeight={300}
+              labelField="label"
+              valueField="value"
+              placeholder={'Please select...'}
               value={language}
-              onChangeText={setLanguage}
+              onChange={(item) => setLanguage(item.value)}
             />
-            <TextInput
-              style={styles.input}
-              placeholder="Institution"
+            </View>
+
+            <Text style={styles.filter}>Institution</Text>
+            <View style={styles.container}>
+            <Dropdown
+              style={styles.dropdown}
+              placeholderStyle={styles.placeholderStyle}
+              selectedTextStyle={styles.selectedTextStyle}
+              iconStyle={styles.iconStyle}
+              data={institutions}
+              maxHeight={300}
+              labelField="label"
+              valueField="value"
+              placeholder={'Please select...'}
               value={institution}
-              onChangeText={setInstitution}
+              onChange={(item) => setInstitution(item.value)}
             />
-            <TextInput
-              style={styles.input}
-              placeholder="Location"
+            </View>
+
+            {/* <Text style={styles.filter}>Location</Text>
+            <View style={styles.container}>
+            <Dropdown
+              style={styles.dropdown}
+              placeholderStyle={styles.placeholderStyle}
+              selectedTextStyle={styles.selectedTextStyle}
+              iconStyle={styles.iconStyle}
+              data={locations}
+              maxHeight={300}
+              labelField="label"
+              valueField="value"
+              placeholder={'Please select...'}
               value={location}
-              onChangeText={setLocation}
-              keyboardType="numeric"
+              onChange={(item) => setLocation(item.value)}
             />
-            <TextInput
-              style={styles.input}
-              placeholder="Smoker"
+            </View> */}
+
+            <Text style={styles.filter}>Smoker?</Text>
+            <View style={styles.container}>
+            <Dropdown
+              style={styles.dropdown}
+              placeholderStyle={styles.placeholderStyle}
+              selectedTextStyle={styles.selectedTextStyle}
+              iconStyle={styles.iconStyle}
+              data={smokers}
+              maxHeight={300}
+              labelField="label"
+              valueField="value"
+              placeholder={'Please select...'}
               value={smoker}
-              onChangeText={setSmoker}
+              onChange={(item) => setSmoker(item.value)}
             />
+            </View>
+
             <TouchableOpacity style={styles.applyButton} onPress={applyFilter}>
               <Text style={styles.applyButtonText}>Apply</Text>
             </TouchableOpacity>
@@ -308,6 +389,8 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     paddingVertical: 12,
     paddingHorizontal: 16,
+    marginTop: 30,
+    marginBottom: 5,
   },
   applyButtonText: {
     fontSize: 16,
@@ -327,6 +410,18 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#fff',
     textAlign: 'center',
+  },
+  filter: {
+    fontSize: 16,
+    paddingBottom: 5,
+    paddingTop: 15,
+  },
+  placeholderStyle: {
+    fontSize: 16,
+  },
+  selectedTextStyle: {
+    fontSize: 16,
+    color: 'black',
   },
 });
 
