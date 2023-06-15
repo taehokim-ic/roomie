@@ -21,6 +21,7 @@ const SearchScreen = ({navigation}) => {
       setLoading(false);
       const response = await axios.get('http://roomie3.herokuapp.com/api/v1/people?current_user_uuid=05b3bbd1-4e75-4ad3-9d71-4c4c8d08717d');
       setUsers(response.data);
+      setResultsCount(response.data.length); // Update results count
       setLoading(true);
       console.log("Fetched users");
     }
@@ -41,9 +42,10 @@ const SearchScreen = ({navigation}) => {
   const handleSearchButtonPress = async () => {
     setLoading(false);
     setShowFilterCard(false);
-    let url = 'http://roomie3.herokuapp.com/api/v1/people?current_user_uuid=05b3bbd1-4e75-4ad3-9d71-4c4c8d08717d&institution=' + searchInput
+    let url = 'http://roomie3.herokuapp.com/api/v1/people?current_user_uuid=05b3bbd1-4e75-4ad3-9d71-4c4c8d08717d&institution=' + searchInput;
     const response = await axios.get(url);
     setUsers(response.data);
+    setResultsCount(response.data.length);
     setLoading(true);
   };
 
@@ -123,6 +125,8 @@ const SearchScreen = ({navigation}) => {
     { label: 'Yes', value: 'Yes' },
     { label: 'No', value: 'No' },
   ];
+
+  const [resultsCount, setResultsCount] = useState(0);
 
   const renderFilterCard = () => {
     if (!showFilterCard) return null;
@@ -240,15 +244,20 @@ const SearchScreen = ({navigation}) => {
         </View>
       </View>
       <View style={styles.container}>
-        { loading ? 
-        <FlatList
-          data={users}
-          renderItem={renderCard}
-          keyExtractor={item => item.uuid.toString()}
-          /> :
-          <ActivityIndicator size={'large'} style={{marginTop: 100}}/>
-        }
-      </View>
+      {loading ? (
+        users.length > 0 ? (
+          <FlatList
+            data={users}
+            renderItem={renderCard}
+            keyExtractor={(item) => item.uuid.toString()}
+          />
+        ) : (
+          <Text style={styles.noResults}>No results found.</Text>
+        )
+      ) : (
+        <ActivityIndicator size={"large"} style={{ marginTop: 100 }} />
+      )}
+    </View>
       {renderFilterCard()}
     </SafeAreaView>
   );
@@ -462,6 +471,11 @@ const styles = StyleSheet.create({
   },
   dropdownSelected: {
     backgroundColor: '#00FF00', // Green color when selected
+  },
+  noResults: {
+    fontSize: 16,
+    textAlign: 'center',
+    marginTop: 100,
   },
 });
 
