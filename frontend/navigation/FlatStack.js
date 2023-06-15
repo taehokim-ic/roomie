@@ -11,6 +11,7 @@ import VisaScreen from "../screens/Home/VisaScreen";
 import CityGuideScreen from "../screens/Home/CityGuides";
 import TFL from "../screens/Home/TFL";
 import AccomodationScreen from "../screens/Home/AccomodationScreen";
+import RecommendedApps from "../screens/Home/RecommendedApps";
 // import ChatLandlordScreen from "../screens/Flats/ChatLandlordScreen";
 
 const Stack = createNativeStackNavigator();
@@ -76,6 +77,10 @@ const FlatStack = () => {
         <Stack.Screen
         name="TFL"
         component={TFL}
+        />
+        <Stack.Screen
+        name="Recommended Apps"
+        component={RecommendedApps}
         />
     </Stack.Navigator>
   );
