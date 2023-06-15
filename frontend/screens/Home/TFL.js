@@ -1,29 +1,28 @@
 import React from 'react';
 import { View, ScrollView, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { LinearGradient } from 'expo-linear-gradient';
 
-const TransportScreen = ({ navigation }) => {
+const TFL = ({ navigation }) => {
   const sections = [
     {
       id: 1,
-      image: require('../../assets/tfl/tfl.jpg'),
-      title: 'TFL Services',
+      image: require('../../assets/resources/bede-hall-bedroom-02.jpg'),
+      title: 'Transport for London Services',
       description: 'Explore the most popular service for transport in London',
       route: 'TFL',
     },
     {
       id: 2,
       image: require('../../assets/resources/Border-Force-Online-Test-UK-1.jpg'),
-      title: 'London Cycling Scheme',
+      title: 'Fares',
       description: 'Explore London\'s cycling scheme, with over 780 docking stations.',
       route: 'Visa and Immigration',
     },
     {
       id: 3,
       image: require('../../assets/resources/guide.jpg'),
-      title: 'Recommended Apps',
-      description: 'These apps are essential to plan your journey well in London.',
+      title: 'Download the app!',
+      description: 'Download the official TFL app and begin exploring your ',
       route: 'City Guides',
     },
   ];
@@ -97,4 +96,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default TransportScreen;
+export default TFL;
