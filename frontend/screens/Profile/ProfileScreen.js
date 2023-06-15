@@ -39,26 +39,16 @@ export default ProfileScreen = () => {
           </TouchableOpacity>
         </View>
       </View>
-      <View>
+      <View style={styles.detailsContainer}>
         <Text style={styles.subtitle}>Personal Details</Text>
-          <View style={styles.fieldContainer}>
-            <Text style={styles.field}>Contact Number    {user.contact_number}</Text>
-          </View>
-          <View style={styles.fieldContainer}>
-            <Text style={styles.field}>Email Address         {user.email}</Text>
-          </View>
-          <View style={styles.fieldContainer}>
-            <Text style={styles.field}>Date of Birth           {user.dob}</Text>
-          </View>
+        <Text style={styles.field}>Contact Number    {user.contact_number}</Text>
+        <Text style={styles.field}>Email Address         {user.email}</Text>
+        <Text style={styles.field}>Date of Birth           {user.dob}</Text>
       </View>
-      <View>
+      <View style={styles.detailsContainer}>
         <Text style={styles.subtitle}>Legal</Text>
-        <View style={styles.fieldContainer}>
-          <Text style={styles.field}>Privacy Policy</Text>
-        </View>
-        <View style={styles.fieldContainer}>
-          <Text style={styles.field}>Terms of Service</Text>
-        </View>
+        <Text style={styles.field}>Privacy Policy</Text>
+        <Text style={styles.field}>Terms of Service</Text>
       </View>
       </ScrollView>
     </SafeAreaView>
@@ -92,9 +82,9 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     fontSize: 20,
-    paddingLeft: 30,
-    paddingTop: 20,
-    paddingBottom: 20,
+    paddingLeft: 10,
+    paddingTop: 5,
+    paddingBottom: 10,
     fontWeight: 'bold',
     textAlign: 'left'
   },
@@ -121,12 +111,20 @@ const styles = StyleSheet.create({
   field: {
     marginRight: 12,
     fontSize: 15,
-    marginLeft: 49,
+    marginLeft: 15,
     marginBottom: 10,
     marginTop: 10,
   },
   fieldContainer: {
     borderWidth: 0.75,
     borderColor: '#ccc',
+  },
+  detailsContainer: {
+    backgroundColor: '#fff', // White background color
+    padding: 16,
+    marginBottom: 16,
+    marginLeft: 20,
+    marginRight: 20,
+    borderRadius: 8,
   },
 });
