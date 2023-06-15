@@ -32,6 +32,10 @@ const SearchScreen = ({navigation}) => {
     setShowFilterCard(!showFilterCard);
   };
 
+  const handleSearchButtonPress = () => {
+
+  };
+
   const handleCardPress = (id) => {
     navigation.navigate('Profile', { uuid: id });
   };
@@ -109,8 +113,8 @@ const SearchScreen = ({navigation}) => {
     return (
       <View style={styles.filterCard}>
           <View style={styles.modalContent}>
-            <Text style={styles.modalTitle}>Filter</Text>
-            <Text style={styles.filter}>Language</Text>
+            <Text style={styles.modalTitle}>Filters</Text>
+            <Text style={styles.filter}>Language:</Text>
             <View style={styles.container}>
             <Dropdown
               style={styles.dropdown}
@@ -127,7 +131,7 @@ const SearchScreen = ({navigation}) => {
             />
             </View>
 
-            <Text style={styles.filter}>Institution</Text>
+            <Text style={styles.filter}>Institution:</Text>
             <View style={styles.container}>
             <Dropdown
               style={styles.dropdown}
@@ -208,11 +212,11 @@ const SearchScreen = ({navigation}) => {
       <View style={styles.headerContainer}>
         <Text style={styles.title}>Find your flatmates</Text>
         <View style={styles.searchContainer}>
-          <TextInput style={styles.searchInput} placeholder="Search..." placeholderTextColor="#555" />
+          <TextInput style={styles.searchInput} placeholder="Search for your institution..." placeholderTextColor="#555" />
           <TouchableOpacity style={styles.filterButton} onPress={handleFilterButtonPress}>
             <Feather name="sliders" size={20} color="#555" />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.submitButton}>
+          <TouchableOpacity style={styles.submitButton} onPress={handleSearchButtonPress}>
             <Text style={styles.submitButtonText}>Search</Text>
           </TouchableOpacity>
         </View>
@@ -365,14 +369,14 @@ const styles = StyleSheet.create({
   modalContent: {
     width: '100%',
     alignContent: 'center',
-    padding: 16,
+    padding: 12,
     backgroundColor: '#FFFFFF',
     borderRadius: 8,
   },
   modalTitle: {
-    fontSize: 18,
+    fontSize: 24,
     fontWeight: 'bold',
-    marginBottom: 16,
+    marginBottom: 8,
     textAlign: 'center',
   },
   input: {
@@ -416,7 +420,6 @@ const styles = StyleSheet.create({
   },
   filter: {
     fontSize: 16,
-    paddingBottom: 5,
     paddingTop: 15,
   },
   placeholderStyle: {
@@ -433,7 +436,7 @@ const styles = StyleSheet.create({
     borderRadius: 40,
     paddingHorizontal: 20,
     paddingVertical: 4,
-    marginTop: 8,
+    marginTop: 4,
     marginLeft: -20,
   },
   dropdownSelected: {
