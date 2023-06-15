@@ -13,6 +13,7 @@ const SearchScreen = ({navigation}) => {
   const [institution, setInstitution] = useState('');
   const [location, setLocation] = useState('');
   const [smoker, setSmoker] = useState('');
+  const [searchInput, setSearchInput] = useState('');
 
   const fetchUsers = async () => {
     try {
@@ -31,10 +32,14 @@ const SearchScreen = ({navigation}) => {
 
   const handleFilterButtonPress = () => {
     setShowFilterCard(!showFilterCard);
+    setSearchInput('');
   };
 
-  const handleSearchButtonPress = () => {
-
+  const handleSearchButtonPress = async () => {
+    setShowFilterCard(false);
+    let url = 'http://roomie3.herokuapp.com/api/v1/people?current_user_uuid=05b3bbd1-4e75-4ad3-9d71-4c4c8d08717d&institution=' + searchInput
+    const response = await axios.get(url);
+    setUsers(response.data);
   };
 
   const handleCardPress = (id) => {
@@ -50,6 +55,10 @@ const SearchScreen = ({navigation}) => {
     const response = await axios.get(url);
     setShowFilterCard(false);
     setUsers(response.data);
+  };
+
+  const handleTextBoxChange = (text) => {
+    setSearchInput(text);
   };
 
   const applyFilter = async () => {
@@ -213,7 +222,7 @@ const SearchScreen = ({navigation}) => {
       <View style={styles.headerContainer}>
         <Text style={styles.title}>Find your flatmates</Text>
         <View style={styles.searchContainer}>
-          <TextInput style={styles.searchInput} placeholder="Search for your institution..." placeholderTextColor="#555" />
+          <TextInput style={styles.searchInput} value={searchInput} onChangeText={handleTextBoxChange} placeholder="Search for your institution..." placeholderTextColor="#555" />
           <TouchableOpacity style={styles.filterButton} onPress={handleFilterButtonPress}>
             <Feather name="sliders" size={20} color="#555" />
           </TouchableOpacity>
