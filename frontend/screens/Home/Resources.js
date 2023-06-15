@@ -17,7 +17,7 @@ const HomeScreen = ({ navigation }) => {
       image: require('../../assets/resources/Border-Force-Online-Test-UK-1.jpg'),
       title: 'Visa and Immigration',
       description: 'Get information about visas and immigration processes.',
-      route: 'VisaScreen',
+      route: 'Visa and Immigration',
     },
     {
       id: 3,
