@@ -41,15 +41,24 @@ const MessagesScreen = ({navigation}) => {
   const fetchRequests = async () => {
     try {
       const response = await axios.get('http://roomie3.herokuapp.com/api/v1/connection_reqs?uuid=05b3bbd1-4e75-4ad3-9d71-4c4c8d08717d');
-      console.log(response.data);
-      console.log("[Message Screen] Fetched data");
-      const res = response.data.slice(0,4).map((user) => {
+      // console.log(response.data);
+      const userData = [];
+      for (let i = 0; i < response.data.connection_reqs.length; i++) {
+        const userRequest = await axios.get('http://roomie3.herokuapp.com/api/v1/person?uuid=' + response.data.connection_reqs[i])
+        console.log(userRequest.data);
+        userData.push(userRequest.data);
+      }
+      let i = 4;
+      if (userData.length < 4) {
+        i = userData.length;
+      }
+      const res = userData.slice(0,i).map((user) => {
         return {
           uuid: user.uuid,
           userImg: {uri: user.picture_url},
         }
       });
-      console.log(res);
+      // console.log(res);
       setRequests(res);
     }
     catch (error) {
@@ -59,8 +68,15 @@ const MessagesScreen = ({navigation}) => {
 
   const fetchUsers = async () => {
     try {
-      const response = await axios.get('http://roomie3.herokuapp.com/api/v1/people?current_user_uuid=05b3bbd1-4e75-4ad3-9d71-4c4c8d08717d');
-      const res = response.data.slice(0,4).map((user) => {
+      const response = await axios.get('http://roomie3.herokuapp.com/api/v1/matches?uuid=05b3bbd1-4e75-4ad3-9d71-4c4c8d08717d');
+      const userData = [];
+      // console.log("USER RESPONSE Fetched data");
+      for (let i = 0; i < response.data.matches.length; i++) {
+        const userRequest = await axios.get('http://roomie3.herokuapp.com/api/v1/person?uuid=' + response.data.matches[i])
+        userData.push(userRequest.data);
+      }
+      // console.log(userData);
+      const res = userData.slice(0,4).map((user) => {
         return {
           uuid: user.uuid,
           userName: user.name,
@@ -161,6 +177,7 @@ const styles = StyleSheet.create({
     marginBottom: 6,
   },
   cardContent: {
+    height: 100,
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',

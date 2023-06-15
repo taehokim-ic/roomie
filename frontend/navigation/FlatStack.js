@@ -9,6 +9,7 @@ import SupportScreen from "../screens/Home/SupportScreen";
 import TransportScreen from "../screens/Home/TransportScreen";
 import VisaScreen from "../screens/Home/VisaScreen";
 import CityGuideScreen from "../screens/Home/CityGuides";
+import TFL from "../screens/Home/TFL";
 import AccomodationScreen from "../screens/Home/AccomodationScreen";
 // import ChatLandlordScreen from "../screens/Flats/ChatLandlordScreen";
 
@@ -71,6 +72,10 @@ const FlatStack = () => {
         name="Success"
         component={SuccessScreen}
         options={{ headerShown: false }}
+        />
+        <Stack.Screen
+        name="TFL"
+        component={TFL}
         />
     </Stack.Navigator>
   );

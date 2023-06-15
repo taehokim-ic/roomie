@@ -10,6 +10,7 @@ import BrowseMatchesScreen from "../screens/Messages/BrowseMatchesScreen";
 import ConfirmationScreen from "../screens/Messages/ConfirmationScreen";
 import ChatContextProvider from "../context/ChatContext";
 import ChannelScreen from "../screens/Messages/ChannelScreen";
+import ChatScreen2 from "../screens/Messages/ChatRoomScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -17,14 +18,19 @@ const MessagesStack = () => {
   return (
     <ChatContextProvider>
     <Stack.Navigator>
-      <Stack.Screen
+    <Stack.Screen
         name="Channel"
         component={ChannelScreen}
-        options={{ headerShown: false }}
+        options={{ headerShown: true }}
       />
-      <Stack.Screen
+    <Stack.Screen
         name="Messages"
         component={MessageScreen}
+        options={{ headerShown: true }}
+      />
+      <Stack.Screen
+        name="ChatRoom"
+        component={ChatScreen2}
         options={{ headerShown: true }}
       />
       <Stack.Screen
@@ -32,6 +38,7 @@ const MessagesStack = () => {
         component={ConfirmationScreen}
         options={{ headerShown: false }}
       />
+
       <Stack.Screen
         name="Chat"
         component={ChatScreen}
