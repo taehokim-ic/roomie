@@ -2,7 +2,7 @@ import React from 'react';
 import { View, ScrollView, Text, Image, TouchableOpacity, StyleSheet, Linking } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-const RecommendedApps = ({ navigation }) => {
+const LondonCycling = ({ navigation }) => {
 
   const openTFlWebsite = ({url}) => {
     Linking.openURL(url)
@@ -12,31 +12,17 @@ const RecommendedApps = ({ navigation }) => {
   const sections = [
     {
       id: 1,
-      image: require('../../assets/tfl/citymapper.jpg'),
-      title: 'Citymapper',
-      description: 'Get a better understanding of the cost of transport in London',
-      url: 'https://citymapper.com',
+      image: require('../../assets/tfl/santander.jpg'),
+      title: 'Santander Bikes',
+      description: 'Santander Bikes offer over 700 docking stations with affordable options',
+      url: 'https://www.santander.co.uk/personal/support/understanding-our-services/santander-cycles',
     },
     {
       id: 2,
-      image: require('../../assets/tfl/googlemaps.jpg'),
-      title: 'Google Maps',
-      description: 'Download the official TFL oyster and contactless app to enhance your experience',
-      url: 'https://tfl.gov.uk/fares/how-to-pay-and-where-to-buy-tickets-and-oyster/tfl-oyster-and-contactless-app#on-this-page-1',
-    },
-    {
-      id: 3,
-      image: require('../../assets/tfl/underground.jpg'),
-      title: 'Transport for London Go',
-      description: 'Explore the different types of transport services provided by TFL',
-      url: 'https://tfl.gov.uk/maps_/tfl-go',
-    },
-    {
-      id: 4,
-      image: require('../../assets/tfl/fares.jpg'),
-      title: 'TFL Oyster and Contact',
-      description: 'Explore the different types of transport services provided by TFL',
-      url: 'https://tfl.gov.ukhttps://tfl.gov.uk/fares/how-to-pay-and-where-to-buy-tickets-and-oyster/tfl-oyster-and-contactless-app',
+      image: require('../../assets/tfl/lime.jpg'),
+      title: 'Lime Bikes',
+      description: 'Ride green with Lime bikes',
+      url: 'https://www.li.me/en-gb/locations/london',
     },
   ];
 
@@ -60,7 +46,7 @@ const RecommendedApps = ({ navigation }) => {
     <SafeAreaView style={styles.container}>
         <ScrollView>
             <Text style={{ fontSize: 24, fontWeight: 'bold', marginBottom: 30, alignSelf: 'center' }}>
-                Make planning your journey's effortless
+                Useful links to get you started
             </Text>
             <View>
                 {sections.map((section) => renderSection(section))}
@@ -111,4 +97,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default RecommendedApps;
+export default LondonCycling;

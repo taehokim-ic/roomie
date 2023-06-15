@@ -17,7 +17,7 @@ const TransportScreen = ({ navigation }) => {
       image: require('../../assets/tfl/cycling.jpg'),
       title: 'London Cycling Scheme',
       description: 'Explore London\'s cycling scheme, with over 780 docking stations.',
-      route: 'Visa and Immigration',
+      route: 'Cycling in London',
     },
     {
       id: 3,
