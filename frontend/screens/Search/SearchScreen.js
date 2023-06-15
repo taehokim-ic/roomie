@@ -287,7 +287,6 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: '#F2F2F2',
     paddingHorizontal: 16,
   },
   cardContainer: {
@@ -385,12 +384,13 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   applyButton: {
-    backgroundColor: '#007bff',
-    borderRadius: 8,
+    backgroundColor: '#027148',
+    borderRadius: 20,
     paddingVertical: 12,
-    paddingHorizontal: 16,
+    paddingHorizontal: 14,
     marginTop: 30,
     marginBottom: 5,
+    width: 310,
   },
   applyButtonText: {
     fontSize: 16,
@@ -399,16 +399,19 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   cancelButton: {
-    backgroundColor: '#dc3545',
-    borderRadius: 8,
+    backgroundColor: '#fff',
+    borderRadius: 20,
     paddingVertical: 12,
     paddingHorizontal: 16,
     marginTop: 4,
+    width: 310,
+    borderColor: '#000000',
+    borderWidth: 0.5,
   },
   cancelButtonText: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#fff',
+    color: '#000000',
     textAlign: 'center',
   },
   filter: {
@@ -422,6 +425,19 @@ const styles = StyleSheet.create({
   selectedTextStyle: {
     fontSize: 16,
     color: 'black',
+  },
+  dropdown: {
+    backgroundColor: '#FFFFFF',
+    borderWidth: 1,
+    borderColor: '#000000',
+    borderRadius: 40,
+    paddingHorizontal: 20,
+    paddingVertical: 4,
+    marginTop: 8,
+    marginLeft: -20,
+  },
+  dropdownSelected: {
+    backgroundColor: '#00FF00', // Green color when selected
   },
 });
 
