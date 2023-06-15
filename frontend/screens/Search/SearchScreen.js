@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { View, FlatList, TouchableOpacity, Text, Image, StyleSheet, SafeAreaView, TextInput } from 'react-native';
+import { View, ActivityIndicator, FlatList, TouchableOpacity, Text, Image, StyleSheet, SafeAreaView, TextInput } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import axios from 'axios';
 import { Dropdown } from 'react-native-element-dropdown';
@@ -14,11 +14,14 @@ const SearchScreen = ({navigation}) => {
   const [location, setLocation] = useState('');
   const [smoker, setSmoker] = useState('');
   const [searchInput, setSearchInput] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const fetchUsers = async () => {
     try {
+      setLoading(false);
       const response = await axios.get('http://roomie3.herokuapp.com/api/v1/people?current_user_uuid=05b3bbd1-4e75-4ad3-9d71-4c4c8d08717d');
       setUsers(response.data);
+      setLoading(true);
       console.log("Fetched users");
     }
     catch (error) {
@@ -36,10 +39,12 @@ const SearchScreen = ({navigation}) => {
   };
 
   const handleSearchButtonPress = async () => {
+    setLoading(false);
     setShowFilterCard(false);
     let url = 'http://roomie3.herokuapp.com/api/v1/people?current_user_uuid=05b3bbd1-4e75-4ad3-9d71-4c4c8d08717d&institution=' + searchInput
     const response = await axios.get(url);
     setUsers(response.data);
+    setLoading(true);
   };
 
   const handleCardPress = (id) => {
@@ -47,6 +52,7 @@ const SearchScreen = ({navigation}) => {
   };
 
   const clearFilter = async () => {
+    setLoading(false);
     setLanguage('');
     setInstitution('');
     setLocation('');
@@ -55,6 +61,7 @@ const SearchScreen = ({navigation}) => {
     const response = await axios.get(url);
     setShowFilterCard(false);
     setUsers(response.data);
+    setLoading(true);
   };
 
   const handleTextBoxChange = (text) => {
@@ -211,7 +218,8 @@ const SearchScreen = ({navigation}) => {
           <Text style={styles.name}>{item.name}</Text>
           <Text style={styles.subtitle}>{`${item.age} | ${item.pronouns}`}</Text>
           <Text style={styles.subtitle}>{`Institution: ${item.institution}`}</Text>
-          <Text style={styles.subtitle}>{`Preferred Location: ${item.preferred_location}`}</Text>
+          <Text style={styles.subtitle}>{`Budget: £${item.min_budget} - £${item.max_budget}`}</Text>
+          
         </View>
       </View>
     </TouchableOpacity>
@@ -232,11 +240,14 @@ const SearchScreen = ({navigation}) => {
         </View>
       </View>
       <View style={styles.container}>
+        { loading ? 
         <FlatList
           data={users}
           renderItem={renderCard}
           keyExtractor={item => item.uuid.toString()}
-        />
+          /> :
+          <ActivityIndicator size={'large'} style={{marginTop: 100}}/>
+        }
       </View>
       {renderFilterCard()}
     </SafeAreaView>

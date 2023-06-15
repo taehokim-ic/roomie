@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { View, Text, Image, FlatList, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, Image, ActivityIndicator, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import axios from 'axios';
 
@@ -8,7 +8,7 @@ const ProfilePage = ({navigation}) => {
   const { uuid } = route.params;
 
   const [flatmateProfile, setFlatmateProfile] = useState({});
-  // const [interests, setInterests] = useState([]);
+  const [loading, setLoading] = useState(false);
   const interests = [
     { id: '1', name: 'Sports' },
     { id: '2', name: 'Music' },
@@ -32,6 +32,7 @@ const ProfilePage = ({navigation}) => {
       setPrompt1(response.data.prompts[0]);
       setPrompt2(response.data.prompts[1]);
       setPrompt3(response.data.prompts[2]);
+      setLoading(true);
       // setInterests(response.data.interests);
     }
     catch (error) {
@@ -68,80 +69,83 @@ const ProfilePage = ({navigation}) => {
 
   return (
     <ScrollView style={styles.contentContainer}>
-    <View style={styles.container}>
-      {/* Profile Picture */}
-      <Image source={{uri: flatmateProfile.picture_url}} style={styles.profilePicture} />
+      { loading ? 
+      <View style={styles.container}>
+        {/* Profile Picture */}
+        <Image source={{uri: flatmateProfile.picture_url}} style={styles.profilePicture} />
 
-      {/* Main Summary */}
-      <View style={styles.card}>
-        <Text style={styles.name}>
-          {flatmateProfile.name}, <Text style={styles.age}>{flatmateProfile.age}</Text>
-        </Text>
-        <Text style={styles.bio}>{flatmateProfile.bio}</Text>
-      </View>
+        {/* Main Summary */}
+        <View style={styles.card}>
+          <Text style={styles.name}>
+            {flatmateProfile.name}, <Text style={styles.age}>{flatmateProfile.age}</Text>
+          </Text>
+          <Text style={styles.bio}>{flatmateProfile.bio}</Text>
+        </View>
 
-      {/* <View style={styles.card}>
-        <Text style={styles.cardTitle}>Interests</Text>
-        <FlatList
-          data={interests}
-          renderItem={renderItem}
-          keyExtractor={(item) => item.id}
-          contentContainerStyle={styles.contentContainer2}
-          numColumns={3}
-        />
-      </View> */}
+        {/* <View style={styles.card}>
+          <Text style={styles.cardTitle}>Interests</Text>
+          <FlatList
+            data={interests}
+            renderItem={renderItem}
+            keyExtractor={(item) => item.id}
+            contentContainerStyle={styles.contentContainer2}
+            numColumns={3}
+          />
+        </View> */}
 
-      {/* Extra Content */}
-      <View style={styles.card}>
-        <Text style={styles.cardTitle}>Additional Information</Text>
-        <View style={styles.infoRow}>
-          <Text style={styles.subtitle}>Pronouns:</Text>
-          <Text style={styles.info}>{flatmateProfile.pronouns}</Text>
-        </View>
-        <View style={styles.infoRow}>
-          <Text style={styles.subtitle}>Institution:</Text>
-          <Text style={styles.info}>{flatmateProfile.institution}</Text>
-        </View>
-        <View style={styles.infoRow}>
-          <Text style={styles.subtitle}>Nationality:</Text>
-          <Text style={styles.info}>{flatmateProfile.nationality}</Text>
-        </View>
-        <View style={styles.infoRow}>
-          <Text style={styles.subtitle}>Budget:</Text>
-          <Text style={styles.info}>£{flatmateProfile.min_budget} - £{flatmateProfile.max_budget}</Text>
-        </View>
-        <View style={styles.infoRow}>
-          <Text style={styles.subtitle}>Smoker?</Text>
-          <Text style={styles.info}>{flatmateProfile.smoker}</Text>
-        </View>
-      </View>
-
-      <View style={styles.card}>
-          <View style={styles.promptContainer}>
-            <Text style={styles.cardTitle}>Q. Are you a morning person or a night owl?</Text>
-            <Text style={styles.answer}>{prompt1}</Text>
+        {/* Extra Content */}
+        <View style={styles.card}>
+          <Text style={styles.cardTitle}>Additional Information</Text>
+          <View style={styles.infoRow}>
+            <Text style={styles.subtitle}>Pronouns:</Text>
+            <Text style={styles.info}>{flatmateProfile.pronouns}</Text>
           </View>
-      </View>
-
-      <View style={styles.card}>
-          <View style={styles.promptContainer}>
-            <Text style={styles.cardTitle}>Q. How do you feel about occasional gatherings at the apartment?</Text>
-            <Text style={styles.answer}>{prompt2}</Text>
+          <View style={styles.infoRow}>
+            <Text style={styles.subtitle}>Institution:</Text>
+            <Text style={styles.info}>{flatmateProfile.institution}</Text>
           </View>
-      </View>
-
-      <View style={styles.card}>
-          <View style={styles.promptContainer}>
-            <Text style={styles.cardTitle}>Q. What is your typical work or study schedule?</Text>
-            <Text style={styles.answer}>{prompt3}</Text>
+          <View style={styles.infoRow}>
+            <Text style={styles.subtitle}>Nationality:</Text>
+            <Text style={styles.info}>{flatmateProfile.nationality}</Text>
           </View>
-      </View>
+          <View style={styles.infoRow}>
+            <Text style={styles.subtitle}>Budget:</Text>
+            <Text style={styles.info}>£{flatmateProfile.min_budget} - £{flatmateProfile.max_budget}</Text>
+          </View>
+          <View style={styles.infoRow}>
+            <Text style={styles.subtitle}>Smoker?</Text>
+            <Text style={styles.info}>{flatmateProfile.smoker}</Text>
+          </View>
+        </View>
 
-      {/* Message Button */}
-      <TouchableOpacity style={styles.messageButton} onPress={handleMessagePress}>
-        <Text style={styles.messageButtonText}>Connect</Text>
-      </TouchableOpacity>
-    </View>
+        <View style={styles.card}>
+            <View style={styles.promptContainer}>
+              <Text style={styles.cardTitle}>Q. Are you a morning person or a night owl?</Text>
+              <Text style={styles.answer}>{prompt1}</Text>
+            </View>
+        </View>
+
+        <View style={styles.card}>
+            <View style={styles.promptContainer}>
+              <Text style={styles.cardTitle}>Q. How do you feel about occasional gatherings at the apartment?</Text>
+              <Text style={styles.answer}>{prompt2}</Text>
+            </View>
+        </View>
+
+        <View style={styles.card}>
+            <View style={styles.promptContainer}>
+              <Text style={styles.cardTitle}>Q. What is your typical work or study schedule?</Text>
+              <Text style={styles.answer}>{prompt3}</Text>
+            </View>
+        </View>
+
+        {/* Message Button */}
+        <TouchableOpacity style={styles.messageButton} onPress={handleMessagePress}>
+          <Text style={styles.messageButtonText}>Connect</Text>
+        </TouchableOpacity>
+      </View> :
+    <ActivityIndicator size="large" style={{marginTop:100}} />
+      }
     </ScrollView>
   );
 };
