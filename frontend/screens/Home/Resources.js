@@ -21,14 +21,14 @@ const HomeScreen = ({ navigation }) => {
     },
     {
       id: 3,
-      image: require('../../assets/resources/transport-london.jpg'),
+      image: require('../../assets/resources/language.jpg'),
       title: 'Still struggling with English?',
       description: 'Here are some tools which can make it easier',
       route: 'Transport Links',
     },
     {
       id: 4,
-      image: require('../../assets/resources/transport-london.jpg'),
+      image: require('../../assets/resources/wallet.jpg'),
       title: 'Managing Finances',
       description: 'Learn about transportation options in the UK.',
       route: 'Transport Links',
