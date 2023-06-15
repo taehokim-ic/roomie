@@ -4,12 +4,15 @@ import { useChatContext } from "../../context/ChatContext";
 import { Channel, MessageList, MessageInput } from "stream-chat-expo";
 
 const ChatRoomScreen = ({navigation}) => {
-  const {currentChannel} = useChatContext();
+  const {currentChannel, setChannelName} = useChatContext();
 
   useEffect(() => {
-    navigation.setOptions({
-      title: currentChannel.data.name,
-    });
+    if (currentChannel?.data?.name) {
+      setChannelName(currentChannel.data.name);
+      navigation.setOptions({
+        title: currentChannel.data.name,
+      });
+    }
   }, [currentChannel]);
 
 

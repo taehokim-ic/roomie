@@ -64,6 +64,7 @@ const ChannelScreen = ({navigation}) => {
                                 <Text style={styles.text}>People who sent you connection requests</Text>
                                 <FlatList
                                 horizontal
+                                contentContainerStyle={{flexGrow: 1, justifyContent: 'center'}}
                                 data={requests}
                                 keyExtractor={item => item.uuid}
                                 renderItem={({ item }) => (
@@ -84,7 +85,7 @@ const ChannelScreen = ({navigation}) => {
                         </View>
                     ) : (
                         <View>
-                            <Text style={styles.text}>You have not received any connection requests yet</Text>
+                            <Text style={styles.text}>You do not have any connection requests currently.</Text>
                         </View>
                     )
                 }
