@@ -2,7 +2,7 @@ import React from 'react';
 import { View, ScrollView, Text, Image, TouchableOpacity, StyleSheet, Linking } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-const TFL = ({ navigation }) => {
+const RecommendedApps = ({ navigation }) => {
 
   const openTFlWebsite = ({url}) => {
     Linking.openURL(url)
@@ -12,23 +12,30 @@ const TFL = ({ navigation }) => {
   const sections = [
     {
       id: 1,
-      image: require('../../assets/tfl/underground.jpg'),
-      title: 'Transport for London Services',
-      description: 'Explore the different types of transport services provided by TFL',
-      url: 'https://tfl.gov.uk',
+      image: require('../../assets/tfl/citymapper.jpg'),
+      title: 'Citymapper',
+      description: 'Get a better understanding of the cost of transport in London',
+      url: 'https://citymapper.com',
     },
     {
       id: 2,
-      image: require('../../assets/tfl/fares.jpg'),
-      title: 'Fares',
-      description: 'Get a better understanding of the cost of transport in London',
-      url: 'https://tfl.gov.uk/fares/find-fares',
+      image: require('../../assets/tfl/googlemaps.jpg'),
+      title: 'Google Maps',
+      description: 'Download the official TFL oyster and contactless app to enhance your experience',
+      url: 'https://tfl.gov.uk/fares/how-to-pay-and-where-to-buy-tickets-and-oyster/tfl-oyster-and-contactless-app#on-this-page-1',
     },
     {
       id: 3,
-      image: require('../../assets/tfl/tfl.jpg'),
-      title: 'Download the app!',
-      description: 'Download the official TFL oyster and contactless app to enhance your experience',
+      image: require('../../assets/tfl/underground.jpg'),
+      title: 'Transport for London Go',
+      description: 'Explore the different types of transport services provided by TFL',
+      url: 'https://tfl.gov.uk/maps_/tfl-go',
+    },
+    {
+      id: 4,
+      image: require('../../assets/tfl/fares.jpg'),
+      title: 'TFL Oyster and Contact',
+      description: 'Explore the different types of transport services provided by TFL',
       url: 'https://tfl.gov.uk/fares/how-to-pay-and-where-to-buy-tickets-and-oyster/tfl-oyster-and-contactless-app',
     },
   ];
@@ -53,7 +60,7 @@ const TFL = ({ navigation }) => {
     <SafeAreaView style={styles.container}>
         <ScrollView>
             <Text style={{ fontSize: 24, fontWeight: 'bold', marginBottom: 30, alignSelf: 'center' }}>
-                Useful links to get you started
+                Make planning your journey's effortless
             </Text>
             <View>
                 {sections.map((section) => renderSection(section))}
@@ -104,4 +111,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default TFL;
+export default RecommendedApps;

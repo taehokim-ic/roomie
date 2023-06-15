@@ -10,7 +10,9 @@ import TransportScreen from "../screens/Home/TransportScreen";
 import VisaScreen from "../screens/Home/VisaScreen";
 import CityGuideScreen from "../screens/Home/CityGuides";
 import TFL from "../screens/Home/TFL";
-import AccomodationScreen from "../screens/Home/AccomodationScreen";
+import Accomodation from "../screens/Home/Accomodation";
+import RecommendedApps from "../screens/Home/RecommendedApps";
+import LondonCycling from "../screens/Home/LondonCycling";
 // import ChatLandlordScreen from "../screens/Flats/ChatLandlordScreen";
 
 const Stack = createNativeStackNavigator();
@@ -39,8 +41,8 @@ const FlatStack = () => {
         options={{ headerShown: true }}
         />
         <Stack.Screen
-        name="Accomodation Listings"
-        component={AccomodationScreen}
+        name="Accomodation"
+        component={Accomodation}
         options={{ headerShown: true }}
         />
         <Stack.Screen
@@ -76,6 +78,14 @@ const FlatStack = () => {
         <Stack.Screen
         name="TFL"
         component={TFL}
+        />
+        <Stack.Screen
+        name="Recommended Apps"
+        component={RecommendedApps}
+        />
+        <Stack.Screen
+        name="Cycling in London"
+        component={LondonCycling}
         />
     </Stack.Navigator>
   );

@@ -2,7 +2,7 @@ import React from 'react';
 import { View, ScrollView, Text, Image, TouchableOpacity, StyleSheet, Linking } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-const TFL = ({ navigation }) => {
+const LondonCycling = ({ navigation }) => {
 
   const openTFlWebsite = ({url}) => {
     Linking.openURL(url)
@@ -12,24 +12,17 @@ const TFL = ({ navigation }) => {
   const sections = [
     {
       id: 1,
-      image: require('../../assets/tfl/underground.jpg'),
-      title: 'Transport for London Services',
-      description: 'Explore the different types of transport services provided by TFL',
-      url: 'https://tfl.gov.uk',
+      image: require('../../assets/tfl/santander.jpg'),
+      title: 'Santander Bikes',
+      description: 'Santander Bikes offer over 700 docking stations with affordable options',
+      url: 'https://www.santander.co.uk/personal/support/understanding-our-services/santander-cycles',
     },
     {
       id: 2,
-      image: require('../../assets/tfl/fares.jpg'),
-      title: 'Fares',
-      description: 'Get a better understanding of the cost of transport in London',
-      url: 'https://tfl.gov.uk/fares/find-fares',
-    },
-    {
-      id: 3,
-      image: require('../../assets/tfl/tfl.jpg'),
-      title: 'Download the app!',
-      description: 'Download the official TFL oyster and contactless app to enhance your experience',
-      url: 'https://tfl.gov.uk/fares/how-to-pay-and-where-to-buy-tickets-and-oyster/tfl-oyster-and-contactless-app',
+      image: require('../../assets/tfl/lime.jpg'),
+      title: 'Lime Bikes',
+      description: 'Ride green with Lime bikes',
+      url: 'https://www.li.me/en-gb/locations/london',
     },
   ];
 
@@ -104,4 +97,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default TFL;
+export default LondonCycling;

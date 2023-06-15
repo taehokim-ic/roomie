@@ -108,11 +108,11 @@ const ProfilePage = ({navigation}) => {
         </View>
         <View style={styles.infoRow}>
           <Text style={styles.subtitle}>Budget:</Text>
-          <Text style={styles.info}>£800 - £1200</Text>
+          <Text style={styles.info}>£{flatmateProfile.min_budget} - £{flatmateProfile.max_budget}</Text>
         </View>
         <View style={styles.infoRow}>
           <Text style={styles.subtitle}>Smoker?</Text>
-          <Text style={styles.info}>No</Text>
+          <Text style={styles.info}>{flatmateProfile.smoker}</Text>
         </View>
       </View>
 

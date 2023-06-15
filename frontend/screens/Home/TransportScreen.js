@@ -14,17 +14,17 @@ const TransportScreen = ({ navigation }) => {
     },
     {
       id: 2,
-      image: require('../../assets/resources/Border-Force-Online-Test-UK-1.jpg'),
+      image: require('../../assets/tfl/cycling.jpg'),
       title: 'London Cycling Scheme',
       description: 'Explore London\'s cycling scheme, with over 780 docking stations.',
-      route: 'Visa and Immigration',
+      route: 'Cycling in London',
     },
     {
       id: 3,
-      image: require('../../assets/resources/guide.jpg'),
+      image: require('../../assets/tfl/appstore.jpg'),
       title: 'Recommended Apps',
       description: 'These apps are essential to plan your journey well in London.',
-      route: 'City Guides',
+      route: 'Recommended Apps',
     },
   ];
 
