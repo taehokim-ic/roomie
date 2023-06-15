@@ -9,6 +9,8 @@ import ConfirmationScreen from "../screens/Messages/ConfirmationScreen";
 import ChatContextProvider from "../context/ChatContext";
 import ChannelScreen from "../screens/Messages/ChannelScreen";
 import ChatScreen2 from "../screens/Messages/ChatRoomScreen";
+import Compatibility from "../screens/Messages/Compatibility";
+import FlatFinding from "../screens/Messages/FlatFinding";
 
 const Stack = createNativeStackNavigator();
 
@@ -42,6 +44,22 @@ const MessagesStack = () => {
         component={ChatScreen}
         options={({ route }) => ({ title: route.params.userName })}
       />
+
+        <Stack.Screen
+          name="Compatible"
+          component={Compatibility}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="FlatFinding"
+          component={FlatFinding}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="InteractionChat"
+          component={ChatScreen}
+          options={{ headerShown: false }}
+        />
 
       <Stack.Screen name="Matches" component={MatchesScreen} />
       <Stack.Screen 

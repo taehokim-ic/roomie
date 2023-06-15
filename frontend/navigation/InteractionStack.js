@@ -12,21 +12,7 @@ const InteractionStack = () => {
   return (
     <Stack.Navigator 
       screenOptions={{}}>
-        <Stack.Screen
-          name="Compatible"
-          component={Compatibility}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="FlatFinding"
-          component={FlatFinding}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="InteractionChat"
-          component={ChatScreen}
-          options={{ headerShown: false }}
-        />
+
     </Stack.Navigator>
   );
 };

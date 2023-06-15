@@ -6,13 +6,17 @@ import ChatIcon from '../../components/ChatIcon';
 import StatusBar from '../../components/StatusBar';
 import { useNavigation } from '@react-navigation/native';
 import StatusBarButton from '../../components/StatusBarButton';
+import { useRoute } from '@react-navigation/native';
 
 const Compatibility = (name) => {
+  const route = useRoute();
+  const { uuid } = route.params;
 
   const navigation = useNavigation();
   const value = "test";
 
   useEffect(() => {
+    console.log(uuid);
     console.log(value);
   }, []);
 

@@ -106,7 +106,7 @@ const ChannelScreen = ({navigation}) => {
         const members = Object.keys(channel.state.members);
         const otherUUID = members.filter((member) => member !== chatClient.user.id)[0];
         console.log(otherUUID);
-        navigation.navigate('Interaction', {uuid: otherUUID});
+        navigation.navigate('Compatible', {uuid: otherUUID});
     }
 
     return (

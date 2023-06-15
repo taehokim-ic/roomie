@@ -7,6 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 
 const ChatScreen = () => {
     const [messages, setMessages] = React.useState([]);
+
     
     useEffect(() => {
         setMessages([
