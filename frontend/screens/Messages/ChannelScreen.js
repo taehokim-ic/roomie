@@ -99,7 +99,7 @@ const ChannelScreen = ({navigation}) => {
           );
     };
 
-    const {setCurrentChannel, chatClient} = useChatContext();
+    const {currentChannel, setCurrentChannel, chatClient} = useChatContext();
 
     const onSelect = (channel) => {
         setCurrentChannel(channel);

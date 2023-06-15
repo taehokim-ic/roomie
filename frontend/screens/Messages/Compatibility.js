@@ -7,6 +7,7 @@ import StatusBar from '../../components/StatusBar';
 import { useNavigation } from '@react-navigation/native';
 import StatusBarButton from '../../components/StatusBarButton';
 import { useRoute } from '@react-navigation/native';
+import { useChatContext } from 'stream-chat-expo';
 
 const Compatibility = (name) => {
   const route = useRoute();
@@ -15,17 +16,12 @@ const Compatibility = (name) => {
   const navigation = useNavigation();
   const value = "test";
 
-  useEffect(() => {
-    console.log(uuid);
-    console.log(value);
-  }, []);
-
   const handleFlatShare = () => {
     navigation.navigate('FlatFinding');
   }
 
   const handleChatSwipe = () => {
-    navigation.navigate('InteractionChat');
+    navigation.navigate('ChatRoom');
   }
 
   const data = [
