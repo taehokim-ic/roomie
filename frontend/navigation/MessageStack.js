@@ -28,6 +28,8 @@ const MessagesStack = () => {
         component={MessageScreen}
         options={{ headerShown: true }}
       />
+
+
       <Stack.Screen
         name="ChatRoom"
         component={ChatScreen2}
