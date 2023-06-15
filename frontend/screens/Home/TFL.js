@@ -29,7 +29,7 @@ const TFL = ({ navigation }) => {
       image: require('../../assets/tfl/tfl.jpg'),
       title: 'Download the app!',
       description: 'Download the official TFL oyster and contactless app to enhance your experience',
-      url: 'https://tfl.gov.uk/fares/how-to-pay-and-where-to-buy-tickets-and-oyster/tfl-oyster-and-contactless-app#on-this-page-1',
+      url: 'https://tfl.gov.uk/fares/how-to-pay-and-where-to-buy-tickets-and-oyster/tfl-oyster-and-contactless-app',
     },
   ];
 

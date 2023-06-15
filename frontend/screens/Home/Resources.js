@@ -10,7 +10,7 @@ const HomeScreen = ({ navigation }) => {
       image: require('../../assets/resources/bede-hall-bedroom-02.jpg'),
       title: 'Find Accommodation',
       description: 'Find the perfect place to live during your stay in London.',
-      route: 'Accomodation Listings',
+      route: 'Accomodation',
     },
     {
       id: 2,
