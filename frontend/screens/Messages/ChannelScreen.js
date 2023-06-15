@@ -99,11 +99,14 @@ const ChannelScreen = ({navigation}) => {
           );
     };
 
-    const {setCurrentChannel} = useChatContext();
+    const {setCurrentChannel, chatClient} = useChatContext();
 
     const onSelect = (channel) => {
         setCurrentChannel(channel);
-        navigation.navigate('ChatRoom');
+        const members = Object.keys(channel.state.members);
+        const otherUUID = members.filter((member) => member !== chatClient.user.id)[0];
+        console.log(otherUUID);
+        navigation.navigate('Interaction', {uuid: otherUUID});
     }
 
     return (

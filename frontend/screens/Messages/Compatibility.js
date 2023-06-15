@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Text, View, StyleSheet, FlatList, PanResponder } from 'react-native';
 import CustomButton from '../../components/CustomButton';
 import MatchingStatus from '../../components/MatchingStatus';
@@ -10,6 +10,11 @@ import StatusBarButton from '../../components/StatusBarButton';
 const Compatibility = (name) => {
 
   const navigation = useNavigation();
+  const value = "test";
+
+  useEffect(() => {
+    console.log(value);
+  }, []);
 
   const handleFlatShare = () => {
     navigation.navigate('FlatFinding');
