@@ -6,16 +6,16 @@ import axios from 'axios';
 const BrowseMatchesScreen = ({navigation}) => {
 
   const [users, setUsers] = useState([]);
-  const [showFilterCard, setShowFilterCard] = useState(false);
-  const [language, setLanguage] = useState('');
-  const [institution, setInstitution] = useState('');
-  const [location, setLocation] = useState('');
-  const [smoker, setSmoker] = useState('');
 
   const fetchUsers = async () => {
     try {
-      const response = await axios.get('http://roomie3.herokuapp.com/api/v1/people?current_user_uuid=05b3bbd1-4e75-4ad3-9d71-4c4c8d08717d');
-      setUsers(response.data);
+      const response = await axios.get('http://roomie3.herokuapp.com/api/v1/connection_reqs?uuid=05b3bbd1-4e75-4ad3-9d71-4c4c8d08717d');
+      const userData = [];
+      for (let i = 0; i < response.data.connection_reqs.length; i++) {
+        const userRequest = await axios.get('http://roomie3.herokuapp.com/api/v1/person?uuid=' + response.data.connection_reqs[i])
+        userData.push(userRequest.data);
+      }
+      setUsers(userData);
     }
     catch (error) {
       console.log(error);
@@ -25,88 +25,6 @@ const BrowseMatchesScreen = ({navigation}) => {
   useEffect(() => {
     fetchUsers();
   }, []);
-
-  const handleFilterButtonPress = () => {
-    setShowFilterCard(!showFilterCard);
-  };
-
-  const handleCardPress = (id) => {
-    
-  };
-
-  const clearFilter = async () => {
-    setLanguage('');
-    setInstitution('');
-    setLocation('');
-    setSmoker('');
-    let url = 'http://roomie3.herokuapp.com/api/v1/people?current_user_uuid=05b3bbd1-4e75-4ad3-9d71-4c4c8d08717d';
-    const response = await axios.get(url);
-    setShowFilterCard(false);
-    setUsers(response.data);
-  };
-
-  const applyFilter = async () => {
-    let url = 'http://roomie3.herokuapp.com/api/v1/people?current_user_uuid=05b3bbd1-4e75-4ad3-9d71-4c4c8d08717d';
-    if (language) {
-      url += `&language=${language}`;
-    }
-    if (institution) {
-      url += `&institution=${institution}`;
-    }
-    if (location) {
-      url += '&location=${location}';
-    }
-    if (smoker) {
-      url += '&smoker=${smoker}';
-    }
-    console.log(url);
-    const response = await axios.get(url);
-    setShowFilterCard(false);
-    setUsers(response.data);
-  }
-
-  const renderFilterCard = () => {
-    if (!showFilterCard) return null;
-
-    return (
-      <View style={styles.filterCard}>
-          <View style={styles.modalContent}>
-            <Text style={styles.modalTitle}>Filter</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="Language"
-              value={language}
-              onChangeText={setLanguage}
-            />
-            <TextInput
-              style={styles.input}
-              placeholder="Institution"
-              value={institution}
-              onChangeText={setInstitution}
-            />
-            <TextInput
-              style={styles.input}
-              placeholder="Location"
-              value={location}
-              onChangeText={setLocation}
-              keyboardType="numeric"
-            />
-            <TextInput
-              style={styles.input}
-              placeholder="Smoker"
-              value={smoker}
-              onChangeText={setSmoker}
-            />
-            <TouchableOpacity style={styles.applyButton} onPress={applyFilter}>
-              <Text style={styles.applyButtonText}>Apply</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.cancelButton} onPress={clearFilter}>
-            <Text style={styles.cancelButtonText}>Clear Filters</Text>
-          </TouchableOpacity>
-          </View>
-      </View>
-    );
-  };
 
   const renderCard = ({ item }) => (
     <TouchableOpacity onPress={() => navigation.navigate('Matches', {uuid : item.uuid})}>
@@ -131,7 +49,6 @@ const BrowseMatchesScreen = ({navigation}) => {
           keyExtractor={item => item.uuid.toString()}
         />
       </View>
-      {renderFilterCard()}
     </SafeAreaView>
   );
 };
