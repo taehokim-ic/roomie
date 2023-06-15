@@ -12,7 +12,6 @@ import { Container,
   TextSection } from '../../styles/MessageStyles';
 import axios from 'axios';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import BrowseMatchesScreen from './BrowseMatchesScreen';
 
 const MessagesScreen = ({navigation}) => {
   const [users, setUsers] = useState([]);
@@ -41,11 +40,9 @@ const MessagesScreen = ({navigation}) => {
   const fetchRequests = async () => {
     try {
       const response = await axios.get('http://roomie3.herokuapp.com/api/v1/connection_reqs?uuid=05b3bbd1-4e75-4ad3-9d71-4c4c8d08717d');
-      // console.log(response.data);
       const userData = [];
       for (let i = 0; i < response.data.connection_reqs.length; i++) {
         const userRequest = await axios.get('http://roomie3.herokuapp.com/api/v1/person?uuid=' + response.data.connection_reqs[i])
-        console.log(userRequest.data);
         userData.push(userRequest.data);
       }
       let i = 4;
@@ -58,7 +55,6 @@ const MessagesScreen = ({navigation}) => {
           userImg: {uri: user.picture_url},
         }
       });
-      // console.log(res);
       setRequests(res);
     }
     catch (error) {
@@ -70,12 +66,10 @@ const MessagesScreen = ({navigation}) => {
     try {
       const response = await axios.get('http://roomie3.herokuapp.com/api/v1/matches?uuid=05b3bbd1-4e75-4ad3-9d71-4c4c8d08717d');
       const userData = [];
-      // console.log("USER RESPONSE Fetched data");
       for (let i = 0; i < response.data.matches.length; i++) {
         const userRequest = await axios.get('http://roomie3.herokuapp.com/api/v1/person?uuid=' + response.data.matches[i])
         userData.push(userRequest.data);
       }
-      // console.log(userData);
       const res = userData.slice(0,4).map((user) => {
         return {
           uuid: user.uuid,
@@ -137,7 +131,6 @@ const MessagesScreen = ({navigation}) => {
           data={Messages}
           keyExtractor={item=>item.uuid}
           renderItem={({item}) => (
-            // <Card onPress={() => navigation.navigate('Interaction')}>
             <Card onPress={() => handleCardPress({navigation, state: 0})}>
               <UserInfo>
                 <UserImgWrapper>

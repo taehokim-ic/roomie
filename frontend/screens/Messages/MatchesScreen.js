@@ -40,7 +40,19 @@ const ProfilePage = ({navigation}) => {
   };
 
   const handleDecline = () => {
-    // Handle decline button press
+    const data = {
+      connection_id: uuid,
+    }
+    const clientUuid = '05b3bbd1-4e75-4ad3-9d71-4c4c8d08717d';
+    const url = 'http://roomie3.herokuapp.com/api/v1/disconnect/' + clientUuid;
+    axios.post(url, data)
+      .then((response) => {
+        console.log(response);
+      }
+    ).catch((error) => {
+      console.log(error);
+    });
+    navigation.goBack();
   };
 
   return (

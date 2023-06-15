@@ -12,19 +12,18 @@ const ChatContextProvider = ({children}) => {
 
     const navigation = useNavigation();
 
+    const client = StreamChat.getInstance('cgza2gd8vxd6');
+
     const user = {
-        id: '05b3bbd1-4e75-4ad3-9d71-4c4c8d08717d',
-        name: 'Matthew',
+        id: 'd98f5ff0-b882-4c70-92e3-4cb69a3279e2',
+        name: 'Michael',
         image: 'https://getstream.io/random_png/?id=test&name=test',
     };
 
     useEffect(() => {
-
         const initChat = async () => {
             if (!user.id) return;
-
-            const client = StreamChat.getInstance('cgza2gd8vxd6');
-
+            
             await client.connectUser(
                 {
                     id: user.id,
@@ -32,15 +31,8 @@ const ChatContextProvider = ({children}) => {
                     image: user.image,
                 },
                 client.devToken(user.id),
-            );
+            );            
             setChatClient(client);
-
-            const channel = client.channel('messaging', 'general', {
-                name: 'General Chat',
-                members: [user.id],
-            });
-            
-            await channel.watch();
 
         };
         initChat();
@@ -54,9 +46,6 @@ const ChatContextProvider = ({children}) => {
     }, []);
 
     const startDMChat = async (userId) => {
-        // console.log('startDMChat');
-        console.log('userId', userId);
-        console.log('chatClientID', chatClient.userID);
         if (!chatClient) return;
 
         const newChannel = chatClient.channel('messaging', {
@@ -66,7 +55,6 @@ const ChatContextProvider = ({children}) => {
         await newChannel.watch();
         setCurrentChannel(newChannel);
         navigation.navigate('ChatRoom');
-        // navigation.goBack();
     };
 
     if (!chatClient) return <ActivityIndicator />;
