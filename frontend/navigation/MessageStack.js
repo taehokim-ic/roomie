@@ -3,8 +3,6 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import MessageScreen from "../screens/Messages/MessageScreen";
 import ChatScreen from "../screens/Messages/ChatScreen";
 import MatchesScreen from "../screens/Messages/MatchesScreen";
-import Compatibility from "../screens/Messages/Compatibility";
-import FlatFinding from "../screens/Messages/FlatFinding";
 import InteractionStack from "./InteractionStack";
 import BrowseMatchesScreen from "../screens/Messages/BrowseMatchesScreen";
 import ConfirmationScreen from "../screens/Messages/ConfirmationScreen";
@@ -19,15 +17,16 @@ const MessagesStack = () => {
     <ChatContextProvider>
     <Stack.Navigator>
     <Stack.Screen
-        name="Messages"
-        component={MessageScreen}
-        options={{ headerShown: true }}
-      />
-    <Stack.Screen
         name="Channel"
         component={ChannelScreen}
         options={{ headerShown: true }}
       />
+    <Stack.Screen
+        name="Messages"
+        component={MessageScreen}
+        options={{ headerShown: true }}
+      />
+
 
       <Stack.Screen
         name="ChatRoom"

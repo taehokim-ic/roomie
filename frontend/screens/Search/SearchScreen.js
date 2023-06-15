@@ -16,6 +16,7 @@ const SearchScreen = ({navigation}) => {
     try {
       const response = await axios.get('http://roomie3.herokuapp.com/api/v1/people?current_user_uuid=05b3bbd1-4e75-4ad3-9d71-4c4c8d08717d');
       setUsers(response.data);
+      console.log("Fetched users");
     }
     catch (error) {
       console.log(error);
