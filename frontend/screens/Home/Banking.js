@@ -2,7 +2,7 @@ import React from 'react';
 import { View, ScrollView, Text, Image, TouchableOpacity, StyleSheet, Linking } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-const LondonCycling = ({ navigation }) => {
+const Banking = ({ navigation }) => {
 
   const openTFlWebsite = ({url}) => {
     Linking.openURL(url)
@@ -12,17 +12,31 @@ const LondonCycling = ({ navigation }) => {
   const sections = [
     {
       id: 1,
-      image: require('../../assets/tfl/santander.jpg'),
-      title: 'Santander Bikes',
-      description: 'Santander Bikes offer over 700 docking stations with affordable options',
-      url: 'https://www.santander.co.uk/personal/support/understanding-our-services/santander-cycles',
+      image: require('../../assets/banks/barclays.jpg'),
+      title: 'Barclays',
+      description: 'A reputable and globally recognized British bank offering comprehensive financial solutions',
+      url: 'https://www.barclays.co.uk/current-accounts/bank-account/',
     },
     {
       id: 2,
-      image: require('../../assets/tfl/lime.jpg'),
-      title: 'Lime Bikes',
-      description: 'Ride green with Lime bikes',
-      url: 'https://www.li.me/en-gb/locations/london',
+      image: require('../../assets/banks/natwest.jpg'),
+      title: 'NatWest',
+      description: 'Trusted British bank, offering diverse financial services nationally and internationally',
+      url: 'https://www.natwest.com',
+    },
+    {
+      id: 3,
+      image: require('../../assets/banks/lloydsx.jpg'),
+      title: 'Lloyds',
+      description: 'A trusted British bank with a wide range of financial services for customers in the UK and abroad',
+      url: 'https://www.lloydsbank.com',
+    },
+    {
+      id: 4,
+      image: require('../../assets/banks/rbsx.jpg'),
+      title: 'RBS',
+      description: 'A respected British banking institution providing financial services to customers',
+      url: 'https://www.rbs.co.uk',
     },
   ];
 
@@ -45,8 +59,8 @@ const LondonCycling = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
         <ScrollView>
-            <Text style={{ fontSize: 24, fontWeight: 'bold', marginBottom: 30, alignSelf: 'center' }}>
-              Rental cycle providers
+            <Text style={{ fontSize: 24, fontWeight: 'bold', marginBottom: 30, alignSelf: 'center', textAlign: 'center' }}>
+              Don't have a UK bank account? Apply here
             </Text>
             <View>
                 {sections.map((section) => renderSection(section))}
@@ -97,4 +111,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LondonCycling;
+export default Banking;

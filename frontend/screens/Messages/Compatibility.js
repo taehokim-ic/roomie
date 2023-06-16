@@ -11,13 +11,13 @@ import { useChatContext } from 'stream-chat-expo';
 
 const Compatibility = (name) => {
   const route = useRoute();
-  const { uuid } = route.params;
+  const { otherUUID } = route.params;
 
   const navigation = useNavigation();
   const value = "test";
 
   const handleFlatShare = () => {
-    navigation.navigate('FlatFinding');
+    navigation.navigate('FlatFinding', {uuid: otherUUID});
   }
 
   const handleChatSwipe = () => {

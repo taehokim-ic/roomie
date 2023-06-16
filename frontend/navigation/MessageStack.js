@@ -1,4 +1,5 @@
 import React from "react";
+import { Button } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import MessageScreen from "../screens/Messages/MessageScreen";
 import ChatScreen from "../screens/Messages/ChatScreen";
@@ -11,10 +12,14 @@ import ChannelScreen from "../screens/Messages/ChannelScreen";
 import ChatScreen2 from "../screens/Messages/ChatRoomScreen";
 import Compatibility from "../screens/Messages/Compatibility";
 import FlatFinding from "../screens/Messages/FlatFinding";
+import { useNavigation } from "@react-navigation/native";
 
 const Stack = createNativeStackNavigator();
 
 const MessagesStack = () => {
+
+  const navigation = useNavigation();
+
   return (
     <ChatContextProvider>
     <Stack.Navigator>
@@ -48,12 +53,18 @@ const MessagesStack = () => {
         <Stack.Screen
           name="Compatible"
           component={Compatibility}
-          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="FlatFinding"
           component={FlatFinding}
-          options={{ headerShown: false }}
+          options={{
+            headerLeft: () => (
+              <Button
+                title="Matches"
+                onPress={() => navigation.navigate('Channel')}
+              />
+            ),
+          }}
         />
         <Stack.Screen
           name="InteractionChat"

@@ -1,28 +1,30 @@
 import React from 'react';
-import { View, ScrollView, Text, Image, TouchableOpacity, StyleSheet, Linking } from 'react-native';
+import { View, ScrollView, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { LinearGradient } from 'expo-linear-gradient';
 
-const LondonCycling = ({ navigation }) => {
-
-  const openTFlWebsite = ({url}) => {
-    Linking.openURL(url)
-      .catch((err) => console.error('An error occurred', err));
-  }
-
+const Housing = ({ navigation }) => {
   const sections = [
     {
       id: 1,
-      image: require('../../assets/tfl/santander.jpg'),
-      title: 'Santander Bikes',
-      description: 'Santander Bikes offer over 700 docking stations with affordable options',
-      url: 'https://www.santander.co.uk/personal/support/understanding-our-services/santander-cycles',
+      image: require('../../assets/agents/guide.jpg'),
+      title: 'Recommended guide',
+      description: 'Not sure where to start? Don\'t worry we have a guide for you!',
+      route: 'Managing finances',
     },
     {
       id: 2,
-      image: require('../../assets/tfl/lime.jpg'),
-      title: 'Lime Bikes',
-      description: 'Ride green with Lime bikes',
-      url: 'https://www.li.me/en-gb/locations/london',
+      image: require('../../assets/banks/swap.jpg'),
+      title: 'Switching to a UK bank account',
+      description: 'Need to get set up with a British bank account? Check out our recommended options',
+      route: 'UK banking',
+    },
+    {
+      id: 3,
+      image: require('../../assets/banks/globe.jpg'),
+      title: 'Already have an existing bank account',
+      description: 'Check to see if your bank provides options for swapping over to the UK',
+      route: 'Existing account',
     },
   ];
 
@@ -31,7 +33,7 @@ const LondonCycling = ({ navigation }) => {
       <TouchableOpacity
         key={section.id}
         style={styles.sectionCard}
-        onPress={() => openTFlWebsite({url: section.url})}
+        onPress={() => navigation.navigate(section.route)}
       >
         <Image source={section.image} style={styles.sectionImage} />
         <View style={styles.sectionInfo}>
@@ -45,8 +47,8 @@ const LondonCycling = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
         <ScrollView>
-            <Text style={{ fontSize: 24, fontWeight: 'bold', marginBottom: 30, alignSelf: 'center' }}>
-              Rental cycle providers
+          <Text style={{ fontSize: 24, fontWeight: 'bold', marginBottom: 26, alignSelf: 'center' }}>
+              Financing options
             </Text>
             <View>
                 {sections.map((section) => renderSection(section))}
@@ -97,4 +99,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LondonCycling;
+export default Housing;
