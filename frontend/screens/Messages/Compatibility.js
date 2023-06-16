@@ -8,6 +8,8 @@ import { useNavigation } from '@react-navigation/native';
 import StatusBarButton from '../../components/StatusBarButton';
 import { useRoute } from '@react-navigation/native';
 import { useChatContext } from 'stream-chat-expo';
+import { Circle } from 'react-native-svg';
+import CircleComponent from '../../components/CircleComponent';
 
 const Compatibility = (name) => {
   const route = useRoute();
@@ -82,7 +84,7 @@ const Compatibility = (name) => {
         styles={styles2}
       />
       <View style={styles.swipe} {...panResponder.panHandlers}>
-        <Text>Swipe!</Text>
+        <CircleComponent />
       </View>
     </View>
   );
@@ -126,7 +128,7 @@ const styles = StyleSheet.create({
     height: '10%',
     width: '100%',
     bottom: '10%',
-    backgroundColor: 'blue',
+    backgroundColor: 'transparent',
   }
 });
 
