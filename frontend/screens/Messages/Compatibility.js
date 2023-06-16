@@ -85,6 +85,7 @@ const Compatibility = (name) => {
       />
       <View style={styles.swipe} {...panResponder.panHandlers}>
         <CircleComponent />
+        <ChatIcon onPress={handleChatSwipe}/>
       </View>
     </View>
   );

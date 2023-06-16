@@ -67,7 +67,7 @@ const Accomodation = ({ navigation }) => {
     <SafeAreaView style={styles.container}>
         <ScrollView>
             <Text style={{ fontSize: 24, fontWeight: 'bold', marginBottom: 30, alignSelf: 'center' }}>
-                Best online real estate agents
+              Links to the best online real estate agents for London
             </Text>
             <View>
                 {sections.map((section) => renderSection(section))}

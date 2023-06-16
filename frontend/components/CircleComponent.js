@@ -19,14 +19,13 @@ const styles = {
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.5,
     shadowRadius: 4,
-    height: 40,
+    height: 30,
     width: 80,
     borderRadius: 20,
     flexDirection: 'row',
     justifyContent: 'center',
   },
   circle: {
-    top: 5,
     width: 10,
     height: 10,
     borderRadius: 10,
@@ -39,7 +38,7 @@ const styles = {
     elevation: 5,
   },
   grayCircle: {
-    backgroundColor: '#dddddd',
+    backgroundColor: '#aaaaaa',
   },
 };
 

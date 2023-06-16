@@ -9,8 +9,8 @@ const ChatIcon = ({onPress}) => {
   return (
     <TouchableOpacity onPress={onPress}>
       <View style={styles.icon}>
-        <AntDesign name="message1" size={36} color="white" />
-        <Text style={{ marginTop: 5, color: 'white', fontWeight: 'bold' }}>Tap to Chat!</Text>
+        <AntDesign name="message1" size={30} color="black" />
+        <Text style={{ marginTop: 5, color: 'black', fontWeight: 'bold' }}>Tap to Chat!</Text>
       </View>
     </TouchableOpacity>
   );
@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
   icon: {
     position: 'absolute',
     alignItems: 'center',
-    marginTop: '10%',
+    top: -15,
     right: '3%',
   }
 })
