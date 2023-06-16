@@ -15,6 +15,9 @@ import RecommendedApps from "../screens/Home/RecommendedApps";
 import LondonCycling from "../screens/Home/LondonCycling";
 import Housing from "../screens/Home/Housing"
 import TemporaryHousing from "../screens/Home/TemporaryHousing";
+import ManagingFinances from "../screens/Home/ManagingFinances";
+import Banking from "../screens/Home/Banking";
+import InternationalBanking from "../screens/Home/InternationalBanking";
 // import ChatLandlordScreen from "../screens/Flats/ChatLandlordScreen";
 
 const Stack = createNativeStackNavigator();
@@ -96,6 +99,18 @@ const FlatStack = () => {
         <Stack.Screen
         name="Temporary housing solutions"
         component={TemporaryHousing}
+        />
+        <Stack.Screen
+        name="Managing finances"
+        component={ManagingFinances}
+        />
+        <Stack.Screen
+        name="UK banking"
+        component={Banking}
+        />
+        <Stack.Screen
+        name="Existing account"
+        component={InternationalBanking}
         />
     </Stack.Navigator>
   );

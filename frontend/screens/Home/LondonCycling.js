@@ -46,7 +46,7 @@ const LondonCycling = ({ navigation }) => {
     <SafeAreaView style={styles.container}>
         <ScrollView>
             <Text style={{ fontSize: 24, fontWeight: 'bold', marginBottom: 30, alignSelf: 'center' }}>
-                Useful links to get you started
+              Rental cycle providers
             </Text>
             <View>
                 {sections.map((section) => renderSection(section))}

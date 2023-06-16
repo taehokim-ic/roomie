@@ -10,21 +10,21 @@ const Housing = ({ navigation }) => {
       image: require('../../assets/agents/guide.jpg'),
       title: 'Recommended guide',
       description: 'Not sure where to start? Don\'t worry we have a guide for you!',
-      route: 'Housing options',
+      route: 'Managing finances',
     },
     {
       id: 2,
-      image: require('../../assets/flatfinding/house.jpg'),
-      title: 'Best online real estate agents',
-      description: 'Our handpicked selection of the best online real estate agents',
-      route: 'Accomodation',
+      image: require('../../assets/banks/swap.jpg'),
+      title: 'Switching to a UK bank account',
+      description: 'Need to get set up with a British bank account? Check out our recommended options',
+      route: 'UK banking',
     },
     {
       id: 3,
-      image: require('../../assets/resources/bed.jpg'),
-      title: 'Temporary housing solutions',
-      description: 'Can\'t find anything? Don\'t worry! We have a list of affordable options till you get up on your feet',
-      route: 'Temporary housing solutions',
+      image: require('../../assets/banks/globe.jpg'),
+      title: 'Already have an existing bank account',
+      description: 'Check to see if your bank provides options for swapping over to the UK',
+      route: 'Existing account',
     },
   ];
 
@@ -48,7 +48,7 @@ const Housing = ({ navigation }) => {
     <SafeAreaView style={styles.container}>
         <ScrollView>
           <Text style={{ fontSize: 24, fontWeight: 'bold', marginBottom: 26, alignSelf: 'center' }}>
-              Best housing options tailored for you
+              Financing options
             </Text>
             <View>
                 {sections.map((section) => renderSection(section))}
