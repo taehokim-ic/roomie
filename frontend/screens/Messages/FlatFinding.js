@@ -36,7 +36,7 @@ const FlatFinding = () => {
   ).current;
 
   const handleChatSwipe = () => {
-    navigation.navigate('InteractionChat');
+    navigation.navigate('ChatRoom');
   }
 
   return (
