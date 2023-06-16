@@ -18,6 +18,9 @@ const MessagesScreen = ({navigation}) => {
   const [requests, setRequests] = useState([]);
   const [Messages, setMessages] = useState([]);
 
+  const uuid = '5b7d48da-3523-4b39-aa0e-39a37a7a1c6b';
+  const uuid2 = '05b3bbd1-4e75-4ad3-9d71-4c4c8d08717d';
+
   const handleCardPress = ({navigation, state} ) => {
     let screenName = "Compatibility";
  
@@ -39,7 +42,7 @@ const MessagesScreen = ({navigation}) => {
 
   const fetchRequests = async () => {
     try {
-      const response = await axios.get('http://roomie3.herokuapp.com/api/v1/connection_reqs?uuid=05b3bbd1-4e75-4ad3-9d71-4c4c8d08717d');
+      const response = await axios.get('http://roomie3.herokuapp.com/api/v1/connection_reqs?uuid=' + uuid2);
       const userData = [];
       for (let i = 0; i < response.data.connection_reqs.length; i++) {
         const userRequest = await axios.get('http://roomie3.herokuapp.com/api/v1/person?uuid=' + response.data.connection_reqs[i])
@@ -64,7 +67,7 @@ const MessagesScreen = ({navigation}) => {
 
   const fetchUsers = async () => {
     try {
-      const response = await axios.get('http://roomie3.herokuapp.com/api/v1/matches?uuid=05b3bbd1-4e75-4ad3-9d71-4c4c8d08717d');
+      const response = await axios.get('http://roomie3.herokuapp.com/api/v1/matches?' + uuid);
       const userData = [];
       for (let i = 0; i < response.data.matches.length; i++) {
         const userRequest = await axios.get('http://roomie3.herokuapp.com/api/v1/person?uuid=' + response.data.matches[i])

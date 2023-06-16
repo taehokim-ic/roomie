@@ -2,14 +2,16 @@ import React, {useState, useEffect} from 'react';
 import { View, FlatList, TouchableOpacity, Text, Image, StyleSheet, SafeAreaView, TextInput } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import axios from 'axios';
+import { generateUUID } from '../../context/uuid';
 
 const BrowseMatchesScreen = ({navigation}) => {
 
   const [users, setUsers] = useState([]);
+  const uuid = generateUUID();
 
   const fetchUsers = async () => {
     try {
-      const response = await axios.get('http://roomie3.herokuapp.com/api/v1/connection_reqs?uuid=05b3bbd1-4e75-4ad3-9d71-4c4c8d08717d');
+      const response = await axios.get('http://roomie3.herokuapp.com/api/v1/connection_reqs?uuid=' + uuid);
       const userData = [];
       for (let i = 0; i < response.data.connection_reqs.length; i++) {
         const userRequest = await axios.get('http://roomie3.herokuapp.com/api/v1/person?uuid=' + response.data.connection_reqs[i])

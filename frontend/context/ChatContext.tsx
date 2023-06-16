@@ -3,6 +3,7 @@ import { ActivityIndicator } from 'react-native';
 import {StreamChat, Channel} from 'stream-chat';
 import { OverlayProvider, Chat } from 'stream-chat-expo'
 import { useNavigation } from '@react-navigation/native';
+import { generateUUID } from './uuid';
 
 export const ChatContext = createContext({});
 
@@ -14,8 +15,10 @@ const ChatContextProvider = ({children}) => {
 
     const client = StreamChat.getInstance('cgza2gd8vxd6');
 
+    const uuid = generateUUID();
+
     const user = {
-        id: 'd98f5ff0-b882-4c70-92e3-4cb69a3279e2',
+        id: uuid,
         name: 'Michael',
         image: 'https://getstream.io/random_png/?id=test&name=test',
     };

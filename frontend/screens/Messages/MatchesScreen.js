@@ -3,10 +3,13 @@ import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView } from 'rea
 import { useRoute } from '@react-navigation/native';
 import { useChatContext } from '../../context/ChatContext';
 import axios from 'axios';
+import { generateUUID } from '../../context/uuid';
 
 const ProfilePage = ({navigation}) => {
   const route = useRoute();
   const { uuid } = route.params;
+
+  const clientUuid = generateUUID();
 
   const {startDMChat} = useChatContext();
 
@@ -39,7 +42,6 @@ const ProfilePage = ({navigation}) => {
     const data = {
       connection_id: uuid,
     }
-    const clientUuid = '05b3bbd1-4e75-4ad3-9d71-4c4c8d08717d';
     const url = 'http://roomie3.herokuapp.com/api/v1/connect/' + clientUuid;
     axios.post(url, data)
       .then((response) => {
@@ -56,7 +58,6 @@ const ProfilePage = ({navigation}) => {
     const data = {
       connection_id: uuid,
     }
-    const clientUuid = '05b3bbd1-4e75-4ad3-9d71-4c4c8d08717d';
     const url = 'http://roomie3.herokuapp.com/api/v1/disconnect/' + clientUuid;
     axios.post(url, data)
       .then((response) => {

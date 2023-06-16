@@ -4,8 +4,11 @@ import { Feather } from '@expo/vector-icons';
 import axios from 'axios';
 import { Dropdown } from 'react-native-element-dropdown';
 import { FontAwesome } from '@expo/vector-icons';
+import { generateUUID } from '../../context/uuid';
 
 const SearchScreen = ({navigation}) => {
+
+  const uuid = generateUUID();
 
   const [users, setUsers] = useState([]);
   const [showFilterCard, setShowFilterCard] = useState(false);
@@ -19,7 +22,7 @@ const SearchScreen = ({navigation}) => {
   const fetchUsers = async () => {
     try {
       setLoading(false);
-      const response = await axios.get('http://roomie3.herokuapp.com/api/v1/people?current_user_uuid=05b3bbd1-4e75-4ad3-9d71-4c4c8d08717d');
+      const response = await axios.get('http://roomie3.herokuapp.com/api/v1/people?current_user_uuid=' + uuid);
       setUsers(response.data);
       setResultsCount(response.data.length); // Update results count
       setLoading(true);
@@ -42,7 +45,7 @@ const SearchScreen = ({navigation}) => {
   const handleSearchButtonPress = async () => {
     setLoading(false);
     setShowFilterCard(false);
-    let url = 'http://roomie3.herokuapp.com/api/v1/people?current_user_uuid=05b3bbd1-4e75-4ad3-9d71-4c4c8d08717d&institution=' + searchInput;
+    let url = 'http://roomie3.herokuapp.com/api/v1/people?current_user_uuid=' + uuid + '&institution=' + searchInput;
     const response = await axios.get(url);
     setUsers(response.data);
     setResultsCount(response.data.length);
@@ -59,7 +62,7 @@ const SearchScreen = ({navigation}) => {
     setInstitution('');
     setLocation('');
     setSmoker('');
-    let url = 'http://roomie3.herokuapp.com/api/v1/people?current_user_uuid=05b3bbd1-4e75-4ad3-9d71-4c4c8d08717d';
+    let url = 'http://roomie3.herokuapp.com/api/v1/people?current_user_uuid=' + uuid;
     const response = await axios.get(url);
     setShowFilterCard(false);
     setUsers(response.data);
@@ -71,7 +74,7 @@ const SearchScreen = ({navigation}) => {
   };
 
   const applyFilter = async () => {
-    let url = 'http://roomie3.herokuapp.com/api/v1/people?current_user_uuid=05b3bbd1-4e75-4ad3-9d71-4c4c8d08717d';
+    let url = 'http://roomie3.herokuapp.com/api/v1/people?current_user_uuid=' + uuid;
     if (language) {
       url += `&language=${language}`;
     }
