@@ -3,49 +3,28 @@ import { View, ScrollView, Text, Image, TouchableOpacity, StyleSheet } from 'rea
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
 
-const HomeScreen = ({ navigation }) => {
+const Housing = ({ navigation }) => {
   const sections = [
     {
       id: 1,
-      image: require('../../assets/resources/housex.jpg'),
-      title: 'Find Accommodation',
-      description: 'Find the perfect place to live during your stay in London.',
-      route: 'Housing options',
+      image: require('../../assets/agents/guide.jpg'),
+      title: 'Recommended guide',
+      description: 'Not sure where to start? Don\'t worry we have a guide for you!',
+      route: 'TFL',
     },
     {
       id: 2,
-      image: require('../../assets/resources/visa.jpg'),
-      title: 'Visa and Immigration',
-      description: 'Get information about visas and immigration processes.',
-      route: 'Visa and Immigration',
+      image: require('../../assets/flatfinding/house.jpg'),
+      title: 'Best online real estate agents',
+      description: 'Our handpicked selection of the best online real estate agents',
+      route: 'Accomodation',
     },
     {
       id: 3,
-      image: require('../../assets/resources/language.jpg'),
-      title: 'Still struggling with English?',
-      description: 'Here are some tools which can make it easier',
-      route: 'Transport Links',
-    },
-    {
-      id: 4,
-      image: require('../../assets/resources/wallet.jpg'),
-      title: 'Managing Finances',
-      description: 'Learn about transportation options in the UK.',
-      route: 'Transport Links',
-    },
-    {
-      id: 5,
-      image: require('../../assets/resources/transport-london.jpg'),
-      title: 'Transportation Information',
-      description: 'Learn about transportation options in the UK.',
-      route: 'Transport Links',
-    },
-    {
-      id: 6,
-      image: require('../../assets/resources/support.jpg'),
-      title: 'Local Support Network',
-      description: 'Connect with local support networks and student associations.',
-      route: 'Support Networks',
+      image: require('../../assets/resources/bed.jpg'),
+      title: 'Temporary housing solutions',
+      description: 'Can\'t find anything? Don\'t worry! We have a list of affordable options till you get up on your feet',
+      route: 'Temporary housing solutions',
     },
   ];
 
@@ -67,11 +46,11 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-        <ScrollView style={{marginTop: 10}}>
-            <Text style={{ fontSize: 24, fontWeight: 'bold', marginBottom: 16, alignSelf: 'center' }}>
-                Get help moving to London
+        <ScrollView>
+          <Text style={{ fontSize: 24, fontWeight: 'bold', marginBottom: 26, alignSelf: 'center' }}>
+              Best housing options tailored for you
             </Text>
-            <View style={{ marginTop: 16 }}>
+            <View>
                 {sections.map((section) => renderSection(section))}
             </View>
         </ScrollView>
@@ -84,7 +63,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     paddingHorizontal: 16,
-    paddingTop: 16,
   },
   sectionCard: {
     flexDirection: 'row',
@@ -121,4 +99,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HomeScreen;
+export default Housing;
