@@ -3,6 +3,7 @@ import { View, Text, Button, StyleSheet, StatusBar, TextInput, ScrollView } from
 import { useNavigation } from '@react-navigation/native';
 import UserContext from '../../context/UserContext';
 import axios from 'axios';
+import { generateUUID } from '../../context/uuid';
 
 const ProfileEditScreen = () => {
   const navigation = useNavigation();
@@ -76,22 +77,13 @@ const ProfileEditScreen = () => {
 
   const handleSave = () => {
     const updatedUser = {
-      id: 'd274e899-53a6-4b25-8558-e28749032a4f',
       name: nameValue,
-      picture_url: 'https://hrgyksjnqypffnavbeqn.supabase.co/storage/v1/object/public/user_profile_pictures/josh_tran_profile.png',
-      bio: 'I am a cool person',
-      requirements: [
-        'I am looking for a cool person'
-      ],
-      additional_info: 'I am a cool person',
       email: emailValue,
       age: ageValue,
       dob: dobValue,
       nationality: nationalityValue,
-      preferredLocation: preferredLocationValue,
       gender: genderValue,
       smoking: smokingValue,
-      hasPets: hasPetsValue,
       minBudget: minBudgetValue,
       maxBudget: maxBudgetValue,
       primary_language: primaryLanguageValue,
@@ -100,7 +92,9 @@ const ProfileEditScreen = () => {
     console.log(updatedUser);
     setUser(updatedUser);
 
-    const url = 'http://roomie3.herokuapp.com/api/v1/profile/d274e899-53a6-4b25-8558-e28749032a4f';
+    const uuid = generateUUID();
+
+    const url = 'http://roomie3.herokuapp.com/api/v1/profile/' + uuid;
     
     axios.post(url, JSON.stringify(updatedUser), {
       headers: {
@@ -178,10 +172,6 @@ const ProfileEditScreen = () => {
           <View style={styles.row}>
             <Text style={styles.label}>Smoker?</Text>
             <TextInput style={styles.input} value={smokingValue} onChangeText={handleSmokingValue} />
-          </View>
-          <View style={styles.row}>
-            <Text style={styles.label}>Has Pets?</Text>
-            <TextInput style={styles.input} value={hasPetsValue} onChangeText={handleHasPetsValue} />
           </View>
         </View>
         <View style={styles.saveRow}>

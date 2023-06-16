@@ -327,7 +327,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
   cardContainer: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#f2f2f2',
     borderRadius: 8,
     marginTop: 10,
     padding: 16,

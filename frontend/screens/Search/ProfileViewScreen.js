@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { View, Text, Image, ActivityIndicator, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, Image, ActivityIndicator, FlatList, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import axios from 'axios';
 
@@ -82,16 +82,16 @@ const ProfilePage = ({navigation}) => {
           <Text style={styles.bio}>{flatmateProfile.bio}</Text>
         </View>
 
-        {/* <View style={styles.card}>
+        <View style={styles.card}>
           <Text style={styles.cardTitle}>Interests</Text>
           <FlatList
             data={interests}
             renderItem={renderItem}
             keyExtractor={(item) => item.id}
             contentContainerStyle={styles.contentContainer2}
-            numColumns={3}
+            numColumns={4}
           />
-        </View> */}
+        </View>
 
         {/* Extra Content */}
         <View style={styles.card}>
@@ -152,15 +152,16 @@ const ProfilePage = ({navigation}) => {
 
 const styles = StyleSheet.create({
   bubble: {
-    backgroundColor: '#03c9a9',
+    backgroundColor: '#027148',
     borderRadius: 20,
     paddingVertical: 8,
-    paddingHorizontal: 16,
+    paddingHorizontal: 12,
     margin: 4,
   },
   text: {
     fontSize: 14,
-    color: '#333333',
+    fontWeight: '600',
+    color: '#fff',
   },
   contentContainer: {
     // flexDirection: 'row',
@@ -221,7 +222,7 @@ const styles = StyleSheet.create({
     color: '#888888',
   },
   messageButton: {
-    backgroundColor: '#038aff',
+    backgroundColor: '#027148',
     borderRadius: 8,
     paddingVertical: 12,
     alignItems: 'center',

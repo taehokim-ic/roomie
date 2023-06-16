@@ -14,6 +14,14 @@ export default ProfileScreen = () => {
     navigation.navigate('ProfileView', { instantAnimation: true });
   };
 
+  const truncateText = (text) => {
+    const maxLength = 24;
+    if (text.length > maxLength) {
+      return text.substring(0, maxLength) + '...'; // Append ellipsis if text exceeds maxLength
+    }
+    return text;
+  };
+
   const {user, setUser} = useContext(UserContext);
 
   return (
@@ -28,14 +36,14 @@ export default ProfileScreen = () => {
         </View>
       <View style={styles.container}>
         <Image
-          source={require('../../assets/profile-picture.png')}
+          source={{uri: user.picture_url}}
           style={styles.profileImage}
         />
         <View style={styles.textContainer}>
           <Text style={styles.name}>{user.name}</Text>
-          <Text style={styles.bio}>Age: {user.age}</Text>
-          <TouchableOpacity style={styles.buttonContainer} onPress={handleView}>
-              <Text style={styles.editButton}>View</Text>
+          <Text style={styles.bio} numberOfLines={1} ellipsizeMode="tail">{truncateText(user.institution)}</Text>
+          <TouchableOpacity style={styles.buttonContainer2} onPress={handleView}>
+              <Text style={styles.editButton2}>View Public Profile</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -62,23 +70,44 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   buttonContainer: {
-    paddingTop: 20,
+    paddingTop: 10,
     marginRight: 20,
+  },
+  buttonContainer2: {
+    backgroundColor: '#027148',
+    borderRadius: 10,
+    width: 140,
+    height: 35,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 20,
+    marginTop: 10,
   },
   editButton: {
     fontSize: 16,
     color: '#007AFF',
   },
+  editButton2: {
+    fontSize: 14,
+    color: '#fff',
+  },
   container: {
     flexDirection: 'row',
     alignItems: 'center',
+    backgroundColor: '#fff',
+    padding: 16,
+    marginBottom: 16,
+    marginLeft: 20,
+    marginRight: 20,
+    borderRadius: 8,
   },
   title: {
     fontSize: 32,
     paddingLeft: 30,
     paddingTop: 20,
     fontWeight: 'bold',
-    textAlign: 'left'
+    textAlign: 'left',
+    marginBottom: 16,
   },
   subtitle: {
     fontSize: 20,
@@ -89,20 +118,21 @@ const styles = StyleSheet.create({
     textAlign: 'left'
   },
   profileImage: {
-    width: 150,
-    height: 150,
+    width: 120,
+    height: 120,
     borderRadius: 75,
-    marginRight: 30,
-    marginLeft: 20,
-    marginBottom: 15,
-    marginTop: 25
+    marginRight: 20,
+    marginLeft: 10,
+    marginBottom: 10,
   },
   name: {
     fontSize: 24,
     fontWeight: 'bold',
   },
   bio: {
-    fontSize: 16,
+    fontSize: 14,
+    color: '#888888',
+    flexWrap: 'wrap',
   },
   input: {
     padding: 8,
