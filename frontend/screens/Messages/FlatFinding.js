@@ -2,6 +2,7 @@ import React from 'react';
 import { Text, View, StyleSheet, FlatList, TouchableOpacity, Image, PanResponder } from 'react-native';
 import MatchingStatus from '../../components/MatchingStatus';
 import { useNavigation } from '@react-navigation/native';
+import FlatResources from './FlatResources';
 
 const FlatFinding = () => {
 
@@ -43,18 +44,7 @@ const FlatFinding = () => {
     <View>
       <View style={oldStyles.container} {...panResponder.panHandlers} >
         <MatchingStatus state={1}/>
-        <View style={styles.container}>
-          {data.map((item) => (
-          <TouchableOpacity
-            key={item.id}
-            style={styles.card}
-            onPress={() => handleCardPress(item.id)}
-          >
-            <Image source={item.image} style={styles.image} />
-            <Text style={styles.text}>{item.text}</Text>
-          </TouchableOpacity>
-          ))}
-        </View>
+        <FlatResources navigation={navigation}/>
       </View>
     </View>
   );
