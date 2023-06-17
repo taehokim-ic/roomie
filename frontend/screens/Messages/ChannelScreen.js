@@ -42,6 +42,11 @@ const ChannelScreen = ({navigation}) => {
           console.log(error);
         }
     };
+
+    const filters ={
+      type:"messaging",
+      members:{$in: [uuid.toString()] }
+    };
     
     useEffect(() => {
         fetchRequests();
@@ -109,13 +114,13 @@ const ChannelScreen = ({navigation}) => {
         const members = Object.keys(channel.state.members);
         const otherUUID = members.filter((member) => member !== chatClient.user.id)[0];
         console.log(otherUUID);
-        navigation.navigate('Compatible', {uuid: otherUUID});
+        navigation.navigate('ChatRoom');
     }
 
     return (
             <View style={styles.container}>
               {renderHeader()}
-              <ChannelList onSelect={onSelect}/>
+              <ChannelList onSelect={onSelect} filters={filters}/>
             </View>
     );
 }

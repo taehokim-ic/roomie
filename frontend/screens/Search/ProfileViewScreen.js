@@ -3,8 +3,10 @@ import { View, Text, Image, ActivityIndicator, FlatList, TouchableOpacity, Style
 import { useRoute } from '@react-navigation/native';
 import axios from 'axios';
 import Toast, { BaseToast, ErrorToast } from 'react-native-toast-message';
+import { useNavigation } from '@react-navigation/native';
 
-const ProfilePage = ({navigation}) => {
+const ProfilePage = () => {
+  const navigation = useNavigation();
   const route = useRoute();
   const { uuid } = route.params;
 
@@ -12,7 +14,7 @@ const ProfilePage = ({navigation}) => {
     success: (props) => (
       <BaseToast
         {...props}
-        style={{ borderLeftColor: '#027148' }}
+        style={{ borderColor: '#027148', borderLeftWidth: 8 }}
         contentContainerStyle={{ paddingHorizontal: 15 }}
         text1Style={{
           fontSize: 15,

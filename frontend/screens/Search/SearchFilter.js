@@ -1,5 +1,4 @@
 import React from 'react';
-import { useNavigation } from '@react-navigation/native';
 import { View, StyleSheet, Text, ScrollView } from 'react-native';
 
 import SearchButton from '../../components/SearchButton';
@@ -17,8 +16,7 @@ import ApplyFiltersButton from '../../components/ApplyFiltersButton';
 import SearchFiltersText from '../../components/SearchFiltersText';
 import AdditionalSearchFiltersText from '../../components/AdditionalSearchFiltersText';
 
-const SearchFilter = () => {
-  const navigation = useNavigation();
+const SearchFilter = ({navigation}) => {
 
   const handleSearchButtonPress = () => {
     navigation.navigate('MainFilter');

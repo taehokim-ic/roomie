@@ -9,17 +9,17 @@ const StatusBar = ({ status }) => {
     case 'agree':
       icon = 'check';
       statusText = 'Agreed';
-      statusColor = 'green';
+      statusColor = '#16a085';
       break;
     case 'disagree':
       icon = 'times';
       statusText = 'Disagreed';
-      statusColor = 'red';
+      statusColor = '#f03434';
       break;
     default:
       icon = 'question';
       statusText = 'Pending';
-      statusColor = 'orange';
+      statusColor = '#f27935';
       break;
   }
 

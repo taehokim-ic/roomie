@@ -6,9 +6,11 @@ import { Dropdown } from 'react-native-element-dropdown';
 import { FontAwesome } from '@expo/vector-icons';
 import { generateUUID } from '../../context/uuid';
 import { AntDesign } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
-const SearchScreen = ({navigation}) => {
+const SearchScreen = () => {
 
+  const navigation = useNavigation();
   const uuid = generateUUID();
 
   const [users, setUsers] = useState([]);

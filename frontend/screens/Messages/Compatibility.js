@@ -70,22 +70,17 @@ const Compatibility = (name) => {
           keyExtractor={(item) => item.id}
         />
       </View>
-      <Text style={styles.update}>Update your status...</Text>
-      <Text style={styles.recommend}>We strongly recommend that you agree on these criteria!</Text>
-
-      <CustomButton
-        title="Not compatible"
-        onPress={() => console.log('Not compatible button pressed')}
-        styles={styles1}
-      />
-      <CustomButton
-        title="Let's flatshare"
-        onPress={handleFlatShare}
-        styles={styles2}
-      />
-      <View style={styles.swipe} {...panResponder.panHandlers}>
-        <CircleComponent />
-        <ChatIcon onPress={handleChatSwipe}/>
+      <View style={{flexWrap: 'wrap', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', position: 'absolute', bottom: '10%', width: '100%'}}>
+        <CustomButton
+          title="Not compatible"
+          onPress={() => console.log('Not compatible button pressed')}
+          styles={styles1}
+        />
+        <CustomButton
+          title="Let's flatshare"
+          onPress={handleFlatShare}
+          styles={styles2}
+        />
       </View>
     </View>
   );
@@ -135,28 +130,19 @@ const styles = StyleSheet.create({
 
 const styles1 = StyleSheet.create({
   button: {
-    backgroundColor: 'red',
+    backgroundColor: '#f64747',
     borderRadius: 20,
-    position: 'absolute',
-    bottom: '0%',
-    left: '0%',
-    width: '50%',
-    height: '7%',
+    width: '40%',
+    paddingVertical: 20,
     borderColor: 'gray',
-    borderWidth: 1,
-    borderRadius: 4,
-    paddingVertical: '5%',
+    borderRadius: 10,
     paddingHorizontal: 15,
     alignItems: 'center',
-    alignSelf: 'center',
     justifyContent: 'center',
-    shadowColor: '#000000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.4,
-    shadowRadius: 4,
+    marginRight: 10,
   },
   buttonText: {
-    color: 'black',
+    color: 'white',
     fontSize: 16,
     fontWeight: 'bold',
   },
@@ -164,24 +150,15 @@ const styles1 = StyleSheet.create({
 
 const styles2 = StyleSheet.create({
   button: {
-    backgroundColor: '#49eb34',
-    right: '0%',
-    position: 'absolute',
-    bottom: '0%',
-    width: '50%',
-    height: '7%',
+    backgroundColor: '#03c9a9',
+    width: '40%',
     borderColor: 'gray',
-    borderWidth: 1,
-    borderRadius: 4,
-    paddingVertical: '5%',
+    borderRadius: 0,
+    paddingVertical: 20,
     paddingHorizontal: 15,
+    borderRadius: 10,
     alignItems: 'center',
-    alignSelf: 'center',
     justifyContent: 'center',
-    shadowColor: '#000000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.4,
-    shadowRadius: 4,
   },
   buttonText: {
     color: 'black',
@@ -192,20 +169,17 @@ const styles2 = StyleSheet.create({
 
 const scrollStyles = StyleSheet.create({
   container: {
-    height: '50%',
+    height: '60%',
     padding: 16,
     backgroundColor: 'white',
-    position: 'absolute',
-    top: 160,
-    zIndex: 100,
   },
   itemContainer: {
-    backgroundColor: '#eeeeee',
+    backgroundColor: '#f2f2f2',
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: '95%',
     height: 50,
-    borderColor: '#1C5231',
+    borderColor: '#f1f1f1',
     borderWidth: 0.5,
     borderRadius: 10,
     alignItems: 'center',

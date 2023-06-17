@@ -8,7 +8,7 @@ import { generateUUID } from './context/uuid';
 import { LogBox } from 'react-native';
 
 const App = () => {
-    LogBox.ignoreAllLogs();//Ignore all log notifications
+    // LogBox.ignoreAllLogs();//Ignore all log notifications
 
 
     const [user, setUser] = useState(null);
