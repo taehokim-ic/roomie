@@ -5,6 +5,7 @@ import axios from 'axios';
 import { Dropdown } from 'react-native-element-dropdown';
 import { FontAwesome } from '@expo/vector-icons';
 import { generateUUID } from '../../context/uuid';
+import { AntDesign } from '@expo/vector-icons';
 
 const SearchScreen = ({navigation}) => {
 
@@ -36,6 +37,13 @@ const SearchScreen = ({navigation}) => {
   useEffect(() => {
     fetchUsers();
   }, []);
+
+  truncateName = (name) => {
+    if (name.length > 14) {
+      return name.substring(0, 14) + '...';
+    }
+    return name;
+  };
 
   const handleFilterButtonPress = () => {
     setShowFilterCard(!showFilterCard);
@@ -220,13 +228,18 @@ const SearchScreen = ({navigation}) => {
   const renderCard = ({ item }) => (
     <TouchableOpacity onPress={() => handleCardPress(item.uuid)}>
       <View style={styles.cardContainer}>
-        <Image source={{uri: item.picture_url}} style={styles.profileImage} />
+        <Image source={{ uri: item.picture_url }} style={styles.profileImage} />
         <View style={styles.profileInfo}>
-          <Text style={styles.name}>{item.name}</Text>
+          <View style={styles.header}>
+            <Text style={styles.name}>{truncateName(item.name)}</Text>
+            <View style={styles.badgeContainer}>
+              <Feather name="check" size={10} color="#ffffff" style={styles.checkIcon} />
+              <Text style={styles.verifiedText}>Verified</Text>
+            </View>
+          </View>
           <Text style={styles.subtitle}>{`${item.age} | ${item.pronouns}`}</Text>
           <Text style={styles.subtitle}>{`Institution: ${item.institution}`}</Text>
           <Text style={styles.subtitle}>{`Budget: £${item.min_budget} - £${item.max_budget}`}</Text>
-          
         </View>
       </View>
     </TouchableOpacity>
@@ -343,10 +356,36 @@ const styles = StyleSheet.create({
   profileInfo: {
     flexDirection: 'column',
   },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: 5,
+  },
   name: {
     fontSize: 18,
     fontWeight: 'bold',
-    marginBottom: 8,
+    marginRight: 5,
+  },
+  badgeContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#038aff',
+    borderRadius: 8,
+    paddingHorizontal: 6,
+    paddingVertical: 4,
+    position: 'absolute',
+    left: 155
+  },
+  checkIcon: {
+    color: '#ffffff',
+    marginRight: 5,
+  },
+  verifiedText: {
+    fontSize: 9,
+    color: '#ffffff',
+    fontWeight: 'bold',
+    paddingRight: 2,
   },
   subtitle: {
     fontSize: 12,
