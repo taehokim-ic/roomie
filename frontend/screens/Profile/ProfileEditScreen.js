@@ -79,7 +79,6 @@ const ProfileEditScreen = () => {
     const updatedUser = {
       name: nameValue,
       email: emailValue,
-      age: ageValue,
       dob: dobValue,
       nationality: nationalityValue,
       gender: genderValue,
@@ -108,6 +107,14 @@ const ProfileEditScreen = () => {
     .catch((error) => {
       console.error(error);
     });
+    axios.get('http://roomie3.herokuapp.com/api/v1/profile/' + uuid)
+    .then((response) => {
+      console.log(response.data);
+      setUser(response.data);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 
     navigation.navigate('DefaultProfile', { instantAnimation: true });
   };
@@ -123,10 +130,6 @@ const ProfileEditScreen = () => {
           <View style={styles.row}>
                 <Text style={styles.label}>Name</Text>
                 <TextInput value={nameValue} onChangeText={handleNameValue} />
-          </View>
-          <View style={styles.row}>
-                <Text style={styles.label}>Age</Text>
-                <TextInput value={ageValue} onChangeText={handleAgeValue} />
           </View>
           <View style={styles.row}>
                 <Text style={styles.label}>Contact Number</Text>

@@ -15,6 +15,7 @@ export default ProfileScreen = () => {
   };
 
   const truncateText = (text) => {
+    if (!text) return;
     const maxLength = 24;
     if (text.length > maxLength) {
       return text.substring(0, maxLength) + '...'; // Append ellipsis if text exceeds maxLength
