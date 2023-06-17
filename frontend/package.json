@@ -49,6 +49,7 @@
     "react-native-step-indicator": "^1.0.3",
     "react-native-svg": "13.4.0",
     "react-native-textinput-effects": "^0.6.3",
+    "react-native-toast-message": "^2.1.6",
     "stream-chat": "^8.9.0",
     "stream-chat-expo": "^5.15.1",
     "stream-chat-react-native": "^5.15.1",

@@ -2,10 +2,27 @@ import React, {useState, useEffect} from 'react';
 import { View, Text, Image, ActivityIndicator, FlatList, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import axios from 'axios';
+import Toast, { BaseToast, ErrorToast } from 'react-native-toast-message';
 
 const ProfilePage = ({navigation}) => {
   const route = useRoute();
   const { uuid } = route.params;
+
+  const toastConfig = {
+    success: (props) => (
+      <BaseToast
+        {...props}
+        style={{ borderLeftColor: '#027148' }}
+        contentContainerStyle={{ paddingHorizontal: 15 }}
+        text1Style={{
+          fontSize: 15,
+          fontWeight: '400'
+        }}
+      />
+    ),}
+
+  useEffect(() => {
+  }, []);
 
   const [flatmateProfile, setFlatmateProfile] = useState({});
   const [loading, setLoading] = useState(false);
@@ -64,7 +81,19 @@ const ProfilePage = ({navigation}) => {
     ).catch((error) => {
       console.log(error);
     });
-    navigation.goBack();
+    Toast.show({
+      type: 'success',
+      text1: 'Connection request successfully submitted!',
+      visibilityTime: 3000,
+      autoHide: true,
+      bottomOffset: 40,
+      position: 'bottom',
+      props: {
+        backgroundColor: '#027148',
+        height: 100,
+        width: 100,
+      }
+    });
   };
 
   return (
@@ -146,6 +175,7 @@ const ProfilePage = ({navigation}) => {
       </View> :
     <ActivityIndicator size="large" style={{marginTop:100}} />
       }
+    <Toast config={toastConfig} />
     </ScrollView>
   );
 };
