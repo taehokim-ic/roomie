@@ -26,6 +26,7 @@ import TransportScreen from "../screens/Home/TransportScreen";
 import VisaScreen from "../screens/Home/VisaScreen";
 import FlatResources from "../screens/Messages/FlatResources";
 import { useNavigation } from "@react-navigation/native";
+import GroupMessagesScreen from "../screens/Messages/GroupMessagesScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -40,6 +41,11 @@ const MessagesStack = () => {
         name="Channel"
         component={ChannelScreen}
         options={{ headerShown: true, headerTitle: 'Matches' }}
+      />
+      <Stack.Screen
+        name="Create Group"
+        component={GroupMessagesScreen}
+        options={{ headerShown: true }}
       />
     <Stack.Screen
         name="Messages"

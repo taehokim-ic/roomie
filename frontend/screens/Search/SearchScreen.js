@@ -5,7 +5,7 @@ import axios from 'axios';
 import { Dropdown } from 'react-native-element-dropdown';
 import { FontAwesome } from '@expo/vector-icons';
 import { generateUUID } from '../../context/uuid';
-import { AntDesign } from '@expo/vector-icons';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
 
 const SearchScreen = () => {
@@ -261,6 +261,7 @@ const SearchScreen = () => {
             <Feather name="sliders" size={20} color="#555" />
           </TouchableOpacity>
           <TouchableOpacity style={styles.submitButton} onPress={handleSearchButtonPress}>
+            <Icon name="search" size={12} color="#fff" style={{marginRight:5}}/>
             <Text style={styles.submitButtonText}>Search</Text>
           </TouchableOpacity>
         </View>
@@ -313,7 +314,7 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 36,
     backgroundColor: '#f1f1f1',
-    paddingHorizontal: 12,
+    paddingHorizontal: 10,
     marginRight: 8,
     color: '#333',
     borderRadius: 4,
@@ -321,19 +322,22 @@ const styles = StyleSheet.create({
     paddingBottom: 4,
   },
   filterButton: {
-    padding: 10,
+    padding: 8,
     backgroundColor: '#f1f1f1',
     borderRadius: 4,
   },
   submitButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
     paddingVertical: 10,
-    paddingHorizontal: 16,
+    paddingHorizontal: 10,
     backgroundColor: '#027148',
     borderRadius: 4,
     marginLeft: 8,
   },
   submitButtonText: {
-    fontSize: 14,
+    fontSize: 12,
     fontWeight: 'bold',
     color: '#fff',
   },
