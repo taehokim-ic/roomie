@@ -19,8 +19,11 @@ const Compatibility = (name) => {
   const value = "test";
 
   const handleFlatShare = () => {
-    console.log(getAgreeCount());
-    handleConfirmation();
+    if (getAgreeCount() === 6) {
+      handleConfirmation();
+    } else {
+      handleInsufficientAccept();
+    }
   }
 
   const handleChatSwipe = () => {
@@ -68,6 +71,20 @@ const Compatibility = (name) => {
 
     return agreeCount;
   }
+
+  const handleInsufficientAccept = () => {
+    Alert.alert(
+      'Insufficient compatibility',
+      'We strongly recommend that you agree on all of the criteria',
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+      ],
+      { cancelable: false }
+    );
+  };
 
   const handleConfirmation = () => {
     Alert.alert(
