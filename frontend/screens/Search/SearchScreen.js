@@ -234,10 +234,14 @@ const SearchScreen = () => {
         <View style={styles.profileInfo}>
           <View style={styles.header}>
             <Text style={styles.name}>{truncateName(item.name)}</Text>
-            <View style={styles.badgeContainer}>
-              <Feather name="check" size={10} color="#ffffff" style={styles.checkIcon} />
-              <Text style={styles.verifiedText}>Verified</Text>
-            </View>
+            {
+              item.verified && (
+                <View style={styles.badgeContainer}>
+                  <Feather name="check" size={11} color="#ffffff" style={styles.checkIcon} />
+                  <Text style={styles.verifiedText}>Verified</Text>
+                </View>
+              )
+            }
           </View>
           <Text style={styles.subtitle}>{`${item.age} | ${item.pronouns}`}</Text>
           <Text style={styles.subtitle}>{`Institution: ${item.institution}`}</Text>
@@ -342,7 +346,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
   cardContainer: {
-    backgroundColor: '#f2f2f2',
+    backgroundColor: '#f7f5f5',
     borderRadius: 8,
     marginTop: 10,
     padding: 16,
@@ -365,7 +369,7 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   name: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: 'bold',
     marginRight: 5,
   },
@@ -377,14 +381,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 6,
     paddingVertical: 4,
     position: 'absolute',
-    left: 155
+    left: 145
   },
   checkIcon: {
     color: '#ffffff',
     marginRight: 5,
   },
   verifiedText: {
-    fontSize: 9,
+    fontSize: 11,
     color: '#ffffff',
     fontWeight: 'bold',
     paddingRight: 2,

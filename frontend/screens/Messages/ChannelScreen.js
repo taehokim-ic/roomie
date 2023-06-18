@@ -6,7 +6,23 @@ import axios from 'axios';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { generateUUID } from '../../context/uuid';
 
+const GroupButton = () => {
+  const handlePress = () => {
+    console.log('Create Group');
+  };
+
+  return (
+    <TouchableOpacity onPress={handlePress}>
+      <Text style={{color: '#038aff', fontSize:14}}>Create Group</Text>
+    </TouchableOpacity>
+  );
+};
+
 const ChannelScreen = ({navigation}) => {
+  navigation.setOptions({
+    headerRight: () => <GroupButton />,
+  });
+
     const [loading, setLoading] = useState(false);
     const [requests, setRequests] = useState([]);
 
@@ -107,7 +123,7 @@ const ChannelScreen = ({navigation}) => {
           );
     };
 
-    const {currentChannel, setCurrentChannel, chatClient} = useChatContext();
+    const {currentChannel, setCurrentChannel, chatClient, startGroupChat} = useChatContext();
 
     const onSelect = (channel) => {
         setCurrentChannel(channel);

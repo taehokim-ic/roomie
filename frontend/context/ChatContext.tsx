@@ -48,6 +48,19 @@ const ChatContextProvider = ({children}) => {
         }};
     }, []);
 
+    const startGroupChat = async (userIds: string[]) => {
+        if (!chatClient) return;
+      
+        const members = [chatClient.userID, ...userIds];
+      
+        const newChannel = chatClient.channel('messaging', { members });
+      
+        await newChannel.watch();
+        setCurrentChannel(newChannel);
+        navigation.navigate('ChatRoom');
+      };
+      
+
     const startDMChat = async (userId) => {
         if (!chatClient) return;
 
@@ -62,7 +75,7 @@ const ChatContextProvider = ({children}) => {
 
     if (!chatClient) return <ActivityIndicator />;
 
-    const value = { chatClient, currentChannel, startDMChat, setCurrentChannel};
+    const value = { chatClient, currentChannel, startDMChat, startGroupChat, setCurrentChannel};
     return (
         <OverlayProvider>
             <Chat client={chatClient}>
