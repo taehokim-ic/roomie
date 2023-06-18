@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, View, StyleSheet, FlatList, PanResponder } from 'react-native';
+import { Text, View, StyleSheet, FlatList, PanResponder, Alert } from 'react-native';
 import CustomButton from '../../components/CustomButton';
 import MatchingStatus from '../../components/MatchingStatus';
 import ChatIcon from '../../components/ChatIcon';
@@ -19,7 +19,8 @@ const Compatibility = (name) => {
   const value = "test";
 
   const handleFlatShare = () => {
-    navigation.navigate('FlatFinding', {uuid: otherUUID});
+    console.log(getAgreeCount());
+    handleConfirmation();
   }
 
   const handleChatSwipe = () => {
@@ -54,6 +55,38 @@ const Compatibility = (name) => {
       return dataItem;
     });
     setCompatibilityData(updatedData);
+  };
+
+  const getAgreeCount = () => {
+    let agreeCount = 0;
+
+    for (let i = 0; i < compatibilityData.length; i++) {
+      if (compatibilityData[i].status === 'agree') {
+        agreeCount++;
+      }
+    }
+
+    return agreeCount;
+  }
+
+  const handleConfirmation = () => {
+    Alert.alert(
+      'Confirmation',
+      'Are you sure you want to proceed?',
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+        {
+          text: 'Confirm',
+          onPress: () => {
+            navigation.navigate('FlatFinding', {uuid: otherUUID});
+          },
+        },
+      ],
+      { cancelable: false }
+    );
   };
 
   const panResponder = React.useRef(
