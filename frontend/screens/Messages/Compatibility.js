@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import { Text, View, StyleSheet, FlatList, PanResponder } from 'react-native';
 import CustomButton from '../../components/CustomButton';
 import MatchingStatus from '../../components/MatchingStatus';
@@ -26,23 +26,35 @@ const Compatibility = (name) => {
     navigation.navigate('ChatRoom');
   }
 
-  const data = [
-    { id: '1', text: 'Rent', status: 'agree' },
-    { id: '2', text: 'Location', status: 'disagree' },
-    { id: '3', text: 'Furniture', status: 'agree' },
-    { id: '4', text: 'Lifestyle', status: 'disagree' },
+  const [compatibilityData, setCompatibilityData] = useState([
+    { id: '1', text: 'Rent', status: 'pending' },
+    { id: '2', text: 'Location', status: 'pending' },
+    { id: '3', text: 'Furniture', status: 'pending' },
+    { id: '4', text: 'Lifestyle', status: 'pending' },
     { id: '5', text: 'Allergies', status: 'pending' },
-    { id: '6', text: 'Pets', status: 'disagree' },
+    { id: '6', text: 'Pets', status: 'pending' },
     // Add more items as needed
-  ];
+  ]);
 
-  const renderItem = ({ item }) => (
-    <View style={scrollStyles.itemContainer}>
-      <Text style={scrollStyles.itemText}>{item.text}</Text>
-      <StatusBar status={item.status} />
-      <StatusBarButton />
-    </View>
-  );
+  const handleAgree = (item) => {
+    const updatedData = compatibilityData.map((dataItem) => {
+      if (dataItem.id === item.id) {
+        return { ...dataItem, status: 'agree' };
+      }
+      return dataItem;
+    });
+    setCompatibilityData(updatedData);
+  };
+
+  const handleDisagree = (item) => {
+    const updatedData = compatibilityData.map((dataItem) => {
+      if (dataItem.id === item.id) {
+        return { ...dataItem, status: 'disagree' };
+      }
+      return dataItem;
+    });
+    setCompatibilityData(updatedData);
+  };
 
   const panResponder = React.useRef(
     PanResponder.create({
@@ -59,13 +71,21 @@ const Compatibility = (name) => {
     })
   ).current;
 
+  const renderItem = ({ item }) => (
+    <View style={scrollStyles.itemContainer}>
+      <Text style={scrollStyles.itemText}>{item.text}</Text>
+      <StatusBar status={item.status} />
+      <StatusBarButton onAgreePress={() => handleAgree(item)} onDisagreePress={() => handleDisagree(item)} />
+    </View>
+  );
+
   return (
     <View style={styles.container}>
       <MatchingStatus state={0}/>
       <Text style={styles.text}>Are you compatible?</Text>
       <View style={scrollStyles.container}>
         <FlatList
-          data={data}
+          data={compatibilityData}
           renderItem={renderItem}
           keyExtractor={(item) => item.id}
         />

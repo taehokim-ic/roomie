@@ -2,12 +2,23 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
-const StatusBarButton = () => {
+const StatusBarButton = ({ onAgreePress, onDisagreePress }) => {
   const [clickCount, setClickCount] = useState(0);
 
   const handlePress = () => {
     setClickCount(clickCount + 1);
   };
+
+  const handleAgreePress = () => {
+    setClickCount(clickCount + 1);
+    console.log('Reached');
+    onAgreePress();
+  }
+
+  const handleDisagreePress = () => {
+    setClickCount(clickCount + 1);
+    onDisagreePress();
+  }
 
   const resetButton = () => {
     setClickCount(0);
@@ -27,13 +38,13 @@ const StatusBarButton = () => {
         >
           <TouchableOpacity
             style={styles.buttonAfter}
-            onPress={handlePress}
+            onPress={handleAgreePress}
           >
             <Text style={styles.buttonText}>Agree</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.buttonAfter}
-            onPress={handlePress}
+            onPress={handleDisagreePress}
           >
             <Text style={styles.buttonText}>Disagree</Text>
           </TouchableOpacity>
