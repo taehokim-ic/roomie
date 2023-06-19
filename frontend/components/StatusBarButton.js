@@ -11,7 +11,6 @@ const StatusBarButton = ({ onAgreePress, onDisagreePress }) => {
 
   const handleAgreePress = () => {
     setClickCount(clickCount + 1);
-    console.log('Reached');
     onAgreePress();
   }
 
