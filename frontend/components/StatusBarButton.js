@@ -76,17 +76,17 @@ const styles = StyleSheet.create({
   },
   buttonAfter: {
     width: 120,
-    height: 30,
-    backgroundColor: 'white',
+    height: 24,
+    backgroundColor: '#fdfdfd',
     alignItems: 'center',
     justifyContent: 'center',
-    borderColor: 'blue',
+    borderColor: 'fff',
     borderWidth: 0.25,
     borderRadius: 4,
   },
   buttonText: {
-    fontSize: 18,
-    color: 'blue',
+    fontSize: 16,
+    color: 'fff',
   },
 });
 

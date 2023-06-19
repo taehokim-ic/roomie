@@ -11,10 +11,18 @@ import { useChatContext } from 'stream-chat-expo';
 import { Circle } from 'react-native-svg';
 import CircleComponent from '../../components/CircleComponent';
 import QuestionMarkButton from '../../components/QuestionMarkButton';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import Icon from 'react-native-vector-icons/Feather';
+import axios from 'axios';
+import { generateUUID } from '../../context/uuid';
+
 
 const Compatibility = (name) => {
   const route = useRoute();
   const { otherUUID } = route.params;
+
+  const uuid = generateUUID();
+  const {currentChannel} = useChatContext();
 
   const navigation = useNavigation();
   const value = "test";
@@ -81,6 +89,12 @@ const Compatibility = (name) => {
         {
           text: 'Cancel',
           style: 'cancel',
+        },
+        {
+          text: 'Ignore',
+          onPress: () => {
+            handleConfirmation();
+          },
         },
       ],
       { cancelable: false }
@@ -232,6 +246,24 @@ const Compatibility = (name) => {
     </View>
   );
 
+  const notCompatible = async () => {
+    const data = {
+      connection_id: otherUUID,
+    }
+    const url = 'http://roomie3.herokuapp.com/api/v1/connect/' + uuid;
+    const destroy = await currentChannel.delete();
+    // console.log(destroy);
+    deleteChannel();
+    axios.post(url, data)
+      .then((response) => {
+        console.log(response);
+      }
+    ).catch((error) => {
+      console.log(error);
+    });
+    navigation.goBack();
+  }
+
   return (
     <View style={styles.container}>
       <MatchingStatus state={0}/>
@@ -243,23 +275,42 @@ const Compatibility = (name) => {
           keyExtractor={(item) => item.id}
         />
       </View>
-      <View style={{flexWrap: 'wrap', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', position: 'absolute', bottom: '10%', width: '100%'}}>
-        <CustomButton
-          title="Not compatible"
-          onPress={() => console.log('Not compatible button pressed')}
-          styles={styles1}
-        />
-        <CustomButton
-          title="Let's flatshare"
-          onPress={handleFlatShare}
-          styles={styles2}
-        />
+      <TouchableOpacity
+        style={styles.chatContainer}
+        onPress={handleChatSwipe}
+        >
+          <Text style={styles.chatText}>Chat</Text>
+        </TouchableOpacity>
+      <View style={{flexWrap: 'wrap', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', width:'100%', marginTop:10}}>
+        <TouchableOpacity style={styles1.button} onPress={notCompatible}>
+        <Icon name="x" size={20} color="white" />
+          <Text style={styles1.buttonText}>Not Compatible</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles2.button} onPress={handleFlatShare}>
+          <Icon name="check" size={20} color="white" />
+            <Text style={styles2.buttonText}>Let's Flatshare</Text>
+          </TouchableOpacity>
       </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  chatContainer: {
+    width: '80%',
+    height: 50,
+    backgroundColor: '#038aff',
+    borderRadius: 10,
+    alignSelf: 'center',
+    justifyContent: 'center',
+  },
+  chatText: {
+    color: 'white',
+    fontSize: 18,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+
   container: {
     height: '100%',
     backgroundColor: 'white',
@@ -304,19 +355,18 @@ const styles = StyleSheet.create({
 const styles1 = StyleSheet.create({
   button: {
     backgroundColor: '#f64747',
-    borderRadius: 20,
-    width: '40%',
     paddingVertical: 20,
-    borderColor: 'gray',
     borderRadius: 10,
     paddingHorizontal: 15,
     alignItems: 'center',
     justifyContent: 'center',
-    marginRight: 10,
+    marginRight: '2%',
+    flexDirection: 'row',
   },
   buttonText: {
+    marginLeft: 3,
     color: 'white',
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: 'bold',
   },
 })
@@ -324,18 +374,17 @@ const styles1 = StyleSheet.create({
 const styles2 = StyleSheet.create({
   button: {
     backgroundColor: '#03c9a9',
-    width: '40%',
-    borderColor: 'gray',
-    borderRadius: 0,
+    borderRadius: 10,
     paddingVertical: 20,
     paddingHorizontal: 15,
-    borderRadius: 10,
     alignItems: 'center',
     justifyContent: 'center',
+    flexDirection: 'row',
   },
   buttonText: {
-    color: 'black',
-    fontSize: 16,
+    marginLeft: 3,
+    color: 'white',
+    fontSize: 14,
     fontWeight: 'bold',
   },
 })

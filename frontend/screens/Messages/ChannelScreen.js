@@ -128,6 +128,7 @@ const ChannelScreen = ({navigation}) => {
 
     const onSelect = (channel) => {
         setCurrentChannel(channel);
+        console.log(channel.id);
         const members = Object.keys(channel.state.members);
         const otherUUID = members.filter((member) => member !== chatClient.user.id)[0];
         console.log(otherUUID);

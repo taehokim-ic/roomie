@@ -55,7 +55,7 @@ const MessagesStack = () => {
       <Stack.Screen
         name="ChatRoom"
         component={ChatScreen2}
-        options={{ headerShown: true }}
+        options={{ headerShown: true , headerTitle: 'Chat'}}
       />
       <Stack.Screen
         name="Confirmation"

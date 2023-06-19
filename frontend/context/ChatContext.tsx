@@ -4,6 +4,7 @@ import {StreamChat, Channel} from 'stream-chat';
 import { OverlayProvider, Chat } from 'stream-chat-expo'
 import { useNavigation } from '@react-navigation/native';
 import { generateUUID } from './uuid';
+import axios from 'axios';
 
 export const ChatContext = createContext({});
 
@@ -17,26 +18,25 @@ const ChatContextProvider = ({children}) => {
 
     const uuid = generateUUID();
 
-    const user = {
-        id: uuid,
-        name: 'Michael',
-        image: 'https://getstream.io/random_png/?id=test&name=test',
-    };
+    useEffect(() => {
+    }, []);
 
     useEffect(() => {
         const initChat = async () => {
-            if (!user.id) return;
+            const response = await axios.get('http://roomie3.herokuapp.com/api/v1/person?uuid=' + uuid);
+
+            const name = response.data.name;
+            const image = response.data.picture_url;
             
             await client.connectUser(
                 {
-                    id: user.id,
-                    name: user.name,
-                    image: user.image,
+                    id: uuid,
+                    name: name,
+                    image: image,
                 },
-                client.devToken(user.id),
+                client.devToken(uuid),
             );            
             setChatClient(client);
-
         };
         initChat();
     }, []);
@@ -59,7 +59,11 @@ const ChatContextProvider = ({children}) => {
         setCurrentChannel(newChannel);
         navigation.navigate('ChatRoom');
       };
-      
+
+      const deleteChannel = async () => {
+        await currentChannel.delete();
+        setCurrentChannel(undefined);
+      };
 
     const startDMChat = async (userId) => {
         if (!chatClient) return;
@@ -70,7 +74,7 @@ const ChatContextProvider = ({children}) => {
 
         await newChannel.watch();
         setCurrentChannel(newChannel);
-        navigation.navigate('ChatRoom');
+        navigation.navigate('Compatible', userId );
     };
 
     if (!chatClient) return <ActivityIndicator />;
