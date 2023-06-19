@@ -9,6 +9,7 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@miblanchard/react-native-slider": "^2.3.1",
     "@ptomasroos/react-native-multi-slider": "^2.2.2",
     "@react-native-community/netinfo": "9.3.7",
     "@react-native-picker/picker": "^2.4.8",
@@ -50,6 +51,7 @@
     "react-native-svg": "13.4.0",
     "react-native-textinput-effects": "^0.6.3",
     "react-native-toast-message": "^2.1.6",
+    "react-slider": "^2.0.5",
     "stream-chat": "^8.9.0",
     "stream-chat-expo": "^5.15.1",
     "stream-chat-react-native": "^5.15.1",

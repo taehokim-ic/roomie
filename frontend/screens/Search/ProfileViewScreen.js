@@ -4,6 +4,7 @@ import { useRoute } from '@react-navigation/native';
 import axios from 'axios';
 import Toast, { BaseToast, ErrorToast } from 'react-native-toast-message';
 import { useNavigation } from '@react-navigation/native';
+import Feather from 'react-native-vector-icons/Feather';
 
 const ProfilePage = () => {
   const navigation = useNavigation();
@@ -102,6 +103,11 @@ const ProfilePage = () => {
     <ScrollView style={styles.contentContainer}>
       { loading ? 
       <View style={styles.container}>
+        { flatmateProfile.verified ? 
+                  <View style={styles.verifiedBadge}>
+                  <Feather name="check" size={11} color="#ffffff" style={styles.checkIcon} />
+                  <Text style={styles.verifiedText}>Verified</Text>
+                </View> : null }
         {/* Profile Picture */}
         <Image source={{uri: flatmateProfile.picture_url}} style={styles.profilePicture} />
 
@@ -183,6 +189,28 @@ const ProfilePage = () => {
 };
 
 const styles = StyleSheet.create({
+  verifiedBadge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#038aff',
+    width: 80,
+    borderRadius: 15,
+    paddingHorizontal: 8,
+    paddingVertical: 8,
+    position: 'absolute',
+    left: 270,
+    top: 20,
+  },
+  checkIcon: {
+    color: '#ffffff',
+    marginRight: 5,
+  },
+  verifiedText: {
+    fontSize: 11,
+    color: '#ffffff',
+    fontWeight: 'bold',
+    paddingRight: 2,
+  },
   bubble: {
     backgroundColor: '#027148',
     borderRadius: 20,
@@ -191,7 +219,7 @@ const styles = StyleSheet.create({
     margin: 4,
   },
   text: {
-    fontSize: 14,
+    fontSize: 12,
     fontWeight: '600',
     color: '#fff',
   },

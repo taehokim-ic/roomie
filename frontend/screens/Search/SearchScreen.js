@@ -7,6 +7,8 @@ import { FontAwesome } from '@expo/vector-icons';
 import { generateUUID } from '../../context/uuid';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
+import MultiSlider from '@ptomasroos/react-native-multi-slider';
+
 
 const SearchScreen = () => {
 
@@ -67,6 +69,7 @@ const SearchScreen = () => {
   };
 
   const clearFilter = async () => {
+    setRangeValues([500, 3000]);
     setLoading(false);
     setLanguage('');
     setInstitution('');
@@ -91,12 +94,7 @@ const SearchScreen = () => {
     if (institution) {
       url += `&institution=${institution}`;
     }
-    if (location) {
-      url += `&location=${location}`;
-    }
-    if (smoker) {
-      url += `&smoker=${smoker}`;
-    }
+    url += `&min_budget=${rangeValues[0]}&max_budget=${rangeValues[1]}`;
     const response = await axios.get(url);
     setShowFilterCard(false);
     setUsers(response.data);
@@ -123,16 +121,11 @@ const SearchScreen = () => {
     { label: 'King\'s English School London', value: 'King\s English School London' },
   ];
 
-  // const locations = [
-  //   { label: 'London', value: 'London' },
-  //   { label: 'EF London', value: 'EF London' },
-  //   { label: 'Stafford House London', value: 'Stafford House London' },
-  //   { label: 'English', value: 'English' },
-  //   { label: 'French', value: 'French' },
-  //   { label: 'German', value: 'German' },
-  //   { label: 'Cantonese', value: 'Cantonese' },
-  //   { label: 'Arabic', value: 'Arabic' },
-  // ];
+  const [rangeValues, setRangeValues] = useState([500, 3000]);
+
+  const handleChange = (values) => {
+    setRangeValues(values);
+  };
 
   const smokers = [
     { label: 'Yes', value: 'Yes' },
@@ -181,38 +174,15 @@ const SearchScreen = () => {
               onChange={(item) => setInstitution(item.value)}
             />
             </View>
-
-            {/* <Text style={styles.filter}>Location</Text>
-            <View style={styles.container}>
-            <Dropdown
-              style={styles.dropdown}
-              placeholderStyle={styles.placeholderStyle}
-              selectedTextStyle={styles.selectedTextStyle}
-              iconStyle={styles.iconStyle}
-              data={locations}
-              maxHeight={300}
-              labelField="label"
-              valueField="value"
-              placeholder={'Please select...'}
-              value={location}
-              onChange={(item) => setLocation(item.value)}
-            />
-            </View> */}
-
-            <Text style={styles.filter}>Smoker?</Text>
-            <View style={styles.container}>
-            <Dropdown
-              style={styles.dropdown}
-              placeholderStyle={styles.placeholderStyle}
-              selectedTextStyle={styles.selectedTextStyle}
-              iconStyle={styles.iconStyle}
-              data={smokers}
-              maxHeight={300}
-              labelField="label"
-              valueField="value"
-              placeholder={'Please select...'}
-              value={smoker}
-              onChange={(item) => setSmoker(item.value)}
+            <Text style={styles.filter}>Monthly Budget: £{rangeValues[0]} - £{rangeValues[1]}</Text>
+            <View style={styles.sliderWrapper}>
+            <MultiSlider
+              values={rangeValues}
+              sliderLength={300}
+              min={500}
+              max={3000}
+              step={100}
+              onValuesChange={handleChange}
             />
             </View>
 
@@ -287,6 +257,12 @@ const SearchScreen = () => {
 };
 
 const styles = StyleSheet.create({
+  sliderWrapper: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginRight: 10,
+  },
   safeArea: {
     flex: 1,
     backgroundColor: '#FFFFFF',
