@@ -10,6 +10,7 @@ import { useRoute } from '@react-navigation/native';
 import { useChatContext } from 'stream-chat-expo';
 import { Circle } from 'react-native-svg';
 import CircleComponent from '../../components/CircleComponent';
+import QuestionMarkButton from '../../components/QuestionMarkButton';
 
 const Compatibility = (name) => {
   const route = useRoute();
@@ -106,6 +107,107 @@ const Compatibility = (name) => {
     );
   };
 
+  const rentPrompt = `
+  Please make sure you have considered:
+
+  - How much are you willing to pay per week?
+
+  - How long do you need to pay rent for?
+
+  - How frequently are you comfortable paying rent?
+
+  - Does rent have to be paid in advance?
+  `
+
+  const locationPrompt = `
+  Please make sure you have considered:
+
+  - How far are you willing to travel to get to your institute?
+
+  - Are you familiar with how expensive and long travel is?
+  `
+
+  const furniturePrompt = `
+  Please make sure you have considered:
+
+  - Do you have any specific needs for furniture?
+
+  - Are you willing to rent in an unfurnished property?
+
+  - If you are, have you arranged to have a bed installed?
+  `
+  const lifestylePrompt = `
+  Please make sure you have considered:
+
+  - What is your normal workday schedule like?
+
+  - Are you comfortable having people over ocassionally?
+
+  - How particular are you about having a clean house?
+
+  - Are there any aspects of your lifestyle which may affect another person living with you?
+  `
+
+  const allergiesPrompt = `
+  Please make sure you have communicated all types of allergies with your match
+  `
+
+  const petsPrompt = `
+  Please make sure you have considered:
+
+  - Are you comfortable with your match owning a pet?
+
+  - Could your pet have a significant influence on your match's experience if they were to flatshare with you?
+  `
+
+  const getPrompt = (item) => {
+    switch(item.id) {
+      case '1':
+        return rentPrompt;
+      case '2':
+        return locationPrompt;
+      case '3':
+        return furniturePrompt;
+      case '4':
+        return lifestylePrompt;
+      case '5':
+        return allergiesPrompt;
+      case '6':
+        return petsPrompt;
+    }
+  }
+
+  const getPromptTitle = (item) => {
+    switch(item.id) {
+      case '1':
+        return "Rent guidance";
+      case '2':
+        return "Location guidance";
+      case '3':
+        return "Furniture guidance";
+      case '4':
+        return "Lifestyle guidance";
+      case '5':
+        return "Allergies guidance"
+      case '6':
+        return "Pets guidance";
+    }
+  }
+
+  const handlePrompt = (item) => {
+    Alert.alert(
+      getPromptTitle(item),
+      getPrompt(item),
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+      ],
+      { cancelable: true }
+    );
+  }
+
   const panResponder = React.useRef(
     PanResponder.create({
       onStartShouldSetPanResponder: (event, gestureState) => {
@@ -124,6 +226,7 @@ const Compatibility = (name) => {
   const renderItem = ({ item }) => (
     <View style={scrollStyles.itemContainer}>
       <Text style={scrollStyles.itemText}>{item.text}</Text>
+      <QuestionMarkButton onPress={() => handlePrompt(item)}/>
       <StatusBar status={item.status} />
       <StatusBarButton onAgreePress={() => handleAgree(item)} onDisagreePress={() => handleDisagree(item)} />
     </View>
