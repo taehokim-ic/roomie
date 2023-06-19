@@ -200,7 +200,7 @@ const Compatibility = (name) => {
       getPrompt(item),
       [
         {
-          text: 'Cancel',
+          text: 'I understand',
           style: 'cancel',
         },
       ],

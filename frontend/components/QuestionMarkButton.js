@@ -6,7 +6,7 @@ const QuestionMarkButton = ({ onPress }) => {
 
   return (
     <TouchableOpacity onPress={onPress} style={styles.button}>
-      <Icon name="question-circle" style={styles.icon} />
+      <Icon name="question-circle" style={styles.icon} size={19} />
     </TouchableOpacity>
   );
 };
@@ -20,8 +20,7 @@ const styles = StyleSheet.create({
     right: 200,
   },
   icon: {
-    fontSize: 22,
-    color: '#1C5231',
+    color: '#363535',
   },
 });
 

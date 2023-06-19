@@ -25,7 +25,7 @@ const StatusBar = ({ status }) => {
 
   return (
     <View style={[styles.container, { backgroundColor: statusColor }]}>
-      <Icon name={icon} style={styles.icon} />
+      {/* <Icon name={icon} style={styles.icon} /> */}
       <Text style={styles.text}>{statusText}</Text>
     </View>
   );
