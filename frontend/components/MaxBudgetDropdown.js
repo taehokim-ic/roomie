@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
-import { FontAwesome } from '@expo/vector-icons';
 
 const data = [
   { label: 'None', value: '0' },

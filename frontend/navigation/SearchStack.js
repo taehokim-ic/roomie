@@ -1,9 +1,6 @@
 import React from "react";
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import SearchScreen from "../screens/Search/SearchScreen";
-import MainFilter from "../screens/Search/MainFilter";
-import SearchFilter from "../screens/Search/SearchFilter";
-import LoadProfile from "../screens/Search/LoadProfile";
 import ProfileViewScreen from "../screens/Search/ProfileViewScreen";
 import { useNavigation } from "@react-navigation/native";
 

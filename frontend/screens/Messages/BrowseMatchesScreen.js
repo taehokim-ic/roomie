@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import { View, FlatList, TouchableOpacity, Text, Image, StyleSheet, SafeAreaView, TextInput } from 'react-native';
-import { Feather } from '@expo/vector-icons';
 import axios from 'axios';
 import { generateUUID } from '../../context/uuid';
 

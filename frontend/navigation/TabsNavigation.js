@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 import Ionicons from '@expo/vector-icons/Ionicons';

@@ -8,7 +8,6 @@ import { useNavigation } from '@react-navigation/native';
 import StatusBarButton from '../../components/StatusBarButton';
 import { useRoute } from '@react-navigation/native';
 import { useChatContext } from 'stream-chat-expo';
-import { Circle } from 'react-native-svg';
 import CircleComponent from '../../components/CircleComponent';
 import QuestionMarkButton from '../../components/QuestionMarkButton';
 import { TouchableOpacity } from 'react-native-gesture-handler';

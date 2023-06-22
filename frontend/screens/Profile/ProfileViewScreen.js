@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import { View, Text, Image, ActivityIndicator, FlatList, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
-import { useRoute } from '@react-navigation/native';
 import axios from 'axios';
 import { generateUUID } from '../../context/uuid';
 

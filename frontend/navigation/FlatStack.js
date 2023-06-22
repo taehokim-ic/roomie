@@ -18,7 +18,6 @@ import TemporaryHousing from "../screens/Home/TemporaryHousing";
 import ManagingFinances from "../screens/Home/ManagingFinances";
 import Banking from "../screens/Home/Banking";
 import InternationalBanking from "../screens/Home/InternationalBanking";
-// import ChatLandlordScreen from "../screens/Flats/ChatLandlordScreen";
 
 const Stack = createNativeStackNavigator();
 

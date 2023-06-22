@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import StepIndicator from 'react-native-step-indicator';
-import {useRoute } from '@react-navigation/native';
-import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
-import { color } from '@rneui/base';
 
 const MatchingStatus = ({state}) => {
 

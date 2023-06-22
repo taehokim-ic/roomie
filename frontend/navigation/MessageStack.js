@@ -24,7 +24,6 @@ import InternationalBanking from "../screens/Home/InternationalBanking";
 import SupportScreen from "../screens/Home/SupportScreen";
 import TransportScreen from "../screens/Home/TransportScreen";
 import VisaScreen from "../screens/Home/VisaScreen";
-import FlatResources from "../screens/Messages/FlatResources";
 import { useNavigation } from "@react-navigation/native";
 import GroupMessagesScreen from "../screens/Messages/GroupMessagesScreen";
 
